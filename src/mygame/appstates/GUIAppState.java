@@ -24,10 +24,11 @@ public class GUIAppState extends AbstractAppState {
     private static final boolean DEBUG = false;
     private PlayerControl playerControl;
     private Node guiNode;
+    private SimpleApplication simpleApp;
 
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
-        SimpleApplication simpleApp = (SimpleApplication) app;
+        simpleApp = (SimpleApplication) app;
         NodesAppState nodesAppState = stateManager.getState(NodesAppState.class);
         this.guiNode = nodesAppState.getGuiNode();
         Node playerNode = nodesAppState.getPlayerNode();
