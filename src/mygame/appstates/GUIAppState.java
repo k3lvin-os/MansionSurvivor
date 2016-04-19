@@ -21,7 +21,6 @@ public class GUIAppState extends AbstractAppState {
 
     private static final float DEFAULT_MESSAGE_X = 0f;
     private static final float DEFAULT_MESSAGE_Y = 0f;
-    private static final boolean DEBUG = false;
     private PlayerControl playerControl;
     private Node guiNode;
     private SimpleApplication simpleApp;
@@ -34,12 +33,6 @@ public class GUIAppState extends AbstractAppState {
         Node playerNode = nodesAppState.getPlayerNode();
         Spatial player = playerNode.getChild(UserData.PLAYER);
         this.playerControl = player.getControl(PlayerControl.class);
-        
-        if(!DEBUG){
-           simpleApp.setDisplayFps(false);
-           simpleApp.setDisplayStatView(false);
-           simpleApp.restart();
-        }
     }
 
     @Override
