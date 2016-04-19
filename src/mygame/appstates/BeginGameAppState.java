@@ -47,6 +47,7 @@ public class BeginGameAppState extends AbstractAppState {
     AnimalCagesRoom animalCagesAppState;
     MaintenanceRoom maintenanceRoom;
     PowerGeneratorRoom powerGeneratorRoomAppState;
+    GUIAppState guiAppState;
 
 
     @Override
@@ -97,6 +98,9 @@ public class BeginGameAppState extends AbstractAppState {
 
         powerGeneratorRoomAppState = new PowerGeneratorRoom();
         this.stateManager.attach(powerGeneratorRoomAppState);
+        
+        guiAppState = new GUIAppState();
+        this.stateManager.attach(guiAppState);
     }
 
 }
