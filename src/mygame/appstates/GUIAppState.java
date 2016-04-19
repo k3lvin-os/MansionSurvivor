@@ -8,6 +8,10 @@ import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
+import com.jme3.asset.AssetManager;
+import com.jme3.font.BitmapFont;
+import com.jme3.font.BitmapText;
+import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import mygame.controls.PlayerControl;
@@ -24,6 +28,7 @@ public class GUIAppState extends AbstractAppState {
     private PlayerControl playerControl;
     private Node guiNode;
     private SimpleApplication simpleApp;
+    private AssetManager assetManager;
 
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
@@ -33,13 +38,19 @@ public class GUIAppState extends AbstractAppState {
         Node playerNode = nodesAppState.getPlayerNode();
         Spatial player = playerNode.getChild(UserData.PLAYER);
         this.playerControl = player.getControl(PlayerControl.class);
+        this.assetManager = simpleApp.getAssetManager();
     }
 
     @Override
     public void update(float tpf) {
     }
-    
-    public void putMessageOnScreen(String message){
-    
+
+    public void putMessageOnScreen(String message) {
+        BitmapText guiText; // This  code is not ready to work
+        hudText.setSize(guiFont.getCharSet().getRenderedSize());      // font size
+        hudText.setColor(ColorRGBA.Blue);                             // font color
+        hudText.setText(message);             // the text
+        hudText.setLocalTranslation(300, hudText.getLineHeight(), 0); // position
+        guiNode.attachChild(hudText);
     }
 }

@@ -11,6 +11,10 @@ import com.jme3.system.AppSettings;
  * @author normenhansen
  */
 public class Main extends SimpleApplication {
+    
+    /*Tells if should show the statistics and the FPS that help the developer
+     to debug the game*/
+    public static final boolean SHOW_DEBUG_INFO = false;
 
     public static void main(String[] args) {
         Main app = new Main();
@@ -22,6 +26,8 @@ public class Main extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
+        this.setDisplayFps(SHOW_DEBUG_INFO);
+        this.setDisplayStatView(SHOW_DEBUG_INFO);
         stateManager.attach(new BeginGameAppState());
     }
 
