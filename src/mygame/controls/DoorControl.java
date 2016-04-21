@@ -13,20 +13,37 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.control.AbstractControl;
+import java.util.Observer;
+import mygame.appstates.GameplayInputAppState;
 import mygame.appstates.NodesAppState;
 import mygame.appstates.util.RoomAppState;
 import mygame.javaclasses.Constants.UserData;
 import mygame.enumerations.Direction;
 import mygame.enumerations.DoorType;
+import mygame.interfaces.IObservable;
+import mygame.interfaces.IObserver;
 import mygame.javaclasses.DoorOrientation;
 import mygame.javaclasses.Constants.PlayerOptions;
+import mygame.javaclasses.MyArrayList;
+import mygame.javaclasses.Constants.Updates;
 
 /**
  *
  * @author GAMEOVER
  */
-public class DoorControl extends AbstractControl {
-
+public class DoorControl extends AbstractControl implements IObservable {
+    
+    /**Used to initilialize the list of observers*/
+    private void setObservers(MyArrayList<IObserver> observers){
+        spatial.setUserData(UserData.OBSERVERS, observers);
+    }
+    
+    /** Used to give access to the observers of this class to itself */
+    private MyArrayList<IObserver> getObservers()
+    {
+        return spatial.getUserData(UserData.OBSERVERS);
+    }    
+    
     /**
      * Max distance to be able to enter in the door
      */
@@ -113,7 +130,7 @@ public class DoorControl extends AbstractControl {
      *
      */
     public DoorControl(Geometry door, String doorName, String symetricDoorName, RoomAppState doorRoom,
-            DoorOrientation orientation, NodesAppState nodes) {
+            DoorOrientation orientation, NodesAppState nodes, GameplayInputAppState gmAppState) {
         this.spatial = door;
         this.spatial.setName(doorName);
         collisionResults = new CollisionResults();
@@ -141,7 +158,6 @@ public class DoorControl extends AbstractControl {
         }
 
     }
-    Integer test = null;
 
     @Override
     protected void controlUpdate(float tpf) {
@@ -151,9 +167,8 @@ public class DoorControl extends AbstractControl {
             if (collisionResults.getClosestCollision() != null) {
                 if (collisionResults.getClosestCollision().getDistance() <= MAX_DISTANCE) {
                     if (!isPlayerUsingDoor()) {
+                        notifyAllObservers(Updates.PLAYER_NEXT_TO_DOOR);
                         setPlayerUsingDoor(true);
-                        playerNode.getChild(UserData.PLAYER).getControl(PlayerControl.class).getListOfPlayerOptions()
-                                .add(PlayerOptions.OPEN_DOOR);
                     }
                 }
             }
@@ -162,8 +177,6 @@ public class DoorControl extends AbstractControl {
                 if (collisionResults.getClosestCollision() == null
                         || collisionResults.getClosestCollision().getDistance() > MAX_DISTANCE) {
                     setPlayerUsingDoor(false);
-                    playerNode.getChild(UserData.PLAYER).getControl(PlayerControl.class).getListOfPlayerOptions()
-                            .remove(PlayerOptions.OPEN_DOOR);
                 }
             }
 
@@ -175,4 +188,19 @@ public class DoorControl extends AbstractControl {
     @Override
     protected void controlRender(RenderManager rm, ViewPort vp) {
     }
+
+    public void addObserver(IObserver o) {
+        getObservers().add(o);
+    }
+
+    public void removeObserver(IObserver o) {
+        getObservers().remove(o);
+    }
+
+    public void notifyAllObservers(String update) {
+       for(IObserver o : getObservers()){
+           o.subjectUpdate(update);
+       }
+    }
+
 }

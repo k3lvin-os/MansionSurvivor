@@ -31,6 +31,8 @@ import mygame.tests.LightForAllEnvironment;
  */
 public class BeginGameAppState extends AbstractAppState {
 
+    private boolean isObserverPatternSet;
+    
     Prototype1Room prototypeRoom1AppState;
     NodesAppState nodesAppState;
     CharactersAppState charactersAppState;
@@ -53,6 +55,7 @@ public class BeginGameAppState extends AbstractAppState {
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
+        isObserverPatternSet = false;
         this.stateManager = stateManager;
         SimpleApplication simpleApp = (SimpleApplication) app;
         assetManager = simpleApp.getAssetManager();
@@ -101,6 +104,17 @@ public class BeginGameAppState extends AbstractAppState {
         
         guiAppState = new GUIAppState();
         this.stateManager.attach(guiAppState);
+    }
+    
+    
+    @Override
+    public void update(float tpf){
+        if(!isObserverPatternSet){
+            // Set observers here
+            
+            
+            isObserverPatternSet = true;
+        }
     }
 
 }
