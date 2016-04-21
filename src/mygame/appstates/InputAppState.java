@@ -59,10 +59,6 @@ public class InputAppState extends AbstractAppState implements IObserver, IObser
      */
     private Vector3f playerMove = new Vector3f();
     /**
-     * This simpleApp state can be used in a door open player action
-     */
-    private ChangeRoomAppState changeRoomAppState;
-    /**
      * List of player options that affect input check's
      */
     private MyArrayList<String> playerOptions;
@@ -83,10 +79,15 @@ public class InputAppState extends AbstractAppState implements IObserver, IObser
         player = playerNode.getChild(UserData.PLAYER);
         playerPhysics = player.getControl(BetterCharacterControl.class);
         playerControl = player.getControl(PlayerControl.class);
-        this.changeRoomAppState = stateManager.getState(ChangeRoomAppState.class);
+
+        // ObserverAppState here
         this.observers = new MyArrayList<IObserver>();
-                
-       
+        GUIAppState guiApp = stateManager.getState(GUIAppState.class);
+        addObserver(guiApp);
+        ChangeRoomAppState changeRoomApp = stateManager.getState(ChangeRoomAppState.class);
+        addObserver(changeRoomApp);
+
+
         //Set mapping
         inputManager = app.getInputManager();
         inputManager.addMapping(Mapping.UP, new KeyTrigger(KeyInput.KEY_UP),
@@ -166,12 +167,21 @@ public class InputAppState extends AbstractAppState implements IObserver, IObser
         if (nextToDoor) {
             // notify guiAppState and changeRoomAppState
             notifyAllObservers(Updates.ENTERED_DOOR);
+            nextToDoor = false;
         }
     }
 
     public void subjectUpdate(String update) {
         if (update.equals(Updates.NEXT_DOOR)) {
             this.nextToDoor = true;
+            notifyAllObservers(Updates.NEXT_DOOR);
+
+        }
+
+        if (update.equals(Updates.NOT_NEXT_DOOR)) {
+            this.nextToDoor = false;
+            notifyAllObservers(Updates.NOT_NEXT_DOOR);
+
         }
     }
 
@@ -184,7 +194,7 @@ public class InputAppState extends AbstractAppState implements IObserver, IObser
     }
 
     public void notifyAllObservers(String update) {
-        for(IObserver o :  observers){
+        for (IObserver o : observers) {
             o.subjectUpdate(update);
         }
     }

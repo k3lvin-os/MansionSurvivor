@@ -68,7 +68,7 @@ public class GUIAppState extends AbstractAppState implements IObserver {
         hudText.setText(message);             // the text
         hudText.setLocalTranslation(300, hudText.getLineHeight(), 0); // position
         int nodeId = guiNode.attachChild(hudText);
-        messagesOnScreen.put(message, nodeId);
+        messagesOnScreen.put(message, nodeId - 1);
     }
 
     public void removeMessageOnScreen(String message) {
@@ -87,7 +87,7 @@ public class GUIAppState extends AbstractAppState implements IObserver {
             }
         }
        
-        else if(update.equals(Updates.NOT_NEXT_DOOR)){
+        else if(update.equals(Updates.NOT_NEXT_DOOR) || update.equals(Updates.ENTERED_DOOR)){
             removeMessageOnScreen(ENTER_DOOR);
         }
     }
