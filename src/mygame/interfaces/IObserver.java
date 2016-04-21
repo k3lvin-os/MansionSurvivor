@@ -9,6 +9,6 @@ package mygame.interfaces;
  * @author GAMEOVER
  */
 public interface IObserver {
-    <T> void subjectUpdate(T type);
-   
+
+    void subjectUpdate(String update);
 }

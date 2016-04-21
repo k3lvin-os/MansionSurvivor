@@ -9,7 +9,7 @@ package mygame.interfaces;
  * @author GAMEOVER
  */
 public interface IObservable {
-    void addObserver();
-    void removeObserver();
-    void notifyAllObservers();
+    void addObserver(IObserver o);
+    void removeObserver(IObserver o);
+    void notifyAllObservers(String update);
 }
