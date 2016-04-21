@@ -71,6 +71,7 @@ public final class Constants {
 
         public static final String NEXT_DOOR = "nextDoor";
         public static final String NOT_NEXT_DOOR = "!nextDoor";
+        public static final String ENTERED_DOOR = "enteredDoor";
     }
    
 }

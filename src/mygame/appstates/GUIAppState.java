@@ -86,7 +86,7 @@ public class GUIAppState extends AbstractAppState implements IObserver {
                 Logger.getLogger(GUIAppState.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+       
         else if(update.equals(Updates.NOT_NEXT_DOOR)){
             removeMessageOnScreen(ENTER_DOOR);
         }

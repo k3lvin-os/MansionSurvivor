@@ -20,6 +20,7 @@ import com.jme3.scene.Spatial;
 import mygame.javaclasses.Constants.Mapping;
 import mygame.javaclasses.Constants.UserData;
 import mygame.controls.PlayerControl;
+import mygame.interfaces.IObservable;
 import mygame.interfaces.IObserver;
 import mygame.javaclasses.Constants.Updates;
 import mygame.javaclasses.MyArrayList;
@@ -28,7 +29,7 @@ import mygame.javaclasses.MyArrayList;
  *
  * @author GAMEOVER
  */
-public class InputAppState extends AbstractAppState implements IObserver {
+public class InputAppState extends AbstractAppState implements IObserver, IObservable {
 
     /*Gives access to the input of the game */
     private InputManager inputManager;
@@ -68,8 +69,8 @@ public class InputAppState extends AbstractAppState implements IObserver {
     /**
      * This class use methods of GUIAppState
      */
-    private GUIAppState guiAppState;
     private boolean nextToDoor;
+    private MyArrayList<IObserver> observers;
 
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
@@ -83,8 +84,9 @@ public class InputAppState extends AbstractAppState implements IObserver {
         playerPhysics = player.getControl(BetterCharacterControl.class);
         playerControl = player.getControl(PlayerControl.class);
         this.changeRoomAppState = stateManager.getState(ChangeRoomAppState.class);
-        this.guiAppState = stateManager.getState(GUIAppState.class);
-
+        this.observers = new MyArrayList<IObserver>();
+                
+       
         //Set mapping
         inputManager = app.getInputManager();
         inputManager.addMapping(Mapping.UP, new KeyTrigger(KeyInput.KEY_UP),
@@ -163,14 +165,27 @@ public class InputAppState extends AbstractAppState implements IObserver {
 
         if (nextToDoor) {
             // notify guiAppState and changeRoomAppState
-            guiAppState.removeMessageOnScreen(Updates.NEXT_DOOR);
-            changeRoomAppState.changeRoom();
+            notifyAllObservers(Updates.ENTERED_DOOR);
         }
     }
 
     public void subjectUpdate(String update) {
         if (update.equals(Updates.NEXT_DOOR)) {
             this.nextToDoor = true;
+        }
+    }
+
+    public void addObserver(IObserver o) {
+        observers.add(o);
+    }
+
+    public void removeObserver(IObserver o) {
+        observers.remove(o);
+    }
+
+    public void notifyAllObservers(String update) {
+        for(IObserver o :  observers){
+            o.subjectUpdate(update);
         }
     }
 }
