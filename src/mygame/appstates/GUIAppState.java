@@ -14,19 +14,22 @@ import com.jme3.font.BitmapText;
 import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import mygame.controls.PlayerControl;
 import mygame.enumerations.TypeOfMessage;
 import mygame.javaclasses.Constants.UserData;
+import mygame.javaclasses.Constants.PlayerOptions;
 
 /**
  *
  * @author GAMEOVER
  */
 public class GUIAppState extends AbstractAppState {
+
     private static BitmapFont gameplayGUIFont;
     private static final float DEFAULT_MESSAGE_X = 0f;
     private static final float DEFAULT_MESSAGE_Y = 0f;
-    private PlayerControl playerControl;
     private Node guiNode;
     private SimpleApplication simpleApp;
     private AssetManager assetManager;
@@ -36,9 +39,6 @@ public class GUIAppState extends AbstractAppState {
         simpleApp = (SimpleApplication) app;
         NodesAppState nodesAppState = stateManager.getState(NodesAppState.class);
         this.guiNode = nodesAppState.getGuiNode();
-        Node playerNode = nodesAppState.getPlayerNode();
-        Spatial player = playerNode.getChild(UserData.PLAYER);
-        this.playerControl = player.getControl(PlayerControl.class);
         this.assetManager = simpleApp.getAssetManager();
         gameplayGUIFont = assetManager.loadFont("Interface/Fonts/ArialBlack.fnt");
     }
@@ -47,19 +47,26 @@ public class GUIAppState extends AbstractAppState {
     public void update(float tpf) {
     }
 
-    public void putMessageOnScreen(String message, TypeOfMessage type ) throws Exception {
-        BitmapFont font;
-        if(type == TypeOfMessage.Gameplay){
-            font = gameplayGUIFont;
-        } 
-        else{
+
+    /*Put a message on screen on a predefined position
+     * @param: message the message to show on the screen
+     @param: type the type of the the message to show on screen (change the font also)*/
+    public void putMessageOnScreen(String message, TypeOfMessage type) throws Exception {
+        BitmapFont guiFont;
+        if (type == TypeOfMessage.Gameplay) {
+            guiFont = gameplayGUIFont;
+        } else {
             throw new Exception("The font for information message is not ready yet.");
-        }   
-        BitmapText hudText = new BitmapFont(font, false);
+        }
+        BitmapText hudText = new BitmapText(guiFont, false);
         hudText.setSize(guiFont.getCharSet().getRenderedSize());      // font size
         hudText.setColor(ColorRGBA.Blue);                             // font color
         hudText.setText(message);             // the text
         hudText.setLocalTranslation(300, hudText.getLineHeight(), 0); // position
         guiNode.attachChild(hudText);
+    }
+
+    public void removeMessageOnScreen(TypeOfMessage type) {
+        // Do something here
     }
 }
