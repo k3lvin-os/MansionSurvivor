@@ -136,36 +136,40 @@ public class GameplayInputAppState extends AbstractAppState {
                         playerMove.setZ(0f);
                     }
                 } else if (name.equals(Mapping.RETURN)) {
-                    if (playerControl.getListOfPlayerOptions() != null
-                            && !playerControl.getListOfPlayerOptions().isEmpty()) {
 
-                        System.out.print(playerControl.getListOfPlayerOptions()); // DEBUG
-
-                        String mostRecentOption = playerControl.getListOfPlayerOptions()
-                                .get(playerControl.getListOfPlayerOptions().size() - 1);
-
-                        if (mostRecentOption.equals(PlayerOptions.OPEN_DOOR)) {
-                            changeRoomAppState.changeRoom();
-                            playerControl.getListOfPlayerOptions()
-                                    .remove(playerControl.getListOfPlayerOptions().size() - 1);
-                        }
-
-                    }
-
+                    checkForPlayerActions();
                 }
 
-                playerControl.setWalkDirection(playerMove);
-
-                if (!playerControl.getWalkDirection().equals(Vector3f.ZERO)) {
-                    playerPhysics.setViewDirection(playerControl.getWalkDirection());
-                }
-
-                playerPhysics.setWalkDirection(playerControl.getWalkDirection());
             }
+
+            playerControl.setWalkDirection(playerMove);
+
+            if (!playerControl.getWalkDirection().equals(Vector3f.ZERO)) {
+                playerPhysics.setViewDirection(playerControl.getWalkDirection());
+            }
+
+            playerPhysics.setWalkDirection(playerControl.getWalkDirection());
         }
     };
 
     @Override
     public void update(float tpf) {
+    }
+
+    public void checkForPlayerActions() {
+        if (playerControl.getListOfPlayerOptions() != null
+                && !playerControl.getListOfPlayerOptions().isEmpty()) {
+
+            System.out.print(playerControl.getListOfPlayerOptions()); // DEBUG
+
+            String mostRecentOption = playerControl.getListOfPlayerOptions()
+                    .get(playerControl.getListOfPlayerOptions().size() - 1);
+
+            if (mostRecentOption.equals(PlayerOptions.OPEN_DOOR)) {
+                changeRoomAppState.changeRoom();
+                playerControl.getListOfPlayerOptions()
+                        .remove(playerControl.getListOfPlayerOptions().size() - 1);
+            }
+        }
     }
 }
