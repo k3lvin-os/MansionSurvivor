@@ -13,13 +13,8 @@ import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
 import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Node;
-import com.jme3.scene.Spatial;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import mygame.controls.PlayerControl;
+import java.util.HashMap;
 import mygame.enumerations.TypeOfMessage;
-import mygame.javaclasses.Constants.UserData;
-import mygame.javaclasses.Constants.PlayerOptions;
 
 /**
  *
@@ -33,9 +28,12 @@ public class GUIAppState extends AbstractAppState {
     private Node guiNode;
     private SimpleApplication simpleApp;
     private AssetManager assetManager;
+    private HashMap<String, Integer> messagesOnScreen;
 
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
+        super.initialize(stateManager, app);
+        messagesOnScreen = new HashMap<String, Integer>();
         simpleApp = (SimpleApplication) app;
         NodesAppState nodesAppState = stateManager.getState(NodesAppState.class);
         this.guiNode = nodesAppState.getGuiNode();
@@ -63,10 +61,13 @@ public class GUIAppState extends AbstractAppState {
         hudText.setColor(ColorRGBA.Blue);                             // font color
         hudText.setText(message);             // the text
         hudText.setLocalTranslation(300, hudText.getLineHeight(), 0); // position
-        guiNode.attachChild(hudText);
+        int nodeId = guiNode.attachChild(hudText);
+        messagesOnScreen.put(type.toString(), nodeId);
     }
 
     public void removeMessageOnScreen(TypeOfMessage type) {
-        // Do something here
+       int nodeId = messagesOnScreen.get(type.toString());
+       guiNode.detachChildAt(nodeId);
+       messagesOnScreen.remove(type.toString());
     }
 }

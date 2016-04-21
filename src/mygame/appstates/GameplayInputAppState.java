@@ -68,6 +68,7 @@ public class GameplayInputAppState extends AbstractAppState {
      * List of player options that affect input check's
      */
     private MyArrayList<String> playerOptions;
+    
 
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
