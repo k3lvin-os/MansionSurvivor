@@ -35,7 +35,7 @@ public class BeginGameAppState extends AbstractAppState {
     NodesAppState nodesAppState;
     CharactersAppState charactersAppState;
     AppStateManager stateManager;
-    GameplayInputAppState gameplayInputAppState;
+    InputAppState gameplayInputAppState;
     CameraAppState cameraAppState;
     AssetManager assetManager;
     BulletAppState bulletAppState;
@@ -81,7 +81,7 @@ public class BeginGameAppState extends AbstractAppState {
         changeRoomAppState = new ChangeRoomAppState();
         this.stateManager.attach(changeRoomAppState);
         
-        gameplayInputAppState = new GameplayInputAppState();
+        gameplayInputAppState = new InputAppState();
         this.stateManager.attach(gameplayInputAppState);
 
         mainCorridorAppState = new MainCorridorRoom();

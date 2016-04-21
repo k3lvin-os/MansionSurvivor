@@ -75,7 +75,7 @@ public class Prototype1Room extends RoomAppState {
         Geometry entranceDoorGeometry = mansionEntranceDoor.getPrototypeGeometry().getGeometry();
       
         entranceDoorControl = new DoorControl(entranceDoorGeometry, Doors.COUNTRYARD_TO_ENTRANCE,
-                Doors.ENTRANCE_TO_COUNTRYARD, this, doorOrientation,nodes);
+                Doors.ENTRANCE_TO_COUNTRYARD, this, doorOrientation,nodes, inputApp);
         entranceDoorGeometry.addControl(entranceDoorControl);
 
         setEnabled(true);

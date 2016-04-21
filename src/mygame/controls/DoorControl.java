@@ -13,6 +13,7 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.control.AbstractControl;
+import mygame.appstates.InputAppState;
 import mygame.appstates.NodesAppState;
 import mygame.appstates.util.RoomAppState;
 import mygame.javaclasses.Constants.UserData;
@@ -113,7 +114,7 @@ public class DoorControl extends AbstractControl {
      *
      */
     public DoorControl(Geometry door, String doorName, String symetricDoorName, RoomAppState doorRoom,
-            DoorOrientation orientation, NodesAppState nodes) {
+            DoorOrientation orientation, NodesAppState nodes, InputAppState inputApp) {
         this.spatial = door;
         this.spatial.setName(doorName);
         collisionResults = new CollisionResults();

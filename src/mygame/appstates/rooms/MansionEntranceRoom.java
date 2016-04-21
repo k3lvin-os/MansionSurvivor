@@ -51,7 +51,7 @@ public class MansionEntranceRoom extends RoomAppState {
 
         
         countryardDoorControl = new DoorControl(countryardDoorGeometry, Doors.ENTRANCE_TO_COUNTRYARD,
-                Doors.COUNTRYARD_TO_ENTRANCE, this ,countryardDoorOrientation, nodes);
+                Doors.COUNTRYARD_TO_ENTRANCE, this ,countryardDoorOrientation, nodes, inputApp);
         countryardDoorGeometry.addControl(countryardDoorControl);
 
         setEnabled(true);

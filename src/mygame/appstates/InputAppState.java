@@ -27,7 +27,7 @@ import mygame.javaclasses.MyArrayList;
  *
  * @author GAMEOVER
  */
-public class GameplayInputAppState extends AbstractAppState {
+public class InputAppState extends AbstractAppState {
 
     /*Gives access to the input of the game */
     private InputManager inputManager;
@@ -171,6 +171,7 @@ public class GameplayInputAppState extends AbstractAppState {
                     .get(playerControl.getListOfPlayerOptions().size() - 1);
 
             if (mostRecentOption.equals(PlayerOptions.OPEN_DOOR)) {
+                guiAppState.removeMessageOnScreen(PlayerOptions.OPEN_DOOR);
                 changeRoomAppState.changeRoom();
                 playerControl.getListOfPlayerOptions()
                         .remove(playerControl.getListOfPlayerOptions().size() - 1);

@@ -9,6 +9,7 @@ import com.jme3.app.state.AppStateManager;
 import com.jme3.export.Savable;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
+import mygame.appstates.InputAppState;
 import mygame.appstates.util.ScenarioAppState;
 import mygame.javaclasses.ConstructionAssets;
 import mygame.javaclasses.Room;
@@ -24,6 +25,7 @@ public abstract class RoomAppState extends ScenarioAppState{
     protected float roomHeight;
     protected Room room;
     protected Vector3f roomLeftExtreme;
+    protected InputAppState inputApp;
 
     public RoomAppState(float roomWidth, float roomHeight, float roomSize, Vector3f roomLeftExtreme) {
         this.roomWidth = roomWidth;
@@ -35,6 +37,7 @@ public abstract class RoomAppState extends ScenarioAppState{
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
+        this.inputApp = stateManager.getState(InputAppState.class);
         room = new Room(constructionAssets, roomWidth, roomHeight, roomSize, roomLeftExtreme);
     }
 
