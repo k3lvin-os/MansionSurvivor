@@ -39,6 +39,7 @@ public final class Constants {
         public static final String NAME = "name";
         public static final String SYMETRIC_DOOR_NAME = "symetricDoorName";
         public static final String PLAYER_CONTROL = "playerControl";
+        public static final String OBSERVERS = "observers";
     }
 
     public static final class Mapping {
@@ -66,8 +67,10 @@ public final class Constants {
         public static final String GENERATOR_TO_CORRIDOR = "generatorToCorridor";
     }
 
-    public static final class PlayerOptions {
+    public static final class Updates {
 
-        public static final String OPEN_DOOR = "openDoor";
+        public static final String NEXT_DOOR = "nextDoor";
+        public static final String NOT_NEXT_DOOR = "!nextDoor";
     }
+   
 }

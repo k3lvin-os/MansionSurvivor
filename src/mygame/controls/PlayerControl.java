@@ -44,21 +44,12 @@ public class PlayerControl extends AbstractControl {
         spatial.getControl(BetterCharacterControl.class).setEnabled(true);
     }
 
-    public MyArrayList<String> getListOfPlayerOptions(){
-        return spatial.getUserData(UserData.PLAYER_OPTIONS);
-    }
-    
-    private void setListOfPlayeOptions(MyArrayList<String> playerActions){
-        spatial.setUserData(UserData.PLAYER_OPTIONS, playerActions);
-    }
-    
     
 
     public PlayerControl(Spatial s) {
         this.spatial = s;
         setSpeed(DEFAULT_SPEED);
         setWalkDirection(new Vector3f(-1f,0,-1f));
-        setListOfPlayeOptions(new MyArrayList<String>());
     }
 
     @Override

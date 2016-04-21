@@ -20,14 +20,15 @@ import com.jme3.scene.Spatial;
 import mygame.javaclasses.Constants.Mapping;
 import mygame.javaclasses.Constants.UserData;
 import mygame.controls.PlayerControl;
-import mygame.javaclasses.Constants.PlayerOptions;
+import mygame.interfaces.IObserver;
+import mygame.javaclasses.Constants.Updates;
 import mygame.javaclasses.MyArrayList;
 
 /**
  *
  * @author GAMEOVER
  */
-public class InputAppState extends AbstractAppState {
+public class InputAppState extends AbstractAppState implements IObserver {
 
     /*Gives access to the input of the game */
     private InputManager inputManager;
@@ -57,10 +58,6 @@ public class InputAppState extends AbstractAppState {
      */
     private Vector3f playerMove = new Vector3f();
     /**
-     * Used in debugging
-     */
-    private FlyByCamera flyCam;
-    /**
      * This simpleApp state can be used in a door open player action
      */
     private ChangeRoomAppState changeRoomAppState;
@@ -68,22 +65,23 @@ public class InputAppState extends AbstractAppState {
      * List of player options that affect input check's
      */
     private MyArrayList<String> playerOptions;
-    
-    /**This class use methods of GUIAppState */
+    /**
+     * This class use methods of GUIAppState
+     */
     private GUIAppState guiAppState;
-    
+    private boolean nextToDoor;
 
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
 
         // Receive and set valeus
         super.initialize(stateManager, app);
+        this.nextToDoor = false;
         this.simpleApp = (SimpleApplication) app;
         playerNode = (Node) this.simpleApp.getRootNode().getChild(UserData.PLAYER_NODE);
         player = playerNode.getChild(UserData.PLAYER);
         playerPhysics = player.getControl(BetterCharacterControl.class);
         playerControl = player.getControl(PlayerControl.class);
-        flyCam = stateManager.getState(CameraAppState.class).getFlyByCamera();
         this.changeRoomAppState = stateManager.getState(ChangeRoomAppState.class);
         this.guiAppState = stateManager.getState(GUIAppState.class);
 
@@ -162,20 +160,17 @@ public class InputAppState extends AbstractAppState {
     }
 
     public void checkForPlayerActions() {
-        if (playerControl.getListOfPlayerOptions() != null
-                && !playerControl.getListOfPlayerOptions().isEmpty()) {
 
-            System.out.print(playerControl.getListOfPlayerOptions()); // DEBUG
+        if (nextToDoor) {
+            // notify guiAppState and changeRoomAppState
+            guiAppState.removeMessageOnScreen(Updates.NEXT_DOOR);
+            changeRoomAppState.changeRoom();
+        }
+    }
 
-            String mostRecentOption = playerControl.getListOfPlayerOptions()
-                    .get(playerControl.getListOfPlayerOptions().size() - 1);
-
-            if (mostRecentOption.equals(PlayerOptions.OPEN_DOOR)) {
-                guiAppState.removeMessageOnScreen(PlayerOptions.OPEN_DOOR);
-                changeRoomAppState.changeRoom();
-                playerControl.getListOfPlayerOptions()
-                        .remove(playerControl.getListOfPlayerOptions().size() - 1);
-            }
+    public void subjectUpdate(String update) {
+        if (update.equals(Updates.NEXT_DOOR)) {
+            this.nextToDoor = true;
         }
     }
 }

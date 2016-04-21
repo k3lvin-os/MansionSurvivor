@@ -19,14 +19,17 @@ import mygame.appstates.util.RoomAppState;
 import mygame.javaclasses.Constants.UserData;
 import mygame.enumerations.Direction;
 import mygame.enumerations.DoorType;
+import mygame.interfaces.IObservable;
+import mygame.interfaces.IObserver;
 import mygame.javaclasses.DoorOrientation;
-import mygame.javaclasses.Constants.PlayerOptions;
+import mygame.javaclasses.Constants.Updates;
+import mygame.javaclasses.MyArrayList;
 
 /**
  *
  * @author GAMEOVER
  */
-public class DoorControl extends AbstractControl {
+public class DoorControl extends AbstractControl implements IObservable {
 
     /**
      * Max distance to be able to enter in the door
@@ -93,7 +96,6 @@ public class DoorControl extends AbstractControl {
         return spatial.getUserData(UserData.DOOR_ORIENTATION);
     }
 
-
     private void setSymetricDoorName(String name) {
         spatial.setUserData(UserData.SYMETRIC_DOOR_NAME, name);
     }
@@ -101,16 +103,17 @@ public class DoorControl extends AbstractControl {
     public String getSymetricDoorName() {
         return spatial.getUserData(UserData.SYMETRIC_DOOR_NAME);
     }
-
+    
     /**
      * Create a door control
      *
      * @param door spatial that the control will be added
-     * @param doorRoom the room of the current door
-     * @param orientation gives the orientation for where the ray will be
-     * launched
-     * @param playerNode receive a reference of the player node in order to
-     * check the player pos
+     * @param doorName current door name
+     * @param symetricDoorName symetric door name - opposite room
+     * @param doorRoom current door room
+     * @param orientation door direction and side that are facing (raycast)
+     * @param nodes game nodes to get doorsNode and playerNode
+     * @param inputApp inputApp used in observer pattern logic
      *
      */
     public DoorControl(Geometry door, String doorName, String symetricDoorName, RoomAppState doorRoom,
@@ -123,26 +126,32 @@ public class DoorControl extends AbstractControl {
         setPlayerUsingDoor(false);
         setSymetricDoorName(symetricDoorName);
         setDoorRoomAppState(doorRoom);
+        setListObservers(new MyArrayList<IObserver>());
         this.playerNode = nodes.getPlayerNode();
         rayDirection = new Vector3f();
+        this.addObserver(inputApp);
 
-        if (doorOrientation.getDoorDirection() == Direction.HORIZONTAL) {
+        defineRayCast();
 
-            if (doorOrientation.getDoorType() == DoorType.INDOOR) {
+
+    }
+
+    private void defineRayCast() {
+        if (this.getDoorOrienation().getDoorDirection() == Direction.HORIZONTAL) {
+
+            if (this.getDoorOrienation().getDoorType() == DoorType.INDOOR) {
                 rayDirection.setZ(-1f);
             } else {
                 rayDirection.setZ(1f);
             }
         } else {
-            if (doorOrientation.getDoorType() == DoorType.INDOOR) {
+            if (this.getDoorOrienation().getDoorType() == DoorType.INDOOR) {
                 rayDirection.setX(1f);
             } else {
                 rayDirection.setZ(-1f);
             }
         }
-
     }
-    Integer test = null;
 
     @Override
     protected void controlUpdate(float tpf) {
@@ -153,8 +162,7 @@ public class DoorControl extends AbstractControl {
                 if (collisionResults.getClosestCollision().getDistance() <= MAX_DISTANCE) {
                     if (!isPlayerUsingDoor()) {
                         setPlayerUsingDoor(true);
-                        playerNode.getChild(UserData.PLAYER).getControl(PlayerControl.class).getListOfPlayerOptions()
-                                .add(PlayerOptions.OPEN_DOOR);
+                        notifyAllObservers(Updates.NEXT_DOOR);
                     }
                 }
             }
@@ -163,8 +171,7 @@ public class DoorControl extends AbstractControl {
                 if (collisionResults.getClosestCollision() == null
                         || collisionResults.getClosestCollision().getDistance() > MAX_DISTANCE) {
                     setPlayerUsingDoor(false);
-                    playerNode.getChild(UserData.PLAYER).getControl(PlayerControl.class).getListOfPlayerOptions()
-                            .remove(PlayerOptions.OPEN_DOOR);
+                    this.notifyAllObservers(Updates.NOT_NEXT_DOOR);
                 }
             }
 
@@ -173,7 +180,33 @@ public class DoorControl extends AbstractControl {
         }
     }
 
+
+    private MyArrayList<IObserver> getListObservers() {
+        return spatial.getUserData(UserData.OBSERVERS);
+    }
+
+    private void setListObservers(MyArrayList<IObserver> observers) {
+        spatial.setUserData(UserData.OBSERVERS, observers);
+    }
+
+    public void addObserver(IObserver o) {
+        MyArrayList<IObserver> observers = spatial.getUserData(UserData.OBSERVERS);
+        observers.add(o);
+    }
+
+    public void removeObserver(IObserver o) {
+        MyArrayList<IObserver> observers = spatial.getUserData(UserData.OBSERVERS);
+        observers.remove(o);
+    }
+
+    public void notifyAllObservers(String update) {
+        for (IObserver o : getListObservers()) {
+            o.subjectUpdate(update);
+        }
+    }
+
     @Override
     protected void controlRender(RenderManager rm, ViewPort vp) {
+
     }
 }
