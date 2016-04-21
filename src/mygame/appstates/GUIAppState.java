@@ -62,12 +62,12 @@ public class GUIAppState extends AbstractAppState {
         hudText.setText(message);             // the text
         hudText.setLocalTranslation(300, hudText.getLineHeight(), 0); // position
         int nodeId = guiNode.attachChild(hudText);
-        messagesOnScreen.put(type.toString(), nodeId);
+        messagesOnScreen.put(message, nodeId);
     }
 
-    public void removeMessageOnScreen(TypeOfMessage type) {
-       int nodeId = messagesOnScreen.get(type.toString());
+    public void removeMessageOnScreen(String message) {
+       int nodeId = messagesOnScreen.get(message);
        guiNode.detachChildAt(nodeId);
-       messagesOnScreen.remove(type.toString());
+       messagesOnScreen.remove(message);
     }
 }

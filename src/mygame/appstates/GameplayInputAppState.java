@@ -69,6 +69,9 @@ public class GameplayInputAppState extends AbstractAppState {
      */
     private MyArrayList<String> playerOptions;
     
+    /**This class use methods of GUIAppState */
+    private GUIAppState guiAppState;
+    
 
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
@@ -82,6 +85,7 @@ public class GameplayInputAppState extends AbstractAppState {
         playerControl = player.getControl(PlayerControl.class);
         flyCam = stateManager.getState(CameraAppState.class).getFlyByCamera();
         this.changeRoomAppState = stateManager.getState(ChangeRoomAppState.class);
+        this.guiAppState = stateManager.getState(GUIAppState.class);
 
         //Set mapping
         inputManager = app.getInputManager();
