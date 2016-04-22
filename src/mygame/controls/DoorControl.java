@@ -13,6 +13,7 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.control.AbstractControl;
+import java.util.ArrayList;
 import mygame.appstates.InputAppState;
 import mygame.appstates.NodesAppState;
 import mygame.appstates.util.RoomAppState;
@@ -22,7 +23,7 @@ import mygame.enumerations.DoorType;
 import mygame.interfaces.IObservable;
 import mygame.interfaces.IObserver;
 import mygame.javaclasses.DoorOrientation;
-import mygame.javaclasses.Constants.Updates;
+import mygame.javaclasses.Constants.ObserverPattern;
 import mygame.javaclasses.MyArrayList;
 
 /**
@@ -52,6 +53,9 @@ public class DoorControl extends AbstractControl implements IObservable {
      * the room
      */
     private Node playerNode;
+    
+    private ArrayList<IObserver> observers;
+    
 
     /**
      * Set if the player is using this door
@@ -126,9 +130,11 @@ public class DoorControl extends AbstractControl implements IObservable {
         setPlayerUsingDoor(false);
         setSymetricDoorName(symetricDoorName);
         setDoorRoomAppState(doorRoom);
-        setListObservers(new MyArrayList<IObserver>());
         this.playerNode = nodes.getPlayerNode();
         rayDirection = new Vector3f();
+        
+        // OBSERVER PATTERN HERE
+        this.observers = new ArrayList<IObserver>();
         this.addObserver(inputApp);
 
         defineRayCast();
@@ -162,7 +168,7 @@ public class DoorControl extends AbstractControl implements IObservable {
                 if (collisionResults.getClosestCollision().getDistance() <= MAX_DISTANCE) {
                     if (!isPlayerUsingDoor()) {
                         setPlayerUsingDoor(true);
-                        notifyAllObservers(Updates.NEXT_DOOR);
+                        notifyAllObservers(ObserverPattern.NEXT_DOOR);
                     }
                 }
             }
@@ -171,7 +177,7 @@ public class DoorControl extends AbstractControl implements IObservable {
                 if (collisionResults.getClosestCollision() == null
                         || collisionResults.getClosestCollision().getDistance() > MAX_DISTANCE) {
                     setPlayerUsingDoor(false);
-                    this.notifyAllObservers(Updates.NOT_NEXT_DOOR);
+                    this.notifyAllObservers(ObserverPattern.NOT_NEXT_DOOR);
                 }
             }
 
@@ -181,26 +187,17 @@ public class DoorControl extends AbstractControl implements IObservable {
     }
 
 
-    private MyArrayList<IObserver> getListObservers() {
-        return spatial.getUserData(UserData.OBSERVERS);
-    }
-
-    private void setListObservers(MyArrayList<IObserver> observers) {
-        spatial.setUserData(UserData.OBSERVERS, observers);
-    }
 
     public void addObserver(IObserver o) {
-        MyArrayList<IObserver> observers = spatial.getUserData(UserData.OBSERVERS);
-        observers.add(o);
+        this.observers.add(o);
     }
 
     public void removeObserver(IObserver o) {
-        MyArrayList<IObserver> observers = spatial.getUserData(UserData.OBSERVERS);
-        observers.remove(o);
+        this.observers.remove(o);
     }
 
     public void notifyAllObservers(String update) {
-        for (IObserver o : getListObservers()) {
+        for (IObserver o : this.observers) {
             o.subjectUpdate(update);
         }
     }

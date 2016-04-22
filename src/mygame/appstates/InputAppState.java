@@ -22,7 +22,7 @@ import mygame.javaclasses.Constants.UserData;
 import mygame.controls.PlayerControl;
 import mygame.interfaces.IObservable;
 import mygame.interfaces.IObserver;
-import mygame.javaclasses.Constants.Updates;
+import mygame.javaclasses.Constants.ObserverPattern;
 import mygame.javaclasses.MyArrayList;
 
 /**
@@ -166,21 +166,21 @@ public class InputAppState extends AbstractAppState implements IObserver, IObser
 
         if (nextToDoor) {
             // notify guiAppState and changeRoomAppState
-            notifyAllObservers(Updates.ENTERED_DOOR);
+            notifyAllObservers(ObserverPattern.ENTERED_DOOR);
             nextToDoor = false;
         }
     }
 
     public void subjectUpdate(String update) {
-        if (update.equals(Updates.NEXT_DOOR)) {
+        if (update.equals(ObserverPattern.NEXT_DOOR)) {
             this.nextToDoor = true;
-            notifyAllObservers(Updates.NEXT_DOOR);
+            notifyAllObservers(ObserverPattern.NEXT_DOOR);
 
         }
 
-        if (update.equals(Updates.NOT_NEXT_DOOR)) {
+        if (update.equals(ObserverPattern.NOT_NEXT_DOOR)) {
             this.nextToDoor = false;
-            notifyAllObservers(Updates.NOT_NEXT_DOOR);
+            notifyAllObservers(ObserverPattern.NOT_NEXT_DOOR);
 
         }
     }

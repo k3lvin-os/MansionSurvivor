@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 import mygame.enumerations.TypeOfMessage;
 import mygame.interfaces.IObserver;
 import mygame.javaclasses.Constants;
-import mygame.javaclasses.Constants.Updates;
+import mygame.javaclasses.Constants.ObserverPattern;
 
 /**
  *
@@ -27,10 +27,9 @@ import mygame.javaclasses.Constants.Updates;
  */
 public class GUIAppState extends AbstractAppState implements IObserver {
     
+    private static final ColorRGBA GREEN_COLOR =  new ColorRGBA(22f / 255f, 110f / 255f, 12f / 255f, 1f);                            // font colo
     private static final String ENTER_DOOR = "Press ENTER to enter in the door";
     private static BitmapFont gameplayGUIFont;
-    private static final float DEFAULT_MESSAGE_X = 0f;
-    private static final float DEFAULT_MESSAGE_Y = 0f;
     private Node guiNode;
     private SimpleApplication simpleApp;
     private AssetManager assetManager;
@@ -64,7 +63,7 @@ public class GUIAppState extends AbstractAppState implements IObserver {
         }
         BitmapText hudText = new BitmapText(guiFont, false);
         hudText.setSize(guiFont.getCharSet().getRenderedSize());      // font size
-        hudText.setColor(ColorRGBA.Blue);                             // font color
+        hudText.setColor(GREEN_COLOR);
         hudText.setText(message);             // the text
         hudText.setLocalTranslation(300, hudText.getLineHeight(), 0); // position
         int nodeId = guiNode.attachChild(hudText);
@@ -79,7 +78,7 @@ public class GUIAppState extends AbstractAppState implements IObserver {
 
     public void subjectUpdate(String update) {
         
-        if(update.equals(Updates.NEXT_DOOR)){
+        if(update.equals(ObserverPattern.NEXT_DOOR)){
             try {
                 putMessageOnScreen(ENTER_DOOR, TypeOfMessage.Gameplay);
             } catch (Exception ex) {
@@ -87,7 +86,8 @@ public class GUIAppState extends AbstractAppState implements IObserver {
             }
         }
        
-        else if(update.equals(Updates.NOT_NEXT_DOOR) || update.equals(Updates.ENTERED_DOOR)){
+        else if(update.equals(ObserverPattern.NOT_NEXT_DOOR) ||
+                update.equals(ObserverPattern.ENTERED_DOOR)){
             removeMessageOnScreen(ENTER_DOOR);
         }
     }

@@ -34,7 +34,7 @@ import mygame.enumerations.DoorType;
  *
  * @author GAMEOVER
  */
-public class ScenarioAppState extends AbstractAppState implements Savable {
+public class ScenarioAppState extends AbstractAppState {
 
     public static final Vector3f FLOOR_MEASURES = new Vector3f(200F, 0f, 200f);
     protected static NodesAppState nodes;
@@ -42,6 +42,8 @@ public class ScenarioAppState extends AbstractAppState implements Savable {
     protected static BulletAppState bulletAppState;
     protected static AssetManager assetManager;
     protected static Spatial player;
+    
+    /** This will be used by the subclasses in order to pass construction assets easily */
     protected static ConstructionAssets constructionAssets;
 
     @Override

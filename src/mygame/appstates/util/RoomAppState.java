@@ -18,7 +18,7 @@ import mygame.javaclasses.Room;
  *
  * @author GAMEOVER
  */
-public abstract class RoomAppState extends ScenarioAppState{
+public abstract class RoomAppState extends ScenarioAppState implements Savable{
 
     protected float roomWidth;
     protected float roomSize;

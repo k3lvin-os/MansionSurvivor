@@ -19,7 +19,7 @@ import mygame.enumerations.Direction;
 import mygame.enumerations.DoorType;
 import mygame.interfaces.IObserver;
 import mygame.javaclasses.Constants;
-import mygame.javaclasses.Constants.Updates;
+import mygame.javaclasses.Constants.ObserverPattern;
 import mygame.javaclasses.Constants.UserData;
 import mygame.javaclasses.DoorOrientation;
 
@@ -96,7 +96,7 @@ public class ChangeRoomAppState extends AbstractAppState implements IObserver {
     }
 
     public void subjectUpdate(String update) {
-        if(update.equals(Updates.ENTERED_DOOR)){
+        if(update.equals(ObserverPattern.ENTERED_DOOR)){
             changeRoom();
         }
     }
