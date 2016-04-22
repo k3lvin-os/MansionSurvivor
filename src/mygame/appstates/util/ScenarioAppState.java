@@ -28,7 +28,7 @@ import mygame.controls.DoorControl;
 import mygame.enumerations.Direction;
 import mygame.javaclasses.Constants;
 import mygame.javaclasses.ConstructionAssets;
-import mygame.enumerations.DoorType;
+import mygame.enumerations.RayCastFace;
 
 /**
  *
@@ -105,7 +105,7 @@ public class ScenarioAppState extends AbstractAppState {
         BoxCollisionShape wallCollisionShape;
 
 
-        if (d == Direction.HORIZONTAL) {
+        if (d == Direction.Horizontal) {
             wallShape = new Box(width / 2f, height / 2f, 0f);
             wallCollisionShape = new BoxCollisionShape(new Vector3f(width / 2f, height / 2f, 0f));
 
@@ -119,7 +119,7 @@ public class ScenarioAppState extends AbstractAppState {
         wallMat.setColor("Color", ColorRGBA.White);
         wall.setMaterial(wallMat);
 
-        if (d == Direction.HORIZONTAL) {
+        if (d == Direction.Horizontal) {
             wall.setLocalTranslation(pos.add(new Vector3f(width / 2f, height / 2f, 0f)));
         } else {
             wall.setLocalTranslation(pos.add(new Vector3f(0f, height / 2f, -width / 2f)));
@@ -138,17 +138,17 @@ public class ScenarioAppState extends AbstractAppState {
     protected static Node createARoom(AssetManager assetManager, float width, float height, float size, Vector3f leftExtreme) {
 
 
-        Geometry bottomWall = createWall(assetManager, width, height, leftExtreme, Direction.HORIZONTAL);
+        Geometry bottomWall = createWall(assetManager, width, height, leftExtreme, Direction.Horizontal);
 
         Geometry topWall = createWall(assetManager, width, height,
-                leftExtreme.add(new Vector3f(0f, 0f, -size)), Direction.HORIZONTAL);
+                leftExtreme.add(new Vector3f(0f, 0f, -size)), Direction.Horizontal);
 
 
-        Geometry leftWall = createWall(assetManager, size, height, leftExtreme, Direction.VERTICAL);
+        Geometry leftWall = createWall(assetManager, size, height, leftExtreme, Direction.Vertical);
 
         Geometry rightWall = createWall(assetManager, size, height,
                 leftExtreme.add(new Vector3f(width, 0f, 0f)),
-                Direction.VERTICAL);
+                Direction.Vertical);
 
         // Geometry floor = createAFlat(assetManager, width, 1f, size, leftExtreme.add(new Vector3f(width / 2f, -1f, -size / 2f)));
 

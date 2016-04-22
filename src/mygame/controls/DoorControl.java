@@ -19,7 +19,7 @@ import mygame.appstates.NodesAppState;
 import mygame.appstates.util.RoomAppState;
 import mygame.javaclasses.Constants.UserData;
 import mygame.enumerations.Direction;
-import mygame.enumerations.DoorType;
+import mygame.enumerations.RayCastFace;
 import mygame.interfaces.IObservable;
 import mygame.interfaces.IObserver;
 import mygame.javaclasses.DoorOrientation;
@@ -40,6 +40,9 @@ public class DoorControl extends AbstractControl implements IObservable {
      * Store the results of collision of the ray
      */
     private CollisionResults collisionResults;
+    
+    public static final float WALL_DISTANCE = 0.2f;
+    
     /**
      * Tells at what directino the ray will go
      */
@@ -124,7 +127,7 @@ public class DoorControl extends AbstractControl implements IObservable {
             DoorOrientation orientation, NodesAppState nodes, InputAppState inputApp) {
         this.spatial = door;
         this.spatial.setName(doorName);
-        collisionResults = new CollisionResults();
+        this.collisionResults = new CollisionResults();
         DoorOrientation doorOrientation = new DoorOrientation(orientation);
         setDoorOrienation(doorOrientation);
         setPlayerUsingDoor(false);
@@ -143,15 +146,15 @@ public class DoorControl extends AbstractControl implements IObservable {
     }
 
     private void defineRayCast() {
-        if (this.getDoorOrienation().getDoorDirection() == Direction.HORIZONTAL) {
+        if (this.getDoorOrienation().getDoorDirection() == Direction.Horizontal) {
 
-            if (this.getDoorOrienation().getDoorType() == DoorType.INDOOR) {
+            if (this.getDoorOrienation().getDoorType() == RayCastFace.PositiveAxis) {
                 rayDirection.setZ(-1f);
             } else {
                 rayDirection.setZ(1f);
             }
         } else {
-            if (this.getDoorOrienation().getDoorType() == DoorType.INDOOR) {
+            if (this.getDoorOrienation().getDoorType() == RayCastFace.PositiveAxis) {
                 rayDirection.setX(1f);
             } else {
                 rayDirection.setZ(-1f);

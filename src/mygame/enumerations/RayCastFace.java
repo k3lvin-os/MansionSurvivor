@@ -8,7 +8,7 @@ package mygame.enumerations;
  *
  * @author GAMEOVER
  */
-public enum DoorType {
-    INDOOR,
-    OUTDOOR
+public enum RayCastFace {
+    PositiveAxis,
+    NegativeAxis
 }

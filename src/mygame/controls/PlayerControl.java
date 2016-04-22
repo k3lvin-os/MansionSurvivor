@@ -54,6 +54,7 @@ public class PlayerControl extends AbstractControl {
 
     @Override
     protected void controlUpdate(float tpf) {
+        System.out.println(spatial.getLocalTranslation());
     }
 
     @Override

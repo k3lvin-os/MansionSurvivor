@@ -20,7 +20,7 @@ import mygame.javaclasses.Constants;
 import mygame.enumerations.Direction;
 import mygame.javaclasses.Door;
 import mygame.javaclasses.DoorOrientation;
-import mygame.enumerations.DoorType;
+import mygame.enumerations.RayCastFace;
 import mygame.javaclasses.Constants.Doors;
 
 /**
@@ -29,7 +29,7 @@ import mygame.javaclasses.Constants.Doors;
  */
 public class Prototype1Room extends RoomAppState {
 
-    public static final Vector3f ENTRANCE_DOOR_POS = new Vector3f(9f, 0f, 0.1f);
+    public static final Vector3f ENTRANCE_DOOR_POS = new Vector3f(18f, 0f, 0.1f);
     protected Door mansionEntranceDoor;
     protected DoorControl entranceDoorControl;
     protected Geometry floor;
@@ -67,11 +67,11 @@ public class Prototype1Room extends RoomAppState {
         //nodes.getRootNode().attachChild(nodes.getEnemyNode().getChild(Constants.UserData.FRANKESTEIN));
 
 
-        DoorOrientation doorOrientation = new DoorOrientation(DoorType.OUTDOOR, Direction.HORIZONTAL);
+        DoorOrientation doorOrientation = new DoorOrientation(RayCastFace.NegativeAxis, Direction.Horizontal);
         boolean doubleDoor = true;
 
         // Left door
-        mansionEntranceDoor = new Door(constructionAssets, ENTRANCE_DOOR_POS, Direction.HORIZONTAL, nodes.getDoorsNode(), doubleDoor);
+        mansionEntranceDoor = new Door(constructionAssets, ENTRANCE_DOOR_POS, Direction.Horizontal, nodes.getDoorsNode(), doubleDoor);
         Geometry entranceDoorGeometry = mansionEntranceDoor.getPrototypeGeometry().getGeometry();
       
         entranceDoorControl = new DoorControl(entranceDoorGeometry, Doors.COUNTRYARD_TO_ENTRANCE,

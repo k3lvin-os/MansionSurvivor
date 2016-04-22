@@ -9,6 +9,6 @@ package mygame.enumerations;
  * @author GAMEOVER
  */
 public enum Direction {
-    HORIZONTAL,
-    VERTICAL
+    Horizontal,
+    Vertical
 }

@@ -16,7 +16,7 @@ import com.jme3.math.Vector3f;
 import mygame.controls.DoorControl;
 import mygame.controls.PlayerControl;
 import mygame.enumerations.Direction;
-import mygame.enumerations.DoorType;
+import mygame.enumerations.RayCastFace;
 import mygame.interfaces.IObserver;
 import mygame.javaclasses.Constants;
 import mygame.javaclasses.Constants.ObserverPattern;

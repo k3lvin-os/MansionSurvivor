@@ -31,13 +31,13 @@ public class Room implements IEnable{
             float width, float height, float size, Vector3f leftExtreme) {
 
         bottomWall = new Wall(constructionAssets, width, height, leftExtreme,
-                Direction.HORIZONTAL);
+                Direction.Horizontal);
         topWall = new Wall(constructionAssets, width, height,
-                leftExtreme.add(new Vector3f(0f, 0f, -size)), Direction.HORIZONTAL);
-        leftWall = new Wall(constructionAssets, size, height, leftExtreme, Direction.VERTICAL);
+                leftExtreme.add(new Vector3f(0f, 0f, -size)), Direction.Horizontal);
+        leftWall = new Wall(constructionAssets, size, height, leftExtreme, Direction.Vertical);
         rightWall = new Wall(constructionAssets, size, height,
                 leftExtreme.add(new Vector3f(width, 0f, 0f)),
-                Direction.VERTICAL);
+                Direction.Vertical);
 
 
         bottomWall.getGeometry().setName(UserData.BOTTOM_WALL);

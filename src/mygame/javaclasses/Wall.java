@@ -46,7 +46,7 @@ public class Wall implements IEnable {
 
 
 
-        if (d == Direction.HORIZONTAL) {
+        if (d == Direction.Horizontal) {
             wallShape = new Box(width / 2f, height / 2f, 0f);
             wallCollisionShape = new BoxCollisionShape(new Vector3f(width / 2f, height / 2f, 0f));
 
@@ -60,7 +60,7 @@ public class Wall implements IEnable {
         wallMat.setColor("Color", ColorRGBA.White);
         wallGeometry.setMaterial(wallMat);
 
-        if (d == Direction.HORIZONTAL) {
+        if (d == Direction.Horizontal) {
             wallGeometry.setLocalTranslation(pos.add(new Vector3f(width / 2f, height / 2f, 0f)));
         } else {
             wallGeometry.setLocalTranslation(pos.add(new Vector3f(0f, height / 2f, -width / 2f)));

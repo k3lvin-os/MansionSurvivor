@@ -29,5 +29,6 @@ public class PowerGeneratorRoom extends RoomAppState {
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
+        setEnabled(true);
     }
 }
