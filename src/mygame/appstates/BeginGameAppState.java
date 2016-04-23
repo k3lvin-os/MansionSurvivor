@@ -9,7 +9,7 @@ import mygame.appstates.rooms.MaintenanceRoom;
 import mygame.appstates.rooms.CorridorRoom;
 import mygame.appstates.rooms.OfficeRoom;
 import mygame.appstates.rooms.MansionEntranceRoom;
-import mygame.appstates.rooms.PowerGeneratorRoom;
+import mygame.appstates.rooms.PowerRoom;
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.AbstractAppState;
@@ -46,7 +46,7 @@ public class BeginGameAppState extends AbstractAppState {
     OfficeRoom officeAppState;
     AnimalCagesRoom animalCagesAppState;
     MaintenanceRoom maintenanceRoom;
-    PowerGeneratorRoom powerGeneratorRoomAppState;
+    PowerRoom powerGeneratorRoomAppState;
     GUIAppState guiAppState;
 
 
@@ -96,7 +96,7 @@ public class BeginGameAppState extends AbstractAppState {
         maintenanceRoom = new MaintenanceRoom();
         this.stateManager.attach(maintenanceRoom);
 
-        powerGeneratorRoomAppState = new PowerGeneratorRoom();
+        powerGeneratorRoomAppState = new PowerRoom();
         this.stateManager.attach(powerGeneratorRoomAppState);
         
         guiAppState = new GUIAppState();

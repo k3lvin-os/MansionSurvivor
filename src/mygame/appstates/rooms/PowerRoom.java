@@ -13,7 +13,7 @@ import com.jme3.math.Vector3f;
  *
  * @author GAMEOVER
  */
-public class PowerGeneratorRoom extends RoomAppState {
+public class PowerRoom extends RoomAppState {
 
     public static final float DEFAULT_WIDTH = 36f;
     public static final float DEFAULT_HEIGHT = 20f;
@@ -22,7 +22,7 @@ public class PowerGeneratorRoom extends RoomAppState {
             .add(0f, 0f, -MaintenanceRoom.DEFAULT_SIZE);
     public static final Vector3f DEFAULT_PLAYER_POSITION = Vector3f.ZERO;
 
-    public PowerGeneratorRoom() {
+    public PowerRoom() {
         super(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_SIZE, DEFAULT_POSITION);
     }
 
