@@ -38,6 +38,9 @@ public class CorridorRoom extends RoomAppState {
             new Vector3f(DEFAULT_WIDTH - DoorControl.WALL_DISTANCE , 0f, -DEFAULT_SIZE * 0.25f));
     public static final Vector3f CAGES_DOOR_POS = DEFAULT_LOCATION.add(DoorControl.WALL_DISTANCE,
             0f, -DEFAULT_SIZE * 0.75f);
+    public static final Vector3f POWER_DOOR_POS = MAINTENANCE_DOOR_POS.add
+            (new Vector3f(0f, 0f, -DEFAULT_SIZE * 0.5f));
+    protected Door powerDoor;
     protected Door cagesDoor;
     protected Door maintenanceDoor;
     protected Door officeDoor;
@@ -90,6 +93,17 @@ public class CorridorRoom extends RoomAppState {
                 Doors.CAGES_TO_CORRIDOR,this,cagesDoorOrientation,nodes,inputApp);
         cagesDoorGeometry.addControl(cagesDoorControl);
         
+        // Power Door
+        DoorOrientation powerDoorOrientation = new DoorOrientation(RayCastFace.NegativeAxis,
+                Direction.Vertical);
+        this.powerDoor = new Door(constructionAssets,POWER_DOOR_POS,
+                powerDoorOrientation.getDoorDirection(), nodes.getDoorsNode());
+        Geometry powerDoorGeometry = this.powerDoor.getPrototypeGeometry().getGeometry();
+        DoorControl powerDoorControl = new DoorControl(powerDoorGeometry,Doors.CORRIDOR_TO_POWER,
+                Doors.POWER_TO_CORRIDOR,this,powerDoorOrientation,nodes,inputApp);
+        powerDoorGeometry.addControl(powerDoorControl);
+        
+        
         setEnabled(false);
     }
 
@@ -100,6 +114,7 @@ public class CorridorRoom extends RoomAppState {
         entranceDoor.setEnabled(false);
         maintenanceDoor.setEnabled(false);
         cagesDoor.setEnabled(false);
+        powerDoor.setEnabled(false);
     }
 
     @Override
@@ -109,5 +124,6 @@ public class CorridorRoom extends RoomAppState {
         entranceDoor.setEnabled(true);
         maintenanceDoor.setEnabled(true);
         cagesDoor.setEnabled(true);
+        powerDoor.setEnabled(true);
     }
 }

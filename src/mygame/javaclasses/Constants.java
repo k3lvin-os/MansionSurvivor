@@ -62,8 +62,8 @@ public final class Constants {
         public static final String CAGES_TO_CORRIDOR = "cagesToCorridor";
         public static final String CORRIDOR_TO_MAINTENANCE = "corridorToMaintenance";
         public static final String MAINTENANCE_TO_CORRIDOR = "maintenanceToCorridor";
-        public static final String CORRIDOR_TO_GENERATOR = "corridorToGenerator";
-        public static final String GENERATOR_TO_CORRIDOR = "generatorToCorridor";
+        public static final String CORRIDOR_TO_POWER = "corridorToGenerator";
+        public static final String POWER_TO_CORRIDOR = "generatorToCorridor";
     }
 
     public static final class ObserverPattern {

@@ -30,15 +30,10 @@ import mygame.javaclasses.Constants.Doors;
 public class OutdoorRoom extends RoomAppState {
 
     public static final Vector3f ENTRANCE_DOOR_POS = new Vector3f(18f, 0f, 0.1f);
-    protected Door mansionEntranceDoor;
-    protected DoorControl entranceDoorControl;
+    protected Door entranceDoor;
     protected Geometry floor;
     protected RigidBodyControl floorPhysics;
-    EntranceRoom mansionEntranceAppState;
-
-    public DoorControl getEntranceDoorControl() {
-        return entranceDoorControl;
-    }
+    private EntranceRoom entranceAppState;
 
     public OutdoorRoom() {
         super(0f, 0f, 0f, Vector3f.ZERO); // Outdoor measures
@@ -47,21 +42,21 @@ public class OutdoorRoom extends RoomAppState {
     @Override
     public void OnEnabled() {
         super.OnEnabled();
-        mansionEntranceDoor.setEnabled(true);
-        mansionEntranceAppState.setEnabled(true);
+        entranceDoor.setEnabled(true);
+        entranceAppState.setEnabled(true);
       
     }
 
     @Override
     public void OnDisabled() {
         super.OnDisabled();
-        mansionEntranceDoor.setEnabled(false);
+        entranceDoor.setEnabled(false);
     }
 
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
-        this.mansionEntranceAppState = stateManager.getState(EntranceRoom.class);
+        this.entranceAppState = stateManager.getState(EntranceRoom.class);
 
         floor = createGameFloor(assetManager, new Vector3f(0f, 0f, 10f));
 
@@ -70,10 +65,10 @@ public class OutdoorRoom extends RoomAppState {
         boolean doubleDoor = true;
 
         // Left door
-        mansionEntranceDoor = new Door(constructionAssets, ENTRANCE_DOOR_POS, Direction.Horizontal, nodes.getDoorsNode(), doubleDoor);
-        Geometry entranceDoorGeometry = mansionEntranceDoor.getPrototypeGeometry().getGeometry();
+        entranceDoor = new Door(constructionAssets, ENTRANCE_DOOR_POS, Direction.Horizontal, nodes.getDoorsNode(), doubleDoor);
+        Geometry entranceDoorGeometry = entranceDoor.getPrototypeGeometry().getGeometry();
       
-        entranceDoorControl = new DoorControl(entranceDoorGeometry, Doors.COUNTRYARD_TO_ENTRANCE,
+        DoorControl entranceDoorControl = new DoorControl(entranceDoorGeometry, Doors.COUNTRYARD_TO_ENTRANCE,
                 Doors.ENTRANCE_TO_COUNTRYARD, this, doorOrientation,nodes, inputApp);
         entranceDoorGeometry.addControl(entranceDoorControl);
 
