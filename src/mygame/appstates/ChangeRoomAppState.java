@@ -55,11 +55,6 @@ public class ChangeRoomAppState extends AbstractAppState implements IObserver {
             RoomAppState nextRoom = symetricDoorControl.getDoorRoomAppState();
             currentRoom.setEnabled(false);
             rootNode.detachChild(playerNode);
-        try {
-            Thread.sleep(1000l);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ChangeRoomAppState.class.getName()).log(Level.SEVERE, null, ex);
-        }
             nextRoom.setEnabled(true);
             Vector3f playerPosition = symetricDoorControl.getSpatial().getLocalTranslation()
                     .add(symetricDoorControl.getRayDirection());

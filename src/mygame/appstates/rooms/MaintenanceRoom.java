@@ -9,6 +9,14 @@ import mygame.appstates.rooms.MainCorridorRoom;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.math.Vector3f;
+import com.jme3.scene.Geometry;
+import mygame.controls.DoorControl;
+import mygame.enumerations.Direction;
+import mygame.enumerations.RayCastFace;
+import mygame.javaclasses.Constants;
+import mygame.javaclasses.Constants.Doors;
+import mygame.javaclasses.Door;
+import mygame.javaclasses.DoorOrientation;
 
 /**
  *
@@ -22,6 +30,9 @@ public class MaintenanceRoom extends RoomAppState {
     public static final Vector3f DEFAULT_POSITION = MainCorridorRoom.DEFAULT_LOCATION
             .add(new Vector3f(MainCorridorRoom.DEFAULT_WIDTH, 0f, 0f));
     public static final Vector3f DEFAULT_PLAYER_POSITION = Vector3f.ZERO;
+    public static final Vector3f CORRIDOR_DOOR_POSITION = MainCorridorRoom.
+            MAINTENANCE_DOOR_POS.add(new Vector3f(DoorControl.WALL_DISTANCE * 2f, 0f, 0f));
+    protected Door corridorDoor;
 
     public MaintenanceRoom() {
         super(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_SIZE, DEFAULT_POSITION);
@@ -30,7 +41,34 @@ public class MaintenanceRoom extends RoomAppState {
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
+        
+        // Corridor Door
+        DoorOrientation corridorDoorOrientation = new DoorOrientation(RayCastFace.PositiveAxis,
+                Direction.Vertical);
+        this.corridorDoor = new Door(constructionAssets,CORRIDOR_DOOR_POSITION,
+                corridorDoorOrientation.getDoorDirection(),nodes.getDoorsNode());
+        Geometry corridorDoorGeometry = this.corridorDoor.getPrototypeGeometry().getGeometry();
+        DoorControl corridorDoorControl = new DoorControl(corridorDoorGeometry,
+                Doors.MAINTENANCE_TO_CORRIDOR,Doors.CORRIDOR_TO_MAINTENANCE,this,
+                corridorDoorOrientation,nodes,inputApp);
+        corridorDoorGeometry.addControl(corridorDoorControl);
+                
+        
         setEnabled(false);
 
     }
+    
+    @Override
+    public void OnEnabled(){
+        super.OnEnabled();
+        corridorDoor.setEnabled(true);
+    }
+    
+    @Override
+    public void OnDisabled(){
+        super.OnDisabled();
+        corridorDoor.setEnabled(false);
+    }
 }
+
+    

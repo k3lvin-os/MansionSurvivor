@@ -34,6 +34,9 @@ public class MainCorridorRoom extends RoomAppState {
             (new Vector3f(DEFAULT_WIDTH / 2f, 0f, -DoorControl.WALL_DISTANCE));
     public static final Vector3f OFFICE_DOOR_POS = DEFAULT_LOCATION.add(new Vector3f(DoorControl.WALL_DISTANCE,
             0f,-DEFAULT_SIZE * 0.25f));
+    public static final Vector3f MAINTENANCE_DOOR_POS = DEFAULT_LOCATION.add(
+            new Vector3f(DEFAULT_WIDTH - DoorControl.WALL_DISTANCE , 0f, -DEFAULT_SIZE * 0.25f));
+    protected Door maintenanceDoor;
     protected Door officeDoor;
     protected Door entranceDoor;
 
@@ -65,6 +68,15 @@ public class MainCorridorRoom extends RoomAppState {
                 officeDoorOrientation, nodes, inputApp);
         officeDoorGeometry.addControl(officeDoorControl);
         
+        // Maintenance Door
+        DoorOrientation maintenanceDoorOrientation = new DoorOrientation(RayCastFace.NegativeAxis, Direction.Vertical);
+        this.maintenanceDoor = new Door(constructionAssets,MAINTENANCE_DOOR_POS,
+                maintenanceDoorOrientation.getDoorDirection(),nodes.getDoorsNode());
+        Geometry maintenanceDoorGeometry = this.maintenanceDoor.getPrototypeGeometry().getGeometry();
+        DoorControl maintenanceDoorControl = new DoorControl(maintenanceDoorGeometry, Doors.CORRIDOR_TO_MAINTENANCE,
+                Doors.MAINTENANCE_TO_CORRIDOR, this, maintenanceDoorOrientation, nodes, inputApp);
+        maintenanceDoorGeometry.addControl(maintenanceDoorControl);
+        
         setEnabled(false);
     }
 
@@ -73,6 +85,7 @@ public class MainCorridorRoom extends RoomAppState {
         super.OnDisabled();
         officeDoor.setEnabled(false);
         entranceDoor.setEnabled(false);
+        maintenanceDoor.setEnabled(false);
     }
 
     @Override
@@ -80,5 +93,6 @@ public class MainCorridorRoom extends RoomAppState {
         super.OnEnabled();
         officeDoor.setEnabled(true);
         entranceDoor.setEnabled(true);
+        maintenanceDoor.setEnabled(true);
     }
 }
