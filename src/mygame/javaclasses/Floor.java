@@ -36,16 +36,16 @@ public class Floor implements IEnable, Savable {
         return floor;
     }
 
-    public Floor(ConstructionAssets assets, float width, float height, float size, Vector3f leftExtreme) {
+    public Floor(ConstructionAssets assets, float width, float size, Vector3f leftExtreme) {
         this.rootNode = assets.getRootNode();
         this.bulletAppState = assets.getBulletAppState();
-        Box floorBox = new Box(width, height, size);
+        Box floorBox = new Box(width / 2f, 0f, size /2f);
         floor = new Geometry(UserData.FLOOR, floorBox);
         Material orangeMat = new Material(assets.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
         orangeMat.setColor("Color", ColorRGBA.Orange);
         floor.setMaterial(orangeMat);
-        floor.setLocalTranslation(leftExtreme);
-        BoxCollisionShape floorShape = new BoxCollisionShape(new Vector3f(width, height, size));
+        floor.setLocalTranslation(leftExtreme.add(width / 2f, 0f, -size / 2f));
+        BoxCollisionShape floorShape = new BoxCollisionShape(new Vector3f(width / 2f, 0f, size / 2f));
         RigidBodyControl floorPhysics = new RigidBodyControl(floorShape, 0.0f);
         floor.addControl(floorPhysics);
         bulletAppState.getPhysicsSpace().add(floorPhysics);    

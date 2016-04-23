@@ -40,7 +40,7 @@ public class Room implements IEnable {
         rightWall = new Wall(constructionAssets, size, height,
                 leftExtreme.add(new Vector3f(width, 0f, 0f)),
                 Direction.Vertical);
-        floor = new Floor(constructionAssets, width, 0f, size, leftExtreme);
+        floor = new Floor(constructionAssets, width, size, leftExtreme);
 
 
         bottomWall.getGeometry().setName(UserData.BOTTOM_WALL);

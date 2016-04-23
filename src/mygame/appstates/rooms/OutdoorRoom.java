@@ -35,7 +35,7 @@ public class OutdoorRoom extends RoomAppState {
     public static final float HEIGHT = 20f;
     public static final float SIZE = 18f;
     public static final Vector3f DEFAULT_POSITION = EntranceRoom.DEFAULT_POSITION
-            .add(0f, 0f, HEIGHT);
+            .add(0f, 0f, SIZE);
     public static final Vector3f ENTRANCE_DOOR_POS = new Vector3f(18f, 0f, 0.1f);
     protected Door entranceDoor;
     private EntranceRoom entranceAppState;
@@ -48,7 +48,7 @@ public class OutdoorRoom extends RoomAppState {
     public void OnEnabled() {
         // Note that i'm not calling the super class in order to not show walls
         entranceDoor.setEnabled(true);
-        entranceAppState.setEnabled(true); // DEBUG
+        entranceAppState.setEnabled(true); 
         Floor floor = room.getNode().getUserData(UserData.FLOOR);
         floor.setEnabled(true);
 
