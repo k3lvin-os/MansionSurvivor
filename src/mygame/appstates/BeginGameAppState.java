@@ -6,7 +6,7 @@ package mygame.appstates;
 
 import mygame.appstates.rooms.Prototype1Room;
 import mygame.appstates.rooms.MaintenanceRoom;
-import mygame.appstates.rooms.MainCorridorRoom;
+import mygame.appstates.rooms.CorridorRoom;
 import mygame.appstates.rooms.OfficeRoom;
 import mygame.appstates.rooms.MansionEntranceRoom;
 import mygame.appstates.rooms.PowerGeneratorRoom;
@@ -42,7 +42,7 @@ public class BeginGameAppState extends AbstractAppState {
     MansionEntranceRoom mansionEntranceAppState;
     LightForAllEnvironment lightForAllEnvironment;
     ChangeRoomAppState changeRoomAppState;
-    MainCorridorRoom mainCorridorAppState;
+    CorridorRoom mainCorridorAppState;
     OfficeRoom officeAppState;
     AnimalCagesRoom animalCagesAppState;
     MaintenanceRoom maintenanceRoom;
@@ -84,7 +84,7 @@ public class BeginGameAppState extends AbstractAppState {
         gameplayInputAppState = new InputAppState();
         this.stateManager.attach(gameplayInputAppState);
 
-        mainCorridorAppState = new MainCorridorRoom();
+        mainCorridorAppState = new CorridorRoom();
         this.stateManager.attach(mainCorridorAppState);
 
         officeAppState = new OfficeRoom();

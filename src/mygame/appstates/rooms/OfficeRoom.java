@@ -26,9 +26,9 @@ public class OfficeRoom extends RoomAppState {
     public static final float DEFAULT_WIDTH = 36f;
     public static final float DEFAULT_HEIGHT = 20f;
     public static final float DEFAULT_SIZE = 18f;
-    public static final Vector3f DEFAULT_POSITION = MainCorridorRoom.DEFAULT_LOCATION
+    public static final Vector3f DEFAULT_POSITION = CorridorRoom.DEFAULT_LOCATION
             .add(new Vector3f(-DEFAULT_WIDTH, 0f, 0f));
-    public static final Vector3f CORRIDOR_DOOR_POS =  MainCorridorRoom.OFFICE_DOOR_POS
+    public static final Vector3f CORRIDOR_DOOR_POS =  CorridorRoom.OFFICE_DOOR_POS
             .add( DoorControl.WALL_DISTANCE * -2f,0f,0f);
     protected Door corridorDoor;
     public OfficeRoom() {

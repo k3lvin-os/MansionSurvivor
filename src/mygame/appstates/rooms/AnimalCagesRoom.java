@@ -27,7 +27,7 @@ public class AnimalCagesRoom extends RoomAppState {
     public static final float DEFAULT_SIZE = 18f;
     public static final Vector3f DEFAULT_POSITION = OfficeRoom.DEFAULT_POSITION
             .add(new Vector3f(0f, 0f, -OfficeRoom.DEFAULT_SIZE));
-    public static final Vector3f CORRIDOR_DOOR_POS = MainCorridorRoom.CAGES_DOOR_POS
+    public static final Vector3f CORRIDOR_DOOR_POS = CorridorRoom.CAGES_DOOR_POS
             .add(new Vector3f(-DoorControl.WALL_DISTANCE * 2f, 0f, 0f));
     protected Door corridorDoor;
 

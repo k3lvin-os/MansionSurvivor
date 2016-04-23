@@ -23,7 +23,7 @@ import mygame.javaclasses.DoorOrientation;
  *
  * @author GAMEOVER
  */
-public class MainCorridorRoom extends RoomAppState {
+public class CorridorRoom extends RoomAppState {
 
     public static final float DEFAULT_WIDTH = 18f;
     public static final float DEFAULT_HEIGHT = 20f;
@@ -43,7 +43,7 @@ public class MainCorridorRoom extends RoomAppState {
     protected Door officeDoor;
     protected Door entranceDoor;
 
-    public MainCorridorRoom() {
+    public CorridorRoom() {
         super(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_SIZE, DEFAULT_LOCATION);
     }
 

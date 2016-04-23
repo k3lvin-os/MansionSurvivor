@@ -14,7 +14,7 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
-import mygame.appstates.rooms.MainCorridorRoom;
+import mygame.appstates.rooms.CorridorRoom;
 import mygame.controls.DoorControl;
 import mygame.javaclasses.Constants;
 import mygame.enumerations.Direction;
