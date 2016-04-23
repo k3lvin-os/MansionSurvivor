@@ -60,7 +60,7 @@ public class EntranceRoom extends RoomAppState {
         countryardDoorGeometry.addControl(countryardDoorControl);
         
 
-        setEnabled(true);
+        setEnabled(false);
     }
 
     @Override

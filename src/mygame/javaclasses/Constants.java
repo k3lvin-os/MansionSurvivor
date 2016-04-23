@@ -39,6 +39,7 @@ public final class Constants {
         public static final String NAME = "name";
         public static final String SYMETRIC_DOOR_NAME = "symetricDoorName";
         public static final String PLAYER_CONTROL = "playerControl";
+        public static final String FLOOR = "floor";
     }
 
     public static final class Mapping {

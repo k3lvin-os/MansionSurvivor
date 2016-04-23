@@ -50,7 +50,7 @@ public class OfficeRoom extends RoomAppState {
                 corridorDoorOrientation, nodes, inputApp);
         corridorDoorGeometry.addControl(corridorDoorControl);
         
-        setEnabled(true);
+        setEnabled(false);
 
     }
     

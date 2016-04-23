@@ -49,7 +49,6 @@ public class BeginGameAppState extends AbstractAppState {
     PowerRoom powerGeneratorRoomAppState;
     GUIAppState guiAppState;
 
-
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
@@ -69,18 +68,18 @@ public class BeginGameAppState extends AbstractAppState {
         cameraAppState = new CameraAppState();
         this.stateManager.attach(cameraAppState);
 
-        prototypeRoom1AppState = new OutdoorRoom();
-        this.stateManager.attach(prototypeRoom1AppState);
-
         mansionEntranceAppState = new EntranceRoom();
         this.stateManager.attach(mansionEntranceAppState);
 
+        prototypeRoom1AppState = new OutdoorRoom();
+        this.stateManager.attach(prototypeRoom1AppState);
+
         lightForAllEnvironment = new LightForAllEnvironment();
         this.stateManager.attach(lightForAllEnvironment);
-        
+
         changeRoomAppState = new ChangeRoomAppState();
         this.stateManager.attach(changeRoomAppState);
-        
+
         gameplayInputAppState = new InputAppState();
         this.stateManager.attach(gameplayInputAppState);
 
@@ -98,9 +97,8 @@ public class BeginGameAppState extends AbstractAppState {
 
         powerGeneratorRoomAppState = new PowerRoom();
         this.stateManager.attach(powerGeneratorRoomAppState);
-        
+
         guiAppState = new GUIAppState();
         this.stateManager.attach(guiAppState);
     }
-
 }

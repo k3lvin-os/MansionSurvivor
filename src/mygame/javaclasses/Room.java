@@ -10,6 +10,7 @@ import com.jme3.bullet.BulletAppState;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
+import mygame.appstates.util.ScenarioAppState;
 import mygame.interfaces.IEnable;
 import mygame.javaclasses.Constants.UserData;
 
@@ -17,13 +18,14 @@ import mygame.javaclasses.Constants.UserData;
  *
  * @author GAMEOVER
  */
-public class Room implements IEnable{
+public class Room implements IEnable {
 
     private Wall bottomWall, topWall, leftWall, rightWall;
+    private Floor floor;
     private Node room;
     private boolean enabled;
 
-    public Node getRoom() {
+    public Node getNode() {
         return room;
     }
 
@@ -38,37 +40,41 @@ public class Room implements IEnable{
         rightWall = new Wall(constructionAssets, size, height,
                 leftExtreme.add(new Vector3f(width, 0f, 0f)),
                 Direction.Vertical);
+        floor = new Floor(constructionAssets, width, 0f, size, leftExtreme);
 
 
         bottomWall.getGeometry().setName(UserData.BOTTOM_WALL);
         topWall.getGeometry().setName(UserData.TOP_WALL);
         leftWall.getGeometry().setName(UserData.LEFT_WALL);
         rightWall.getGeometry().setName(UserData.RIGHT_WALL);
+        floor.getGeometry().setName(UserData.FLOOR);
 
         room = new Node();
-        room.attachChild(bottomWall.getGeometry());
-        room.attachChild(topWall.getGeometry());
-        room.attachChild(leftWall.getGeometry());
-        room.attachChild(rightWall.getGeometry());
+        room.setUserData(UserData.BOTTOM_WALL, bottomWall);
+        room.setUserData(UserData.TOP_WALL, topWall);
+        room.setUserData(UserData.LEFT_WALL, leftWall);
+        room.setUserData(UserData.RIGHT_WALL, rightWall);
+        room.setUserData(UserData.FLOOR, floor);
     }
-    
-    public void setEnabled(boolean enabled){
+
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
-        if(enabled){
+        if (enabled) {
             bottomWall.setEnabled(true);
             topWall.setEnabled(true);
             leftWall.setEnabled(true);
             rightWall.setEnabled(true);
-        }
-        else{
+            floor.setEnabled(true);
+        } else {
             bottomWall.setEnabled(false);
             topWall.setEnabled(false);
             leftWall.setEnabled(false);
-            rightWall.setEnabled(false);        
+            rightWall.setEnabled(false);
+            floor.setEnabled(false);
         }
     }
 
     public boolean isEnabled() {
-       return enabled;
+        return enabled;
     }
 }

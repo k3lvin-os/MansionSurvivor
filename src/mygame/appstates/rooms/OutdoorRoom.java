@@ -22,6 +22,8 @@ import mygame.javaclasses.Door;
 import mygame.javaclasses.DoorOrientation;
 import mygame.enumerations.RayCastFace;
 import mygame.javaclasses.Constants.Doors;
+import mygame.javaclasses.Constants.UserData;
+import mygame.javaclasses.Floor;
 
 /**
  *
@@ -29,28 +31,35 @@ import mygame.javaclasses.Constants.Doors;
  */
 public class OutdoorRoom extends RoomAppState {
 
+    public static final float WIDTH = 36f;
+    public static final float HEIGHT = 20f;
+    public static final float SIZE = 18f;
+    public static final Vector3f DEFAULT_POSITION = EntranceRoom.DEFAULT_POSITION
+            .add(0f, 0f, HEIGHT);
     public static final Vector3f ENTRANCE_DOOR_POS = new Vector3f(18f, 0f, 0.1f);
     protected Door entranceDoor;
-    protected Geometry floor;
-    protected RigidBodyControl floorPhysics;
     private EntranceRoom entranceAppState;
 
     public OutdoorRoom() {
-        super(0f, 0f, 0f, Vector3f.ZERO); // Outdoor measures
+        super(WIDTH, HEIGHT, SIZE, DEFAULT_POSITION); // Outdoor measures
     }
 
     @Override
     public void OnEnabled() {
-        super.OnEnabled();
+        // Note that i'm not calling the super class in order to not show walls
         entranceDoor.setEnabled(true);
-        entranceAppState.setEnabled(true);
-      
+        entranceAppState.setEnabled(true); // DEBUG
+        Floor floor = room.getNode().getUserData(UserData.FLOOR);
+        floor.setEnabled(true);
+
+
     }
 
     @Override
     public void OnDisabled() {
-        super.OnDisabled();
         entranceDoor.setEnabled(false);
+        Floor floor = room.getNode().getUserData(UserData.FLOOR);
+        floor.setEnabled(false);
     }
 
     @Override
@@ -58,7 +67,6 @@ public class OutdoorRoom extends RoomAppState {
         super.initialize(stateManager, app);
         this.entranceAppState = stateManager.getState(EntranceRoom.class);
 
-        floor = createGameFloor(assetManager, new Vector3f(0f, 0f, 10f));
 
 
         DoorOrientation doorOrientation = new DoorOrientation(RayCastFace.NegativeAxis, Direction.Horizontal);
@@ -67,9 +75,9 @@ public class OutdoorRoom extends RoomAppState {
         // Left door
         entranceDoor = new Door(constructionAssets, ENTRANCE_DOOR_POS, Direction.Horizontal, nodes.getDoorsNode(), doubleDoor);
         Geometry entranceDoorGeometry = entranceDoor.getPrototypeGeometry().getGeometry();
-      
+
         DoorControl entranceDoorControl = new DoorControl(entranceDoorGeometry, Doors.COUNTRYARD_TO_ENTRANCE,
-                Doors.ENTRANCE_TO_COUNTRYARD, this, doorOrientation,nodes, inputApp);
+                Doors.ENTRANCE_TO_COUNTRYARD, this, doorOrientation, nodes, inputApp);
         entranceDoorGeometry.addControl(entranceDoorControl);
 
         setEnabled(true);

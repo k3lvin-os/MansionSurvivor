@@ -9,19 +9,23 @@ import com.jme3.asset.AssetManager;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.bullet.collision.shapes.BoxCollisionShape;
 import com.jme3.bullet.control.RigidBodyControl;
+import com.jme3.export.JmeExporter;
+import com.jme3.export.JmeImporter;
+import com.jme3.export.Savable;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.shape.Box;
+import java.io.IOException;
 import mygame.interfaces.IEnable;
 
 /**
  *
  * @author GAMEOVER
  */
-public class Wall implements IEnable {
+public class Wall implements IEnable, Savable {
 
     private RigidBodyControl wallPhysics;
     private Geometry wallGeometry;
@@ -83,5 +87,13 @@ public class Wall implements IEnable {
 
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public void write(JmeExporter ex) throws IOException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void read(JmeImporter im) throws IOException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
