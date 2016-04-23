@@ -36,6 +36,9 @@ public class MainCorridorRoom extends RoomAppState {
             0f,-DEFAULT_SIZE * 0.25f));
     public static final Vector3f MAINTENANCE_DOOR_POS = DEFAULT_LOCATION.add(
             new Vector3f(DEFAULT_WIDTH - DoorControl.WALL_DISTANCE , 0f, -DEFAULT_SIZE * 0.25f));
+    public static final Vector3f CAGES_DOOR_POS = DEFAULT_LOCATION.add(DoorControl.WALL_DISTANCE,
+            0f, -DEFAULT_SIZE * 0.75f);
+    protected Door cagesDoor;
     protected Door maintenanceDoor;
     protected Door officeDoor;
     protected Door entranceDoor;
@@ -77,6 +80,16 @@ public class MainCorridorRoom extends RoomAppState {
                 Doors.MAINTENANCE_TO_CORRIDOR, this, maintenanceDoorOrientation, nodes, inputApp);
         maintenanceDoorGeometry.addControl(maintenanceDoorControl);
         
+        // Animal Cages Door
+        DoorOrientation cagesDoorOrientation = new DoorOrientation(RayCastFace.PositiveAxis, 
+                Direction.Vertical);
+        this.cagesDoor = new Door(constructionAssets, CAGES_DOOR_POS
+                ,cagesDoorOrientation.getDoorDirection(),nodes.getDoorsNode());
+        Geometry cagesDoorGeometry = this.cagesDoor.getPrototypeGeometry().getGeometry();
+        DoorControl cagesDoorControl = new DoorControl(cagesDoorGeometry,Doors.CORRIDOR_TO_CAGES,
+                Doors.CAGES_TO_CORRIDOR,this,cagesDoorOrientation,nodes,inputApp);
+        cagesDoorGeometry.addControl(cagesDoorControl);
+        
         setEnabled(false);
     }
 
@@ -86,6 +99,7 @@ public class MainCorridorRoom extends RoomAppState {
         officeDoor.setEnabled(false);
         entranceDoor.setEnabled(false);
         maintenanceDoor.setEnabled(false);
+        cagesDoor.setEnabled(false);
     }
 
     @Override
@@ -94,5 +108,6 @@ public class MainCorridorRoom extends RoomAppState {
         officeDoor.setEnabled(true);
         entranceDoor.setEnabled(true);
         maintenanceDoor.setEnabled(true);
+        cagesDoor.setEnabled(true);
     }
 }
