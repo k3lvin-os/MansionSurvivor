@@ -29,12 +29,13 @@ public class MainCorridorRoom extends RoomAppState {
     public static final float DEFAULT_HEIGHT = 20f;
     public static final float DEFAULT_SIZE = 36f;
     public static final Vector3f DEFAULT_LOCATION = MansionEntranceRoom.DEFAULT_POSITION
-            .add(new Vector3f(9f, 0f, -DEFAULT_SIZE / 2f));
-    public static final Vector3f ENTRANCE_DOOR_POS = MansionEntranceRoom.CORRIDOR_DOOR_POS.add
-            (new Vector3f(0f, 0f, DoorControl.WALL_DISTANCE * -2f));
+            .add(new Vector3f(9f, 0f, -18F));
+    public static final Vector3f ENTRANCE_DOOR_POS = DEFAULT_LOCATION.add
+            (new Vector3f(DEFAULT_WIDTH / 2f, 0f, -DoorControl.WALL_DISTANCE));
+    public static final Vector3f OFFICE_DOOR_POS = DEFAULT_LOCATION.add(new Vector3f(DoorControl.WALL_DISTANCE,
+            0f,-DEFAULT_SIZE * 0.25f));
     protected Door officeDoor;
     protected Door entranceDoor;
-    public static final Vector3f OFFICE_DOOR_POS = DEFAULT_LOCATION.add(new Vector3f(0f, 0f, 4.5f));
 
     public MainCorridorRoom() {
         super(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_SIZE, DEFAULT_LOCATION);
@@ -64,7 +65,7 @@ public class MainCorridorRoom extends RoomAppState {
                 officeDoorOrientation, nodes, inputApp);
         officeDoorGeometry.addControl(officeDoorControl);
         
-        setEnabled(true);
+        setEnabled(false);
     }
 
     @Override

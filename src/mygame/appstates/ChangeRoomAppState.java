@@ -13,6 +13,8 @@ import com.jme3.scene.Node;
 import com.jme3.scene.SceneGraphVisitor;
 import com.jme3.scene.Spatial;
 import com.jme3.math.Vector3f;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import mygame.controls.DoorControl;
 import mygame.controls.PlayerControl;
 import mygame.enumerations.Direction;
@@ -53,6 +55,11 @@ public class ChangeRoomAppState extends AbstractAppState implements IObserver {
             RoomAppState nextRoom = symetricDoorControl.getDoorRoomAppState();
             currentRoom.setEnabled(false);
             rootNode.detachChild(playerNode);
+        try {
+            Thread.sleep(1000l);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ChangeRoomAppState.class.getName()).log(Level.SEVERE, null, ex);
+        }
             nextRoom.setEnabled(true);
             Vector3f playerPosition = symetricDoorControl.getSpatial().getLocalTranslation()
                     .add(symetricDoorControl.getRayDirection());

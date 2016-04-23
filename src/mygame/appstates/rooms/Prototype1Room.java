@@ -49,13 +49,13 @@ public class Prototype1Room extends RoomAppState {
         super.OnEnabled();
         mansionEntranceDoor.setEnabled(true);
         mansionEntranceAppState.setEnabled(true);
+      
     }
 
     @Override
     public void OnDisabled() {
         super.OnDisabled();
         mansionEntranceDoor.setEnabled(false);
-        mansionEntranceAppState.setEnabled(false);
     }
 
     @Override
@@ -64,7 +64,6 @@ public class Prototype1Room extends RoomAppState {
         this.mansionEntranceAppState = stateManager.getState(MansionEntranceRoom.class);
 
         floor = createGameFloor(assetManager, new Vector3f(0f, 0f, 10f));
-        //nodes.getRootNode().attachChild(nodes.getEnemyNode().getChild(Constants.UserData.FRANKESTEIN));
 
 
         DoorOrientation doorOrientation = new DoorOrientation(RayCastFace.NegativeAxis, Direction.Horizontal);

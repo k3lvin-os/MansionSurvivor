@@ -45,8 +45,9 @@ public class MansionEntranceRoom extends RoomAppState {
         this.corridorDoor = new Door(constructionAssets, CORRIDOR_DOOR_POS, corridorDoorOrientation.getDoorDirection(),
                 nodes.getDoorsNode(), doubleDoor);
         Geometry corridorDoorGeometry = this.corridorDoor.getPrototypeGeometry().getGeometry();
-        DoorControl corridorDoorControl = new DoorControl(corridorDoorGeometry, Doors.ENTRANCE_TO_CORRIDOR, Doors.CORRIDOR_TO_ENTRANCE,
-               this,corridorDoorOrientation, nodes,inputApp);
+        DoorControl corridorDoorControl = new DoorControl(corridorDoorGeometry,
+                Doors.ENTRANCE_TO_CORRIDOR, Doors.CORRIDOR_TO_ENTRANCE,this,
+                corridorDoorOrientation, nodes,inputApp);
         corridorDoorGeometry.addControl(corridorDoorControl);
         
         // Contryard Door

@@ -41,7 +41,7 @@ public class DoorControl extends AbstractControl implements IObservable {
      */
     private CollisionResults collisionResults;
     
-    public static final float WALL_DISTANCE = 0.2f;
+    public static final float WALL_DISTANCE = 0.1f;
     
     /**
      * Tells at what directino the ray will go
@@ -157,7 +157,7 @@ public class DoorControl extends AbstractControl implements IObservable {
             if (this.getDoorOrienation().getDoorType() == RayCastFace.PositiveAxis) {
                 rayDirection.setX(1f);
             } else {
-                rayDirection.setZ(-1f);
+                rayDirection.setX(-1f);
             }
         }
     }

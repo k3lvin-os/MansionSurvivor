@@ -28,7 +28,7 @@ public class AnimalCagesRoom extends RoomAppState {
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
-        setEnabled(true);
+        setEnabled(false);
 
     }
 }
