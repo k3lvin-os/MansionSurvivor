@@ -20,7 +20,7 @@ import mygame.javaclasses.DoorOrientation;
  *
  * @author GAMEOVER
  */
-public class AnimalCagesRoom extends RoomAppState {
+public class CagesRoom extends RoomAppState {
 
     public static final float DEFAULT_WIDTH = 36F;
     public static final float DEFAULT_HEIGHT = 20F;
@@ -31,7 +31,7 @@ public class AnimalCagesRoom extends RoomAppState {
             .add(new Vector3f(-DoorControl.WALL_DISTANCE * 2f, 0f, 0f));
     protected Door corridorDoor;
 
-    public AnimalCagesRoom() {
+    public CagesRoom() {
         super(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_SIZE, DEFAULT_POSITION);
     }
 

@@ -4,11 +4,11 @@
  */
 package mygame.appstates;
 
-import mygame.appstates.rooms.Prototype1Room;
+import mygame.appstates.rooms.OutdoorRoom;
 import mygame.appstates.rooms.MaintenanceRoom;
 import mygame.appstates.rooms.CorridorRoom;
 import mygame.appstates.rooms.OfficeRoom;
-import mygame.appstates.rooms.MansionEntranceRoom;
+import mygame.appstates.rooms.EntranceRoom;
 import mygame.appstates.rooms.PowerRoom;
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
@@ -19,7 +19,7 @@ import com.jme3.bullet.BulletAppState;
 import com.jme3.bullet.control.BetterCharacterControl;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import mygame.appstates.rooms.AnimalCagesRoom;
+import mygame.appstates.rooms.CagesRoom;
 import mygame.controls.DoorControl;
 import mygame.controls.PlayerControl;
 import mygame.javaclasses.Constants.UserData;
@@ -31,7 +31,7 @@ import mygame.tests.LightForAllEnvironment;
  */
 public class BeginGameAppState extends AbstractAppState {
 
-    Prototype1Room prototypeRoom1AppState;
+    OutdoorRoom prototypeRoom1AppState;
     NodesAppState nodesAppState;
     CharactersAppState charactersAppState;
     AppStateManager stateManager;
@@ -39,12 +39,12 @@ public class BeginGameAppState extends AbstractAppState {
     CameraAppState cameraAppState;
     AssetManager assetManager;
     BulletAppState bulletAppState;
-    MansionEntranceRoom mansionEntranceAppState;
+    EntranceRoom mansionEntranceAppState;
     LightForAllEnvironment lightForAllEnvironment;
     ChangeRoomAppState changeRoomAppState;
     CorridorRoom mainCorridorAppState;
     OfficeRoom officeAppState;
-    AnimalCagesRoom animalCagesAppState;
+    CagesRoom animalCagesAppState;
     MaintenanceRoom maintenanceRoom;
     PowerRoom powerGeneratorRoomAppState;
     GUIAppState guiAppState;
@@ -69,10 +69,10 @@ public class BeginGameAppState extends AbstractAppState {
         cameraAppState = new CameraAppState();
         this.stateManager.attach(cameraAppState);
 
-        prototypeRoom1AppState = new Prototype1Room();
+        prototypeRoom1AppState = new OutdoorRoom();
         this.stateManager.attach(prototypeRoom1AppState);
 
-        mansionEntranceAppState = new MansionEntranceRoom();
+        mansionEntranceAppState = new EntranceRoom();
         this.stateManager.attach(mansionEntranceAppState);
 
         lightForAllEnvironment = new LightForAllEnvironment();
@@ -90,7 +90,7 @@ public class BeginGameAppState extends AbstractAppState {
         officeAppState = new OfficeRoom();
         this.stateManager.attach(officeAppState);
 
-        animalCagesAppState = new AnimalCagesRoom();
+        animalCagesAppState = new CagesRoom();
         this.stateManager.attach(animalCagesAppState);
 
         maintenanceRoom = new MaintenanceRoom();

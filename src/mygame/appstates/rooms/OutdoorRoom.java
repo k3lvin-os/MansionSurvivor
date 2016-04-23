@@ -5,7 +5,7 @@
 package mygame.appstates.rooms;
 
 import mygame.appstates.util.RoomAppState;
-import mygame.appstates.rooms.MansionEntranceRoom;
+import mygame.appstates.rooms.EntranceRoom;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.bullet.control.RigidBodyControl;
@@ -27,20 +27,20 @@ import mygame.javaclasses.Constants.Doors;
  *
  * @author GAMEOVER
  */
-public class Prototype1Room extends RoomAppState {
+public class OutdoorRoom extends RoomAppState {
 
     public static final Vector3f ENTRANCE_DOOR_POS = new Vector3f(18f, 0f, 0.1f);
     protected Door mansionEntranceDoor;
     protected DoorControl entranceDoorControl;
     protected Geometry floor;
     protected RigidBodyControl floorPhysics;
-    MansionEntranceRoom mansionEntranceAppState;
+    EntranceRoom mansionEntranceAppState;
 
     public DoorControl getEntranceDoorControl() {
         return entranceDoorControl;
     }
 
-    public Prototype1Room() {
+    public OutdoorRoom() {
         super(0f, 0f, 0f, Vector3f.ZERO); // Outdoor measures
     }
 
@@ -61,7 +61,7 @@ public class Prototype1Room extends RoomAppState {
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
-        this.mansionEntranceAppState = stateManager.getState(MansionEntranceRoom.class);
+        this.mansionEntranceAppState = stateManager.getState(EntranceRoom.class);
 
         floor = createGameFloor(assetManager, new Vector3f(0f, 0f, 10f));
 
