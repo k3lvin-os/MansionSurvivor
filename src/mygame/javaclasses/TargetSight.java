@@ -18,26 +18,40 @@ import java.io.IOException;
 public class TargetSight implements Savable {
 
     private Vector3f worldUpVector;
-    private Vector3f targetPositionOffset;
     private Vector3f camPositionOffset;
-    
-    public TargetSight(Vector3f camPosition, Vector3f targetPosition, Vector3f worldUpVector ){
+    private Vector3f directionOffset;
+    private Vector3f targetFollowFactor;
+
+    public TargetSight(Vector3f camPositionOffset, Vector3f targetFollowFactor, Vector3f worldUpVector) {
         this.worldUpVector = worldUpVector;
-        this.targetPositionOffset = targetPosition;
-        this.camPositionOffset = camPosition;
+        this.camPositionOffset = camPositionOffset;
+        this.targetFollowFactor = targetFollowFactor;
+        this.directionOffset = Vector3f.ZERO;
     }
-    
-    public Vector3f getWorldUpVector(){
+
+    public TargetSight(Vector3f camPositionOffset, Vector3f targetFollowFactor, Vector3f worldUpVector, Vector3f directionOffset) {
+        this.worldUpVector = worldUpVector;
+        this.camPositionOffset = camPositionOffset;
+        this.targetFollowFactor = targetFollowFactor;
+        this.directionOffset = directionOffset;
+    }
+
+    public Vector3f getWorldUpVector() {
         return worldUpVector;
     }
 
-    public Vector3f getTargetPositionOffset(){
-        return targetPositionOffset;
-    }
-    
-    public Vector3f getCamPositionOffset(){
+    public Vector3f getCamPositionOffset() {
         return camPositionOffset;
     }
+    
+    public Vector3f getDirectionOffset(){
+        return directionOffset;
+    }
+    
+    public Vector3f getTargetFollowFactor(){
+        return this.targetFollowFactor;
+    }
+
 
     public void write(JmeExporter ex) throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -46,4 +60,5 @@ public class TargetSight implements Savable {
     public void read(JmeImporter im) throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }

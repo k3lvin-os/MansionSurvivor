@@ -56,7 +56,7 @@ public class CharactersAppState extends AbstractAppState {
         playerPhysics.setDucked(false);
         nodesAppState.getRootNode().attachChild(nodesAppState.getPlayerNode()); // Use this to show things in scene
         CameraAppState cameraAppState = stateManager.getState(CameraAppState.class);
-        TargetSight playerSight = new TargetSight(new Vector3f(0f, 20f, 0f), Vector3f.ZERO, new Vector3f(0f, 0f, -1f));
+        TargetSight playerSight = new TargetSight(new Vector3f(0f, 20f, 0f), new Vector3f(1f, 0f, 1f), new Vector3f(0f, 0f, -1f));
         player.setUserData(UserData.TARGET_SIGHT, playerSight);
         cameraAppState.setTarget(player);
         //cam.setLocation(new Vector3f(targetSight.getLocalTranslation().getX(), 20f,

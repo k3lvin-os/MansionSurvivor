@@ -27,19 +27,21 @@ public class CameraAppState extends AbstractAppState {
     private TargetSight targetSight;
     private Spatial target;
 
-    /** Set a targetSight based in user data of the passed spatial */
-    public void setTarget(Spatial target){
+    /**
+     * Set a targetSight based in user data of the passed spatial
+     */
+    public void setTarget(Spatial target) {
         this.targetSight = target.getUserData(UserData.TARGET_SIGHT);
         this.target = target;
     }
-    
-    /** This method provides the correct way to set target sight to null */
-    public void removeTarget(){
+
+    /**
+     * This method provides the correct way to set target sight to null
+     */
+    public void removeTarget() {
         this.targetSight = null;
         this.target = null;
     }
-    
-
 
     public FlyByCamera getFlyByCamera() {
         return flyCam;
@@ -60,9 +62,10 @@ public class CameraAppState extends AbstractAppState {
         if (!flyCam.isEnabled()) { // This verification is only checked in stage of development
 
             if (targetSight != null && target != null) {
-                    this.cam.setLocation(this.target.getLocalTranslation().add(this.targetSight.getCamPositionOffset()));
-                    this.cam.lookAt(this.target.getLocalTranslation().add(this.targetSight.getTargetPositionOffset())
-                            , this.targetSight.getWorldUpVector());
+                this.cam.setLocation(this.targetSight.getCamPositionOffset().
+                        add( this.targetSight.getTargetFollowFactor().mult(this.target.getLocalTranslation()) ));
+                this.cam.lookAt(this.target.getLocalTranslation().add(this.targetSight.getDirectionOffset()), 
+                        this.targetSight.getWorldUpVector());
 
             }
 
