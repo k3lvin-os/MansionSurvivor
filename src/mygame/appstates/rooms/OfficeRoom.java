@@ -17,6 +17,7 @@ import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
+import mygame.controls.CollisionControl;
 import mygame.controls.DoorControl;
 import mygame.enumerations.Direction;
 import mygame.enumerations.RayCastFace;
@@ -66,13 +67,16 @@ public class OfficeRoom extends RoomAppState {
         this.cagesKey.scale(0.125f);
         this.cagesKey.rotate(FastMath.DEG_TO_RAD * 90F, 0F, 0F);
 
+        // DeskWithKey
         this.deskWithKey = (Node) assetManager.loadModel("Models/StylishDesk/StylishDesk.j3o");
         this.deskWithKey.setLocalTranslation(-10f, 0f, -24f);
         CollisionShape deskCollisionShape = CollisionShapeFactory.createBoxShape(deskWithKey);
         RigidBodyControl deskRigidBodyControl = new RigidBodyControl(deskCollisionShape, 0.0f);
         deskWithKey.addControl(deskRigidBodyControl);
+        CollisionControl deskCollisionControl = new CollisionControl(deskWithKey, 4f, bulletAppState);
+        deskWithKey.addControl(deskCollisionControl);
 
-        setEnabled(false);
+        setEnabled(true);
 
     }
 

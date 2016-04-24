@@ -68,7 +68,7 @@ public class CharactersAppState extends AbstractAppState {
         BetterCharacterControl frankesteinPhysics = new BetterCharacterControl(0.9f, 1.8f, 0.1f);
         frankesteinPhysics.setJumpForce(Vector3f.ZERO);
         frankestein.addControl(frankesteinPhysics);
-        bulletAppState.getPhysicsSpace().add(frankesteinPhysics);
+       //bulletAppState.getPhysicsSpace().add(frankesteinPhysics);
         nodesAppState.getEnemyNode().attachChild(frankestein);
     }
 }
