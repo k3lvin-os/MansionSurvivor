@@ -10,10 +10,10 @@ import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.input.FlyByCamera;
 import com.jme3.math.Quaternion;
-import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Spatial;
-import mygame.javaclasses.Constants;
+import mygame.javaclasses.Constants.UserData;
+import mygame.javaclasses.TargetSight;
 
 /**
  *
@@ -21,18 +21,25 @@ import mygame.javaclasses.Constants;
  */
 public class CameraAppState extends AbstractAppState {
 
-    public static final boolean FLY_CAM_ENABLE = false;
+    public static final boolean FLY_CAM_ENABLED = false;
     private Camera cam;
     private FlyByCamera flyCam;
+    private TargetSight targetSight;
     private Spatial target;
 
-    public Spatial getTarget() {
-        return target;
+    /** Set a targetSight based in user data of the passed spatial */
+    public void setTarget(Spatial target){
+        targetSight = target.getUserData(UserData.TARGET_SIGHT);
+        this.target = target;
     }
+    
+    /** This method provides the correct way to set target sight to null */
+    public void removeTarget(){
+        this.targetSight = null;
+        this.target = null;
+    }
+    
 
-    public void setTarget(Spatial value) {
-        target = value;
-    }
 
     public FlyByCamera getFlyByCamera() {
         return flyCam;
@@ -44,7 +51,9 @@ public class CameraAppState extends AbstractAppState {
         SimpleApplication simpleApp = (SimpleApplication) app;
         cam = simpleApp.getCamera();
         flyCam = simpleApp.getFlyByCamera();
-        flyCam.setEnabled(FLY_CAM_ENABLE);
+        flyCam.setEnabled(FLY_CAM_ENABLED);
+        this.targetSight = null;
+        this.target = null;
     }
 
     @Override
@@ -52,13 +61,11 @@ public class CameraAppState extends AbstractAppState {
 
         if (!flyCam.isEnabled()) { // This verification is only checked in stage of development
 
-            if (target != null) {
-                if (target.getName().equals(Constants.UserData.PLAYER)) {
+            if (targetSight != null && target != null) {
+                    this.cam.setLocation(this.target.getLocalTranslation().add(this.targetSight.getCamPositionOffset()));
+                    this.cam.lookAt(this.target.getLocalTranslation().add(this.targetSight.getTargetPositionOffset())
+                            , this.targetSight.getWorldUpVector());
 
-                    cam.setLocation(new Vector3f(target.getLocalTranslation().getX(), 20f,
-                            target.getLocalTranslation().getZ()));
-                    cam.lookAt(target.getLocalTranslation(), new Vector3f(0f, 0f, -1f));
-                }
             }
 
         }

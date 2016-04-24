@@ -16,6 +16,7 @@ import com.jme3.scene.control.AbstractControl;
 import mygame.interfaces.IObservable;
 import mygame.interfaces.IObserver;
 import mygame.javaclasses.Constants;
+import mygame.javaclasses.Constants.ObserverPattern;
 import mygame.javaclasses.Constants.UserData;
 import mygame.javaclasses.MyArrayList;
 
@@ -95,7 +96,7 @@ public class CollisionControl extends AbstractControl implements IObservable, Ph
         
        if(player != null){
            if(spatial.getLocalTranslation().distance(player.getLocalTranslation()) <= maxDistance){
-               System.out.println("Well done.");
+               notifyAllObservers(ObserverPattern.COLLISION_PLAYER);
            }
        } 
     }

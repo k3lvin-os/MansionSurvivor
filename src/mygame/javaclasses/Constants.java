@@ -40,6 +40,7 @@ public final class Constants {
         public static final String SYMETRIC_DOOR_NAME = "symetricDoorName";
         public static final String PLAYER_CONTROL = "playerControl";
         public static final String FLOOR = "floor";
+        public static String TARGET_SIGHT = "targetSight";
     }
 
     public static final class Mapping {
@@ -72,6 +73,7 @@ public final class Constants {
         public static final String NEXT_DOOR = "nextDoor";
         public static final String NOT_NEXT_DOOR = "!nextDoor";
         public static final String ENTERED_DOOR = "enteredDoor";
+        public static final String COLLISION_PLAYER = "collisionPlayer";
     }
    
 }

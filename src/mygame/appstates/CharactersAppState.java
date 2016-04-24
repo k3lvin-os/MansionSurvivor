@@ -15,9 +15,13 @@ import com.jme3.bullet.control.BetterCharacterControl;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import mygame.javaclasses.Constants;
 import mygame.controls.PlayerControl;
 import mygame.controls.SimpleChaseControl;
+import mygame.javaclasses.Constants.UserData;
+import mygame.javaclasses.TargetSight;
 
 /**
  *
@@ -52,7 +56,13 @@ public class CharactersAppState extends AbstractAppState {
         playerPhysics.setDucked(false);
         nodesAppState.getRootNode().attachChild(nodesAppState.getPlayerNode()); // Use this to show things in scene
         CameraAppState cameraAppState = stateManager.getState(CameraAppState.class);
+        TargetSight playerSight = new TargetSight(new Vector3f(0f, 20f, 0f), Vector3f.ZERO, new Vector3f(0f, 0f, -1f));
+        player.setUserData(UserData.TARGET_SIGHT, playerSight);
         cameraAppState.setTarget(player);
+        //cam.setLocation(new Vector3f(targetSight.getLocalTranslation().getX(), 20f,
+        //       targetSight.getLocalTranslation().getZ()));
+        // cam.lookAt(target.getLocalTranslation(), new Vector3f(0f, 0f, -1f));
+
         playerControl.setPosition(new Vector3f(0F, 0F, 5F));
 
 
@@ -68,7 +78,7 @@ public class CharactersAppState extends AbstractAppState {
         BetterCharacterControl frankesteinPhysics = new BetterCharacterControl(0.9f, 1.8f, 0.1f);
         frankesteinPhysics.setJumpForce(Vector3f.ZERO);
         frankestein.addControl(frankesteinPhysics);
-       //bulletAppState.getPhysicsSpace().add(frankesteinPhysics);
+        //bulletAppState.getPhysicsSpace().add(frankesteinPhysics);
         nodesAppState.getEnemyNode().attachChild(frankestein);
     }
 }
