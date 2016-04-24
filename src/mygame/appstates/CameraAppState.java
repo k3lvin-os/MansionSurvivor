@@ -21,7 +21,7 @@ import mygame.javaclasses.Constants;
  */
 public class CameraAppState extends AbstractAppState {
 
-    public static final boolean FLY_CAM_ENABLE = true;
+    public static final boolean FLY_CAM_ENABLE = false;
     private Camera cam;
     private FlyByCamera flyCam;
     private Spatial target;
