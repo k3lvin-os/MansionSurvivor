@@ -29,7 +29,7 @@ public class CameraAppState extends AbstractAppState {
 
     /** Set a targetSight based in user data of the passed spatial */
     public void setTarget(Spatial target){
-        targetSight = target.getUserData(UserData.TARGET_SIGHT);
+        this.targetSight = target.getUserData(UserData.TARGET_SIGHT);
         this.target = target;
     }
     
@@ -52,8 +52,6 @@ public class CameraAppState extends AbstractAppState {
         cam = simpleApp.getCamera();
         flyCam = simpleApp.getFlyByCamera();
         flyCam.setEnabled(FLY_CAM_ENABLED);
-        this.targetSight = null;
-        this.target = null;
     }
 
     @Override

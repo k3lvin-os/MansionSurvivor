@@ -49,6 +49,7 @@ public class CollisionControl extends AbstractControl implements IObservable, Ph
         this.spatial = s;
         this.bulletApp = bulletApp;
         this.maxDistance = maxDistance;
+        this.observers = new MyArrayList<IObserver>();
         setEnabled(true);
     }
 
