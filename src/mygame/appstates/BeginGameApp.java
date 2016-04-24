@@ -48,6 +48,7 @@ public class BeginGameApp extends AbstractAppState {
     MaintenanceRoom maintenanceRoom;
     PowerRoom powerGeneratorRoomAppState;
     GUIApp guiAppState;
+    ObserverManagerApp observerManagerApp;
 
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
@@ -100,5 +101,8 @@ public class BeginGameApp extends AbstractAppState {
 
         guiAppState = new GUIApp();
         this.stateManager.attach(guiAppState);
+        
+        observerManagerApp = new ObserverManagerApp();
+        this.stateManager.attach(observerManagerApp);
     }
 }
