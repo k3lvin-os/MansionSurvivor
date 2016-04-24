@@ -5,7 +5,7 @@
 package mygame.appstates.rooms;
 
 import com.bulletphysics.dynamics.RigidBody;
-import mygame.appstates.util.RoomAppState;
+import mygame.appstates.util.RoomScenario;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.bullet.collision.shapes.BoxCollisionShape;
@@ -30,7 +30,7 @@ import mygame.javaclasses.DoorOrientation;
  *
  * @author GAMEOVER
  */
-public class OfficeRoom extends RoomAppState {
+public class OfficeRoom extends RoomScenario {
 
     public static final float DEFAULT_WIDTH = 36f;
     public static final float DEFAULT_HEIGHT = 20f;

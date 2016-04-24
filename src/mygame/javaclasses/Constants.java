@@ -4,7 +4,7 @@
  */
 package mygame.javaclasses;
 
-import mygame.appstates.util.ScenarioAppState;
+import mygame.appstates.util.ScenarioApp;
 
 /**
  *

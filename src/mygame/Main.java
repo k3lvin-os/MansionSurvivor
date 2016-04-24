@@ -1,6 +1,6 @@
 package mygame;
 
-import mygame.appstates.BeginGameAppState;
+import mygame.appstates.BeginGameApp;
 import com.jme3.app.SimpleApplication;
 import com.jme3.renderer.RenderManager;
 import com.jme3.system.AppSettings;
@@ -28,7 +28,7 @@ public class Main extends SimpleApplication {
     public void simpleInitApp() {
         this.setDisplayFps(SHOW_DEBUG_INFO);
         this.setDisplayStatView(SHOW_DEBUG_INFO);
-        stateManager.attach(new BeginGameAppState());
+        stateManager.attach(new BeginGameApp());
     }
 
     @Override

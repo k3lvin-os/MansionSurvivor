@@ -4,7 +4,7 @@
  */
 package mygame.appstates;
 
-import mygame.appstates.CameraAppState;
+import mygame.appstates.CameraApp;
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.AbstractAppState;
@@ -27,11 +27,11 @@ import mygame.javaclasses.TargetSight;
  *
  * @author GAMEOVER
  */
-public class CharactersAppState extends AbstractAppState {
+public class CharactersApp extends AbstractAppState {
 
     private AssetManager assetManager;
     private BulletAppState bulletAppState;
-    private NodesAppState nodesAppState;
+    private NodesApp nodesAppState;
 
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
@@ -39,7 +39,7 @@ public class CharactersAppState extends AbstractAppState {
         SimpleApplication simpleApp = (SimpleApplication) app;
         assetManager = simpleApp.getAssetManager();
         bulletAppState = stateManager.getState(BulletAppState.class);
-        nodesAppState = stateManager.getState(NodesAppState.class);
+        nodesAppState = stateManager.getState(NodesApp.class);
 
         // Player
         Spatial player = (Node) assetManager.loadModel("Models/Jaime/Jaime.j3o");
@@ -55,7 +55,7 @@ public class CharactersAppState extends AbstractAppState {
         playerPhysics.setJumpForce(Vector3f.ZERO);
         playerPhysics.setDucked(false);
         nodesAppState.getRootNode().attachChild(nodesAppState.getPlayerNode()); // Use this to show things in scene
-        CameraAppState cameraAppState = stateManager.getState(CameraAppState.class);
+        CameraApp cameraAppState = stateManager.getState(CameraApp.class);
         TargetSight playerSight = new TargetSight(new Vector3f(0f, 20f, 0f), new Vector3f(1f, 0f, 1f), new Vector3f(0f, 0f, -1f));
         player.setUserData(UserData.TARGET_SIGHT, playerSight);
         cameraAppState.setTarget(player);

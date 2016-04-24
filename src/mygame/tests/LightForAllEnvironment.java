@@ -11,7 +11,7 @@ import com.jme3.light.PointLight;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
-import mygame.appstates.NodesAppState;
+import mygame.appstates.NodesApp;
 
 /**
  *
@@ -25,7 +25,7 @@ public class LightForAllEnvironment extends AbstractAppState {
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
-        rootNode = stateManager.getState(NodesAppState.class).getRootNode();
+        rootNode = stateManager.getState(NodesApp.class).getRootNode();
         PutLightForAllEnvironment();
     }
 

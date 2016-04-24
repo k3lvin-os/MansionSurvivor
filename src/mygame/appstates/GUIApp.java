@@ -25,7 +25,7 @@ import mygame.javaclasses.Constants.ObserverPattern;
  *
  * @author GAMEOVER
  */
-public class GUIAppState extends AbstractAppState implements IObserver {
+public class GUIApp extends AbstractAppState implements IObserver {
     
     private static final ColorRGBA GREEN_COLOR =  new ColorRGBA(22f / 255f, 110f / 255f, 12f / 255f, 1f);                            // font colo
     private static final String ENTER_DOOR = "Press ENTER to enter in the door";
@@ -40,7 +40,7 @@ public class GUIAppState extends AbstractAppState implements IObserver {
         super.initialize(stateManager, app);
         messagesOnScreen = new HashMap<String, Integer>();
         simpleApp = (SimpleApplication) app;
-        NodesAppState nodesAppState = stateManager.getState(NodesAppState.class);
+        NodesApp nodesAppState = stateManager.getState(NodesApp.class);
         this.guiNode = nodesAppState.getGuiNode();
         this.assetManager = simpleApp.getAssetManager();
         gameplayGUIFont = assetManager.loadFont("Interface/Fonts/ArialBlack.fnt");
@@ -82,7 +82,7 @@ public class GUIAppState extends AbstractAppState implements IObserver {
             try {
                 putMessageOnScreen(ENTER_DOOR, TypeOfMessage.Gameplay);
             } catch (Exception ex) {
-                Logger.getLogger(GUIAppState.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GUIApp.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
        

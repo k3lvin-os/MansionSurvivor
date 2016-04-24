@@ -14,9 +14,9 @@ import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.control.AbstractControl;
 import java.util.ArrayList;
-import mygame.appstates.InputAppState;
-import mygame.appstates.NodesAppState;
-import mygame.appstates.util.RoomAppState;
+import mygame.appstates.InputApp;
+import mygame.appstates.NodesApp;
+import mygame.appstates.util.RoomScenario;
 import mygame.javaclasses.Constants.UserData;
 import mygame.enumerations.Direction;
 import mygame.enumerations.RayCastFace;
@@ -84,14 +84,14 @@ public class DoorControl extends AbstractControl implements IObservable {
     /**
      * Set the room that this door pertains*
      */
-    private void setDoorRoomAppState(RoomAppState room) {
+    private void setDoorRoomAppState(RoomScenario room) {
         spatial.setUserData(UserData.ROOM_APP, room);
     }
 
     /**
      * Get the room that this door pertains
      */
-    public RoomAppState getDoorRoomAppState() {
+    public RoomScenario getDoorRoomAppState() {
         return spatial.getUserData(UserData.ROOM_APP);
     }
 
@@ -123,8 +123,8 @@ public class DoorControl extends AbstractControl implements IObservable {
      * @param inputApp inputApp used in observer pattern logic
      *
      */
-    public DoorControl(Geometry door, String doorName, String symetricDoorName, RoomAppState doorRoom,
-            DoorOrientation orientation, NodesAppState nodes, InputAppState inputApp) {
+    public DoorControl(Geometry door, String doorName, String symetricDoorName, RoomScenario doorRoom,
+            DoorOrientation orientation, NodesApp nodes, InputApp inputApp) {
         this.spatial = door;
         this.spatial.setName(doorName);
         this.collisionResults = new CollisionResults();

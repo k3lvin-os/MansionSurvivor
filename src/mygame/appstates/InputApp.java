@@ -29,7 +29,7 @@ import mygame.javaclasses.MyArrayList;
  *
  * @author GAMEOVER
  */
-public class InputAppState extends AbstractAppState implements IObserver, IObservable {
+public class InputApp extends AbstractAppState implements IObserver, IObservable {
 
     /*Gives access to the input of the game */
     private InputManager inputManager;
@@ -63,7 +63,7 @@ public class InputAppState extends AbstractAppState implements IObserver, IObser
      */
     private MyArrayList<String> playerOptions;
     /**
-     * This class use methods of GUIAppState
+     * This class use methods of GUIApp
      */
     private boolean nextToDoor;
     private MyArrayList<IObserver> observers;
@@ -82,9 +82,9 @@ public class InputAppState extends AbstractAppState implements IObserver, IObser
 
         // ObserverAppState here
         this.observers = new MyArrayList<IObserver>();
-        GUIAppState guiApp = stateManager.getState(GUIAppState.class);
+        GUIApp guiApp = stateManager.getState(GUIApp.class);
         addObserver(guiApp);
-        ChangeRoomAppState changeRoomApp = stateManager.getState(ChangeRoomAppState.class);
+        ChangeRoomApp changeRoomApp = stateManager.getState(ChangeRoomApp.class);
         addObserver(changeRoomApp);
 
 

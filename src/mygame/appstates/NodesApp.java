@@ -15,7 +15,7 @@ import mygame.javaclasses.Constants;
  *
  * @author GAMEOVER
  */
-public class NodesAppState extends AbstractAppState {
+public class NodesApp extends AbstractAppState {
 
     private Node playerNode;
     private Node enemyNode;

@@ -4,7 +4,7 @@
  */
 package mygame.appstates.rooms;
 
-import mygame.appstates.util.RoomAppState;
+import mygame.appstates.util.RoomScenario;
 import mygame.appstates.rooms.EntranceRoom;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
@@ -23,7 +23,7 @@ import mygame.javaclasses.DoorOrientation;
  *
  * @author GAMEOVER
  */
-public class CorridorRoom extends RoomAppState {
+public class CorridorRoom extends RoomScenario {
 
     public static final float DEFAULT_WIDTH = 18f;
     public static final float DEFAULT_HEIGHT = 20f;

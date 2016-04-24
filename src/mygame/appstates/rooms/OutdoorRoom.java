@@ -4,7 +4,7 @@
  */
 package mygame.appstates.rooms;
 
-import mygame.appstates.util.RoomAppState;
+import mygame.appstates.util.RoomScenario;
 import mygame.appstates.rooms.EntranceRoom;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
@@ -29,7 +29,7 @@ import mygame.javaclasses.Floor;
  *
  * @author GAMEOVER
  */
-public class OutdoorRoom extends RoomAppState {
+public class OutdoorRoom extends RoomScenario {
 
     public static final float WIDTH = 36f;
     public static final float HEIGHT = 20f;

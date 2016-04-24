@@ -9,8 +9,8 @@ import com.jme3.app.state.AppStateManager;
 import com.jme3.export.Savable;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
-import mygame.appstates.InputAppState;
-import mygame.appstates.util.ScenarioAppState;
+import mygame.appstates.InputApp;
+import mygame.appstates.util.ScenarioApp;
 import mygame.javaclasses.ConstructionAssets;
 import mygame.javaclasses.Room;
 
@@ -18,16 +18,16 @@ import mygame.javaclasses.Room;
  *
  * @author GAMEOVER
  */
-public abstract class RoomAppState extends ScenarioAppState implements Savable{
+public abstract class RoomScenario extends ScenarioApp implements Savable{
 
     protected float roomWidth;
     protected float roomSize;
     protected float roomHeight;
     protected Room room;
     protected Vector3f roomLeftExtreme;
-    protected InputAppState inputApp;
+    protected InputApp inputApp;
 
-    public RoomAppState(float roomWidth, float roomHeight, float roomSize, Vector3f roomLeftExtreme) {
+    public RoomScenario(float roomWidth, float roomHeight, float roomSize, Vector3f roomLeftExtreme) {
         this.roomWidth = roomWidth;
         this.roomHeight = roomHeight;
         this.roomSize = roomSize;
@@ -37,7 +37,7 @@ public abstract class RoomAppState extends ScenarioAppState implements Savable{
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
-        this.inputApp = stateManager.getState(InputAppState.class);
+        this.inputApp = stateManager.getState(InputApp.class);
         room = new Room(constructionAssets, roomWidth, roomHeight, roomSize, roomLeftExtreme);
     }
 

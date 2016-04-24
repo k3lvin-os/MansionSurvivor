@@ -29,25 +29,25 @@ import mygame.tests.LightForAllEnvironment;
  *
  * @author GAMEOVER
  */
-public class BeginGameAppState extends AbstractAppState {
+public class BeginGameApp extends AbstractAppState {
 
     OutdoorRoom prototypeRoom1AppState;
-    NodesAppState nodesAppState;
-    CharactersAppState charactersAppState;
+    NodesApp nodesAppState;
+    CharactersApp charactersAppState;
     AppStateManager stateManager;
-    InputAppState gameplayInputAppState;
-    CameraAppState cameraAppState;
+    InputApp gameplayInputAppState;
+    CameraApp cameraAppState;
     AssetManager assetManager;
     BulletAppState bulletAppState;
     EntranceRoom mansionEntranceAppState;
     LightForAllEnvironment lightForAllEnvironment;
-    ChangeRoomAppState changeRoomAppState;
+    ChangeRoomApp changeRoomAppState;
     CorridorRoom mainCorridorAppState;
     OfficeRoom officeAppState;
     CagesRoom animalCagesAppState;
     MaintenanceRoom maintenanceRoom;
     PowerRoom powerGeneratorRoomAppState;
-    GUIAppState guiAppState;
+    GUIApp guiAppState;
 
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
@@ -59,13 +59,13 @@ public class BeginGameAppState extends AbstractAppState {
         bulletAppState = new BulletAppState();
         this.stateManager.attach(bulletAppState);
 
-        nodesAppState = new NodesAppState();
+        nodesAppState = new NodesApp();
         this.stateManager.attach(nodesAppState);
 
-        charactersAppState = new CharactersAppState();
+        charactersAppState = new CharactersApp();
         this.stateManager.attach(charactersAppState);
 
-        cameraAppState = new CameraAppState();
+        cameraAppState = new CameraApp();
         this.stateManager.attach(cameraAppState);
 
         mansionEntranceAppState = new EntranceRoom();
@@ -77,10 +77,10 @@ public class BeginGameAppState extends AbstractAppState {
         lightForAllEnvironment = new LightForAllEnvironment();
         this.stateManager.attach(lightForAllEnvironment);
 
-        changeRoomAppState = new ChangeRoomAppState();
+        changeRoomAppState = new ChangeRoomApp();
         this.stateManager.attach(changeRoomAppState);
 
-        gameplayInputAppState = new InputAppState();
+        gameplayInputAppState = new InputApp();
         this.stateManager.attach(gameplayInputAppState);
 
         mainCorridorAppState = new CorridorRoom();
@@ -98,7 +98,7 @@ public class BeginGameAppState extends AbstractAppState {
         powerGeneratorRoomAppState = new PowerRoom();
         this.stateManager.attach(powerGeneratorRoomAppState);
 
-        guiAppState = new GUIAppState();
+        guiAppState = new GUIApp();
         this.stateManager.attach(guiAppState);
     }
 }

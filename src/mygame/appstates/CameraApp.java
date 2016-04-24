@@ -19,7 +19,7 @@ import mygame.javaclasses.TargetSight;
  *
  * @author GAMEOVER
  */
-public class CameraAppState extends AbstractAppState {
+public class CameraApp extends AbstractAppState {
 
     public static final boolean FLY_CAM_ENABLED = false;
     private Camera cam;

@@ -4,7 +4,7 @@
  */
 package mygame.appstates;
 
-import mygame.appstates.util.RoomAppState;
+import mygame.appstates.util.RoomScenario;
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
@@ -29,7 +29,7 @@ import mygame.javaclasses.DoorOrientation;
  *
  * @author GAMEOVER
  */
-public class ChangeRoomAppState extends AbstractAppState implements IObserver {
+public class ChangeRoomApp extends AbstractAppState implements IObserver {
 
     private Node playerNode;
     private Node rootNode;
@@ -38,7 +38,7 @@ public class ChangeRoomAppState extends AbstractAppState implements IObserver {
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
-        NodesAppState nodesAppState = stateManager.getState(NodesAppState.class);
+        NodesApp nodesAppState = stateManager.getState(NodesApp.class);
         this.rootNode = nodesAppState.getRootNode();
         this.playerNode = nodesAppState.getPlayerNode();
         this.doorsNode = nodesAppState.getDoorsNode();
@@ -50,9 +50,9 @@ public class ChangeRoomAppState extends AbstractAppState implements IObserver {
     public void changeRoom() {
             DoorControl playerUsingDoor = getDoorPlayerIsUsing();
             playerUsingDoor.setPlayerUsingDoor(false);
-            RoomAppState currentRoom = playerUsingDoor.getDoorRoomAppState();
+            RoomScenario currentRoom = playerUsingDoor.getDoorRoomAppState();
             DoorControl symetricDoorControl = getDoorControlWithName(playerUsingDoor.getSymetricDoorName());
-            RoomAppState nextRoom = symetricDoorControl.getDoorRoomAppState();
+            RoomScenario nextRoom = symetricDoorControl.getDoorRoomAppState();
             currentRoom.setEnabled(false);
             rootNode.detachChild(playerNode);
             nextRoom.setEnabled(true);

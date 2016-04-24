@@ -23,7 +23,7 @@ import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
 import java.io.IOException;
-import mygame.appstates.NodesAppState;
+import mygame.appstates.NodesApp;
 import mygame.controls.DoorControl;
 import mygame.enumerations.Direction;
 import mygame.javaclasses.Constants;
@@ -35,10 +35,10 @@ import mygame.javaclasses.Constants.UserData;
  *
  * @author GAMEOVER
  */
-public class ScenarioAppState extends AbstractAppState {
+public class ScenarioApp extends AbstractAppState {
 
     public static final Vector3f FLOOR_MEASURES = new Vector3f(200F, 0f, 200f);
-    protected static NodesAppState nodes;
+    protected static NodesApp nodes;
     protected static AppStateManager stateManager;
     protected static BulletAppState bulletAppState;
     protected static AssetManager assetManager;
@@ -51,13 +51,13 @@ public class ScenarioAppState extends AbstractAppState {
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
         SimpleApplication simpleApp = (SimpleApplication) app;
-        nodes = stateManager.getState(NodesAppState.class);
+        nodes = stateManager.getState(NodesApp.class);
         bulletAppState = stateManager.getState(BulletAppState.class);
-        ScenarioAppState.stateManager = stateManager;
+        ScenarioApp.stateManager = stateManager;
         assetManager = simpleApp.getAssetManager();
         Node playerNode = nodes.getPlayerNode();
         player = playerNode.getChild(Constants.UserData.PLAYER);
-        ScenarioAppState.constructionAssets = new ConstructionAssets(nodes.getRootNode(), assetManager, bulletAppState);
+        ScenarioApp.constructionAssets = new ConstructionAssets(nodes.getRootNode(), assetManager, bulletAppState);
     }
 
 

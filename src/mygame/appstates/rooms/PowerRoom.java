@@ -4,7 +4,7 @@
  */
 package mygame.appstates.rooms;
 
-import mygame.appstates.util.RoomAppState;
+import mygame.appstates.util.RoomScenario;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.math.Vector3f;
@@ -20,7 +20,7 @@ import mygame.javaclasses.DoorOrientation;
  *
  * @author GAMEOVER
  */
-public class PowerRoom extends RoomAppState {
+public class PowerRoom extends RoomScenario {
 
     public static final float DEFAULT_WIDTH = 36f;
     public static final float DEFAULT_HEIGHT = 20f;
