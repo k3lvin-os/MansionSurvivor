@@ -42,13 +42,14 @@ public class CharactersAppState extends AbstractAppState {
         PlayerControl playerControl = new PlayerControl(player);
         player.setName(Constants.UserData.PLAYER);
         player.setLocalScale(2f);
-        BetterCharacterControl playerPhysics = new BetterCharacterControl(2.1f, 4.2f, 0.1f);
+        BetterCharacterControl playerPhysics = new BetterCharacterControl(2.1f, 4.2f, 600f);
         player.addControl(playerPhysics);
         player.addControl(playerControl);
         playerPhysics.setViewDirection(new Vector3f(0f, 0f, -1f));
         bulletAppState.getPhysicsSpace().add(playerPhysics);
         nodesAppState.getPlayerNode().attachChild(player);
         playerPhysics.setJumpForce(Vector3f.ZERO);
+        playerPhysics.setDucked(false);
         nodesAppState.getRootNode().attachChild(nodesAppState.getPlayerNode()); // Use this to show things in scene
         CameraAppState cameraAppState = stateManager.getState(CameraAppState.class);
         cameraAppState.setTarget(player);
