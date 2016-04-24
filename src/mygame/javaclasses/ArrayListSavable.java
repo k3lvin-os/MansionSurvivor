@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * IMPORTANT NOTE: this can be the use (PlayerListAcations) substitute by Queue structure
  * in order to use something something more proper
  */
-public class MyArrayList<T> extends ArrayList<T> implements Savable {
+public class ArrayListSavable<T> extends ArrayList<T> implements Savable {
 
     public void write(JmeExporter ex) throws IOException {
     }

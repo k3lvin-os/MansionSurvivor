@@ -18,7 +18,7 @@ import mygame.interfaces.IObserver;
 import mygame.javaclasses.Constants;
 import mygame.javaclasses.Constants.ObserverPattern;
 import mygame.javaclasses.Constants.UserData;
-import mygame.javaclasses.MyArrayList;
+import mygame.javaclasses.ArrayListSavable;
 
 /**
  *
@@ -30,7 +30,7 @@ import mygame.javaclasses.MyArrayList;
 public class CollisionControl extends AbstractControl implements IObservable, PhysicsCollisionListener {
 
     public static final float MIN_DISTANCE = 4F;
-    private MyArrayList<IObserver> observers;
+    private ArrayListSavable<IObserver> observers;
     private BulletAppState bulletApp;
     private float maxDistance;
 
@@ -49,7 +49,7 @@ public class CollisionControl extends AbstractControl implements IObservable, Ph
         this.spatial = s;
         this.bulletApp = bulletApp;
         this.maxDistance = maxDistance;
-        this.observers = new MyArrayList<IObserver>();
+        this.observers = new ArrayListSavable<IObserver>();
         setEnabled(true);
     }
 

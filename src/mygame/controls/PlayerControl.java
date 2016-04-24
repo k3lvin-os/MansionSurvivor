@@ -12,7 +12,7 @@ import com.jme3.scene.Spatial;
 import com.jme3.scene.control.AbstractControl;
 import java.util.List;
 import mygame.javaclasses.Constants.UserData;
-import mygame.javaclasses.MyArrayList;
+import mygame.javaclasses.ArrayListSavable;
 
 /**
  *

@@ -23,7 +23,7 @@ import mygame.controls.PlayerControl;
 import mygame.interfaces.IObservable;
 import mygame.interfaces.IObserver;
 import mygame.javaclasses.Constants.ObserverPattern;
-import mygame.javaclasses.MyArrayList;
+import mygame.javaclasses.ArrayListSavable;
 
 /**
  *
@@ -61,12 +61,12 @@ public class InputApp extends AbstractAppState implements IObserver, IObservable
     /**
      * List of player options that affect input check's
      */
-    private MyArrayList<String> playerOptions;
+    private ArrayListSavable<String> playerOptions;
     /**
      * This class use methods of GUIApp
      */
     private boolean nextToDoor;
-    private MyArrayList<IObserver> observers;
+    private ArrayListSavable<IObserver> observers;
 
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
@@ -81,7 +81,7 @@ public class InputApp extends AbstractAppState implements IObserver, IObservable
         playerControl = player.getControl(PlayerControl.class);
 
         // ObserverAppState here
-        this.observers = new MyArrayList<IObserver>();
+        this.observers = new ArrayListSavable<IObserver>();
         GUIApp guiApp = stateManager.getState(GUIApp.class);
         addObserver(guiApp);
         ChangeRoomApp changeRoomApp = stateManager.getState(ChangeRoomApp.class);

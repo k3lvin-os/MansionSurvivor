@@ -24,7 +24,7 @@ import mygame.interfaces.IObservable;
 import mygame.interfaces.IObserver;
 import mygame.javaclasses.DoorOrientation;
 import mygame.javaclasses.Constants.ObserverPattern;
-import mygame.javaclasses.MyArrayList;
+import mygame.javaclasses.ArrayListSavable;
 
 /**
  *
