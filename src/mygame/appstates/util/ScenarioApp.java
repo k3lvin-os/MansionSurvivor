@@ -24,6 +24,7 @@ import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
 import java.io.IOException;
 import mygame.appstates.NodesApp;
+import mygame.appstates.ObserverManagerApp;
 import mygame.controls.DoorControl;
 import mygame.enumerations.Direction;
 import mygame.javaclasses.Constants;
@@ -38,28 +39,31 @@ import mygame.javaclasses.Constants.UserData;
 public class ScenarioApp extends AbstractAppState {
 
     public static final Vector3f FLOOR_MEASURES = new Vector3f(200F, 0f, 200f);
-    protected static NodesApp nodes;
-    protected static AppStateManager stateManager;
-    protected static BulletAppState bulletAppState;
-    protected static AssetManager assetManager;
-    protected static Spatial player;
-    
-    /** This will be used by the subclasses in order to pass construction assets easily */
-    protected static ConstructionAssets constructionAssets;
+    protected NodesApp nodes;
+    protected AppStateManager stateManager;
+    protected BulletAppState bulletAppState;
+    protected AssetManager assetManager;
+    protected Spatial player;
+    protected ObserverManagerApp observerApp;    
+     /**
+     * This will be used by the subclasses in order to pass construction assets
+     * easily
+     */
+    protected ConstructionAssets constructionAssets;
 
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
         SimpleApplication simpleApp = (SimpleApplication) app;
-        nodes = stateManager.getState(NodesApp.class);
-        bulletAppState = stateManager.getState(BulletAppState.class);
-        ScenarioApp.stateManager = stateManager;
-        assetManager = simpleApp.getAssetManager();
+        this.nodes = stateManager.getState(NodesApp.class);
+        this.bulletAppState = stateManager.getState(BulletAppState.class);
+        this.stateManager = stateManager;
+        this.assetManager = simpleApp.getAssetManager();
         Node playerNode = nodes.getPlayerNode();
-        player = playerNode.getChild(Constants.UserData.PLAYER);
-        ScenarioApp.constructionAssets = new ConstructionAssets(nodes.getRootNode(), assetManager, bulletAppState);
+        this.player = playerNode.getChild(Constants.UserData.PLAYER);
+        this.constructionAssets = new ConstructionAssets(nodes.getRootNode(), assetManager, bulletAppState);
+        this.observerApp = stateManager.getState(ObserverManagerApp.class);
     }
-
 
     public void write(JmeExporter ex) throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -68,6 +72,4 @@ public class ScenarioApp extends AbstractAppState {
     public void read(JmeImporter im) throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-
 }

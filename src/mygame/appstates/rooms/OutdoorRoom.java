@@ -14,6 +14,7 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
+import mygame.appstates.ObserverManagerApp;
 import mygame.appstates.rooms.CorridorRoom;
 import mygame.controls.DoorControl;
 import mygame.javaclasses.Constants;
@@ -76,8 +77,8 @@ public class OutdoorRoom extends RoomScenario {
         entranceDoor = new Door(constructionAssets, ENTRANCE_DOOR_POS, Direction.Horizontal, nodes.getDoorsNode(), doubleDoor);
         Geometry entranceDoorGeometry = entranceDoor.getPrototypeGeometry().getGeometry();
 
-        DoorControl entranceDoorControl = new DoorControl(entranceDoorGeometry, Doors.COUNTRYARD_TO_ENTRANCE,
-                Doors.ENTRANCE_TO_COUNTRYARD, this, doorOrientation, nodes, inputApp);
+        DoorControl entranceDoorControl = observerApp.createDoorControl(entranceDoorGeometry, Doors.COUNTRYARD_TO_ENTRANCE,
+                Doors.ENTRANCE_TO_COUNTRYARD, this, doorOrientation, nodes);
         entranceDoorGeometry.addControl(entranceDoorControl);
 
         setEnabled(true);

@@ -57,6 +57,9 @@ public class BeginGameApp extends AbstractAppState {
         SimpleApplication simpleApp = (SimpleApplication) app;
         assetManager = simpleApp.getAssetManager();
 
+        observerManagerApp = new ObserverManagerApp();
+        this.stateManager.attach(observerManagerApp);
+
         bulletAppState = new BulletAppState();
         this.stateManager.attach(bulletAppState);
 
@@ -101,8 +104,6 @@ public class BeginGameApp extends AbstractAppState {
 
         guiAppState = new GUIApp();
         this.stateManager.attach(guiAppState);
-        
-        observerManagerApp = new ObserverManagerApp();
-        this.stateManager.attach(observerManagerApp);
+
     }
 }

@@ -9,6 +9,7 @@ import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
+import mygame.appstates.ObserverManagerApp;
 import mygame.controls.DoorControl;
 import mygame.enumerations.Direction;
 import mygame.enumerations.RayCastFace;
@@ -27,7 +28,7 @@ public class EntranceRoom extends RoomScenario {
     public static final float DEFAULT_SIZE = 18f;
     public static final Vector3f COUNTRYARD_DOOR_POS = new Vector3f(18f, 0f, -0.1f);
     public static final Vector3f DEFAULT_POSITION = Vector3f.ZERO;
-    public static final Vector3f CORRIDOR_DOOR_POS =  new Vector3f(18f, 0f,  -DEFAULT_SIZE + DoorControl.WALL_DISTANCE);
+    public static final Vector3f CORRIDOR_DOOR_POS = new Vector3f(18f, 0f, -DEFAULT_SIZE + DoorControl.WALL_DISTANCE);
     protected Door countryardDoor;
     protected Door corridorDoor;
 
@@ -39,26 +40,26 @@ public class EntranceRoom extends RoomScenario {
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
         boolean doubleDoor = true;
-        
+
         // Corridor Door
         DoorOrientation corridorDoorOrientation = new DoorOrientation(RayCastFace.NegativeAxis, Direction.Horizontal);
         this.corridorDoor = new Door(constructionAssets, CORRIDOR_DOOR_POS, corridorDoorOrientation.getDoorDirection(),
                 nodes.getDoorsNode(), doubleDoor);
         Geometry corridorDoorGeometry = this.corridorDoor.getPrototypeGeometry().getGeometry();
-        DoorControl corridorDoorControl = new DoorControl(corridorDoorGeometry,
-                Doors.ENTRANCE_TO_CORRIDOR, Doors.CORRIDOR_TO_ENTRANCE,this,
-                corridorDoorOrientation, nodes,inputApp);
+        DoorControl corridorDoorControl = observerApp.createDoorControl(corridorDoorGeometry,
+                Doors.ENTRANCE_TO_CORRIDOR, Doors.CORRIDOR_TO_ENTRANCE, this,
+                corridorDoorOrientation, nodes);
         corridorDoorGeometry.addControl(corridorDoorControl);
-        
+
         // Contryard Door
         DoorOrientation countryardDoorOrientation = new DoorOrientation(RayCastFace.PositiveAxis, Direction.Horizontal);
         countryardDoor = new Door(constructionAssets, COUNTRYARD_DOOR_POS,
                 countryardDoorOrientation.getDoorDirection(), nodes.getDoorsNode(), doubleDoor);
         Geometry countryardDoorGeometry = countryardDoor.getPrototypeGeometry().getGeometry();
-        DoorControl countryardDoorControl = new DoorControl(countryardDoorGeometry, Doors.ENTRANCE_TO_COUNTRYARD,
-                Doors.COUNTRYARD_TO_ENTRANCE, this, countryardDoorOrientation, nodes, inputApp);
+        DoorControl countryardDoorControl = observerApp.createDoorControl(countryardDoorGeometry, Doors.ENTRANCE_TO_COUNTRYARD,
+                Doors.COUNTRYARD_TO_ENTRANCE, this, countryardDoorOrientation, nodes);
         countryardDoorGeometry.addControl(countryardDoorControl);
-        
+
 
         setEnabled(false);
     }

@@ -40,9 +40,7 @@ public class DoorControl extends AbstractControl implements IObservable {
      * Store the results of collision of the ray
      */
     private CollisionResults collisionResults;
-    
     public static final float WALL_DISTANCE = 0.1f;
-    
     /**
      * Tells at what directino the ray will go
      */
@@ -56,9 +54,7 @@ public class DoorControl extends AbstractControl implements IObservable {
      * the room
      */
     private Node playerNode;
-    
     private ArrayList<IObserver> observers;
-    
 
     /**
      * Set if the player is using this door
@@ -110,7 +106,7 @@ public class DoorControl extends AbstractControl implements IObservable {
     public String getSymetricDoorName() {
         return spatial.getUserData(UserData.SYMETRIC_DOOR_NAME);
     }
-    
+
     /**
      * Create a door control
      *
@@ -123,8 +119,8 @@ public class DoorControl extends AbstractControl implements IObservable {
      * @param inputApp inputApp used in observer pattern logic
      *
      */
-    public DoorControl(Geometry door, String doorName, String symetricDoorName, RoomScenario doorRoom,
-            DoorOrientation orientation, NodesApp nodes, InputApp inputApp) {
+    public DoorControl(Spatial door, String doorName, String symetricDoorName, RoomScenario doorRoom,
+            DoorOrientation orientation, NodesApp nodes) {
         this.spatial = door;
         this.spatial.setName(doorName);
         this.collisionResults = new CollisionResults();
@@ -135,14 +131,9 @@ public class DoorControl extends AbstractControl implements IObservable {
         setDoorRoomAppState(doorRoom);
         this.playerNode = nodes.getPlayerNode();
         rayDirection = new Vector3f();
-        
-        // OBSERVER PATTERN HERE
         this.observers = new ArrayList<IObserver>();
-        this.addObserver(inputApp);
 
         defineRayCast();
-
-
     }
 
     private void defineRayCast() {
@@ -189,8 +180,6 @@ public class DoorControl extends AbstractControl implements IObservable {
         }
     }
 
-
-
     public void addObserver(IObserver o) {
         this.observers.add(o);
     }
@@ -207,6 +196,5 @@ public class DoorControl extends AbstractControl implements IObservable {
 
     @Override
     protected void controlRender(RenderManager rm, ViewPort vp) {
-
     }
 }

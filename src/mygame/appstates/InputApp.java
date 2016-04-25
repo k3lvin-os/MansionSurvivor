@@ -17,6 +17,7 @@ import com.jme3.input.controls.KeyTrigger;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import java.util.List;
 import mygame.javaclasses.Constants.Mapping;
 import mygame.javaclasses.Constants.UserData;
 import mygame.controls.PlayerControl;
@@ -79,13 +80,7 @@ public class InputApp extends AbstractAppState implements IObserver, IObservable
         player = playerNode.getChild(UserData.PLAYER);
         playerPhysics = player.getControl(BetterCharacterControl.class);
         playerControl = player.getControl(PlayerControl.class);
-
-        // ObserverAppState here
-        this.observers = new ArrayListSavable<IObserver>();
-        GUIApp guiApp = stateManager.getState(GUIApp.class);
-        addObserver(guiApp);
-        ChangeRoomApp changeRoomApp = stateManager.getState(ChangeRoomApp.class);
-        addObserver(changeRoomApp);
+        observers = new ArrayListSavable<IObserver>();
 
 
         //Set mapping
@@ -174,14 +169,10 @@ public class InputApp extends AbstractAppState implements IObserver, IObservable
     public void subjectUpdate(String update) {
         if (update.equals(ObserverPattern.NEXT_DOOR)) {
             this.nextToDoor = true;
-            notifyAllObservers(ObserverPattern.NEXT_DOOR);
-
         }
 
         if (update.equals(ObserverPattern.NOT_NEXT_DOOR)) {
             this.nextToDoor = false;
-            notifyAllObservers(ObserverPattern.NOT_NEXT_DOOR);
-
         }
     }
 

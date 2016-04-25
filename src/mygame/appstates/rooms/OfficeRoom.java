@@ -17,6 +17,7 @@ import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
+import mygame.appstates.ObserverManagerApp;
 import mygame.controls.CollisionControl;
 import mygame.controls.DoorControl;
 import mygame.enumerations.Direction;
@@ -56,9 +57,9 @@ public class OfficeRoom extends RoomScenario {
         this.corridorDoor = new Door(constructionAssets, CORRIDOR_DOOR_POS,
                 corridorDoorOrientation.getDoorDirection(), nodes.getDoorsNode());
         Geometry corridorDoorGeometry = this.corridorDoor.getPrototypeGeometry().getGeometry();
-        DoorControl corridorDoorControl = new DoorControl(corridorDoorGeometry,
+        DoorControl corridorDoorControl = observerApp.createDoorControl(corridorDoorGeometry,
                 Doors.OFFICE_TO_CORRIDOR, Doors.CORRIDOR_TO_OFFICE, this,
-                corridorDoorOrientation, nodes, inputApp);
+                corridorDoorOrientation, nodes);
         corridorDoorGeometry.addControl(corridorDoorControl);
 
         // Cages Key

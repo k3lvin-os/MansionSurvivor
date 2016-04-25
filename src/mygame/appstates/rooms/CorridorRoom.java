@@ -11,6 +11,7 @@ import com.jme3.app.state.AppStateManager;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
+import mygame.appstates.ObserverManagerApp;
 import mygame.controls.DoorControl;
 import mygame.enumerations.Direction;
 import mygame.enumerations.RayCastFace;
@@ -61,8 +62,8 @@ public class CorridorRoom extends RoomScenario {
         this.entranceDoor = new Door(constructionAssets, ENTRANCE_DOOR_POS, 
                 entranceDoorOrientation.getDoorDirection(),nodes.getDoorsNode(), doubleDoor);
         Geometry entranceDoorGeometry = this.entranceDoor.getPrototypeGeometry().getGeometry();
-        DoorControl entranceDoorControl = new DoorControl(entranceDoorGeometry, Doors.CORRIDOR_TO_ENTRANCE, Doors.ENTRANCE_TO_CORRIDOR,
-                this, entranceDoorOrientation, nodes, inputApp);
+        DoorControl entranceDoorControl = observerApp.createDoorControl(entranceDoorGeometry, Doors.CORRIDOR_TO_ENTRANCE, Doors.ENTRANCE_TO_CORRIDOR,
+                this, entranceDoorOrientation, nodes);
         entranceDoorGeometry.addControl(entranceDoorControl);
         
         // Office Door
@@ -70,8 +71,8 @@ public class CorridorRoom extends RoomScenario {
         this.officeDoor = new Door(constructionAssets, OFFICE_DOOR_POS, 
                 officeDoorOrientation.getDoorDirection(),nodes.getDoorsNode());
         Geometry officeDoorGeometry = officeDoor.getPrototypeGeometry().getGeometry();
-        DoorControl officeDoorControl = new DoorControl(officeDoorGeometry, Doors.CORRIDOR_TO_OFFICE, Doors.OFFICE_TO_CORRIDOR, this,
-                officeDoorOrientation, nodes, inputApp);
+        DoorControl officeDoorControl = observerApp.createDoorControl(officeDoorGeometry, Doors.CORRIDOR_TO_OFFICE, Doors.OFFICE_TO_CORRIDOR, this,
+                officeDoorOrientation, nodes);
         officeDoorGeometry.addControl(officeDoorControl);
         
         // Maintenance Door
@@ -79,8 +80,8 @@ public class CorridorRoom extends RoomScenario {
         this.maintenanceDoor = new Door(constructionAssets,MAINTENANCE_DOOR_POS,
                 maintenanceDoorOrientation.getDoorDirection(),nodes.getDoorsNode());
         Geometry maintenanceDoorGeometry = this.maintenanceDoor.getPrototypeGeometry().getGeometry();
-        DoorControl maintenanceDoorControl = new DoorControl(maintenanceDoorGeometry, Doors.CORRIDOR_TO_MAINTENANCE,
-                Doors.MAINTENANCE_TO_CORRIDOR, this, maintenanceDoorOrientation, nodes, inputApp);
+        DoorControl maintenanceDoorControl = observerApp.createDoorControl(maintenanceDoorGeometry, Doors.CORRIDOR_TO_MAINTENANCE,
+                Doors.MAINTENANCE_TO_CORRIDOR, this, maintenanceDoorOrientation, nodes);
         maintenanceDoorGeometry.addControl(maintenanceDoorControl);
         
         // Animal Cages Door
@@ -89,8 +90,8 @@ public class CorridorRoom extends RoomScenario {
         this.cagesDoor = new Door(constructionAssets, CAGES_DOOR_POS
                 ,cagesDoorOrientation.getDoorDirection(),nodes.getDoorsNode());
         Geometry cagesDoorGeometry = this.cagesDoor.getPrototypeGeometry().getGeometry();
-        DoorControl cagesDoorControl = new DoorControl(cagesDoorGeometry,Doors.CORRIDOR_TO_CAGES,
-                Doors.CAGES_TO_CORRIDOR,this,cagesDoorOrientation,nodes,inputApp);
+        DoorControl cagesDoorControl = observerApp.createDoorControl(cagesDoorGeometry,Doors.CORRIDOR_TO_CAGES,
+                Doors.CAGES_TO_CORRIDOR,this,cagesDoorOrientation,nodes);
         cagesDoorGeometry.addControl(cagesDoorControl);
         
         // Power Door
@@ -99,8 +100,8 @@ public class CorridorRoom extends RoomScenario {
         this.powerDoor = new Door(constructionAssets,POWER_DOOR_POS,
                 powerDoorOrientation.getDoorDirection(), nodes.getDoorsNode());
         Geometry powerDoorGeometry = this.powerDoor.getPrototypeGeometry().getGeometry();
-        DoorControl powerDoorControl = new DoorControl(powerDoorGeometry,Doors.CORRIDOR_TO_POWER,
-                Doors.POWER_TO_CORRIDOR,this,powerDoorOrientation,nodes,inputApp);
+        DoorControl powerDoorControl = observerApp.createDoorControl(powerDoorGeometry,Doors.CORRIDOR_TO_POWER,
+                Doors.POWER_TO_CORRIDOR,this,powerDoorOrientation,nodes);
         powerDoorGeometry.addControl(powerDoorControl);
         
         
