@@ -74,6 +74,7 @@ public final class Constants {
         public static final String NOT_NEXT_DOOR = "!nextDoor";
         public static final String ENTERED_DOOR = "enteredDoor";
         public static final String COLLISION_PLAYER = "collisionPlayer";
+        public static final String NOT_COLLISION_PLAYER = "!collisionPlayer";
     }
    
 }

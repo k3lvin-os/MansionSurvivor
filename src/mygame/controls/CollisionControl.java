@@ -33,6 +33,7 @@ public class CollisionControl extends AbstractControl implements IObservable, Ph
     private ArrayListSavable<IObserver> observers;
     private BulletAppState bulletApp;
     private float maxDistance;
+    private boolean isColliding;
 
     /**
      * Create a brand new Collision Control :) IMPORTANT: this constructor will
@@ -50,6 +51,7 @@ public class CollisionControl extends AbstractControl implements IObservable, Ph
         this.bulletApp = bulletApp;
         this.maxDistance = maxDistance;
         this.observers = new ArrayListSavable<IObserver>();
+        this.isColliding = false;
         setEnabled(true);
     }
 
@@ -65,7 +67,6 @@ public class CollisionControl extends AbstractControl implements IObservable, Ph
 
     @Override
     protected void controlUpdate(float tpf) {
-
     }
 
     @Override
@@ -88,17 +89,26 @@ public class CollisionControl extends AbstractControl implements IObservable, Ph
 
     public void collision(PhysicsCollisionEvent event) {
         Spatial player = null;
-        if(event.getNodeA().getName().equals(UserData.PLAYER)){
+        if (event.getNodeA().getName().equals(UserData.PLAYER)) {
             player = event.getNodeA();
-        }
-        else if(event.getNodeA().getName().equals(UserData.PLAYER)){
+        } else if (event.getNodeA().getName().equals(UserData.PLAYER)) {
             player = event.getNodeB();
         }
-        
-       if(player != null){
-           if(spatial.getLocalTranslation().distance(player.getLocalTranslation()) <= maxDistance){
-               notifyAllObservers(ObserverPattern.COLLISION_PLAYER);
-           }
-       } 
+
+        if (player != null) {
+            if (spatial.getLocalTranslation().distance(player.getLocalTranslation()) <= maxDistance) {
+                if (!isColliding) {
+                    isColliding = true;
+                    notifyAllObservers(ObserverPattern.COLLISION_PLAYER);
+                    System.out.println("DEBUG: Collision with player");
+                }
+            } else {
+                if(isColliding){
+                    isColliding = false;
+                    notifyAllObservers(ObserverPattern.NOT_COLLISION_PLAYER);
+                    System.out.println("DEBUG: Not in collision with player");
+                }
+            }
+        }
     }
 }
