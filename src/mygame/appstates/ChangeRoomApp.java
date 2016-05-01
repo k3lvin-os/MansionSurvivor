@@ -19,10 +19,10 @@ import mygame.javaclasses.Constants.UserData;
 
 /**
  *
- * @author GAMEOVER
  */
 public class ChangeRoomApp extends AbstractAppState implements IObserver {
 
+    public static final float OFFSET_NEW_DOOR = 2f;
     private static Node playerNode;
     private static Node rootNode;
     private static Node doorsNode;
@@ -49,7 +49,7 @@ public class ChangeRoomApp extends AbstractAppState implements IObserver {
             rootNode.detachChild(playerNode);
             nextRoom.setEnabled(true);
             Vector3f playerPosition = symetricDoorControl.getSpatial().getLocalTranslation()
-                    .add(symetricDoorControl.getRayDirection());
+                    .add(symetricDoorControl.getRayDirection().mult(OFFSET_NEW_DOOR));
             playerNode.getChild(UserData.PLAYER).getControl(PlayerControl.class)
                     .setPosition(playerPosition);
             rootNode.attachChild(playerNode);

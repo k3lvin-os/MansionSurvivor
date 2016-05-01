@@ -26,11 +26,12 @@ public class EntranceRoom extends RoomScenario {
     public static final float DEFAULT_WIDTH = 36f;
     public static final float DEFAULT_HEIGHT = 20f;
     public static final float DEFAULT_SIZE = 18f;
-    public static final Vector3f COUNTRYARD_DOOR_POS = new Vector3f(18f, 0f, -0.1f);
+    public static final Vector3f OUTDOOR_DOOR_POS = new Vector3f(18f, 0f, -0.1f);
     public static final Vector3f DEFAULT_POSITION = Vector3f.ZERO;
     public static final Vector3f CORRIDOR_DOOR_POS = new Vector3f(18f, 0f, -DEFAULT_SIZE + DoorControl.WALL_DISTANCE);
-    protected Door countryardDoor;
+    protected Door outdoorDoor;
     protected Door corridorDoor;
+    protected DoorControl outdoorDoorControl;
 
     public EntranceRoom() {
         super(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_SIZE, DEFAULT_POSITION);
@@ -51,15 +52,14 @@ public class EntranceRoom extends RoomScenario {
                 corridorDoorOrientation, nodes);
         corridorDoorGeometry.addControl(corridorDoorControl);
 
-        // Contryard Door
-        DoorOrientation countryardDoorOrientation = new DoorOrientation(RayCastFace.PositiveAxis, Direction.Horizontal);
-        countryardDoor = new Door(constructionAssets, COUNTRYARD_DOOR_POS,
-                countryardDoorOrientation.getDoorDirection(), nodes.getDoorsNode(), doubleDoor);
-        Geometry countryardDoorGeometry = countryardDoor.getPrototypeGeometry().getGeometry();
-        DoorControl countryardDoorControl = observerApp.createDoorControl(countryardDoorGeometry, Doors.ENTRANCE_TO_COUNTRYARD,
-                Doors.COUNTRYARD_TO_ENTRANCE, this, countryardDoorOrientation, nodes);
-        countryardDoorGeometry.addControl(countryardDoorControl);
-
+        // Outdoor Door
+        DoorOrientation outdoorDoorOrientation = new DoorOrientation(RayCastFace.PositiveAxis, Direction.Horizontal);
+        outdoorDoor = new Door(constructionAssets, OUTDOOR_DOOR_POS,
+                outdoorDoorOrientation.getDoorDirection(), nodes.getDoorsNode(), doubleDoor);
+        Geometry outdoorDoorGeometry = outdoorDoor.getPrototypeGeometry().getGeometry();
+        outdoorDoorControl = observerApp.createDoorControl(outdoorDoorGeometry, Doors.ENTRANCE_TO_COUNTRYARD,
+                Doors.COUNTRYARD_TO_ENTRANCE, this, outdoorDoorOrientation, nodes);
+        outdoorDoorGeometry.addControl(outdoorDoorControl);
 
         setEnabled(false);
     }
@@ -67,7 +67,7 @@ public class EntranceRoom extends RoomScenario {
     @Override
     public void OnDisabled() {
         super.OnDisabled();
-        countryardDoor.setEnabled(false);
+        outdoorDoor.setEnabled(false);
         this.corridorDoor.setEnabled(false);
 
     }
@@ -75,7 +75,8 @@ public class EntranceRoom extends RoomScenario {
     @Override
     public void OnEnabled() {
         super.OnEnabled();
-        countryardDoor.setEnabled(true);
+        outdoorDoor.setEnabled(true);
         this.corridorDoor.setEnabled(true);
+        this.outdoorDoorControl.setEnabled(false); // Stop the access to the outdoor. In order to provide interaction, use CollisionControl
     }
 }

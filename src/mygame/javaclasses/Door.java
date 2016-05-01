@@ -9,6 +9,7 @@ import mygame.enumerations.Direction;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
+import mygame.controls.DoorControl;
 import mygame.interfaces.IEnable;
 
 /**
@@ -56,9 +57,15 @@ public class Door implements IEnable {
         if (enabled) {
             rootNode.attachChild(prototypeGeometry.getGeometry());
             bulletAppState.getPhysicsSpace().add(prototypeGeometry.getPhysics());
+            if (getPrototypeGeometry().getGeometry().getControl(DoorControl.class) != null) {
+                getPrototypeGeometry().getGeometry().getControl(DoorControl.class).setEnabled(true);
+            }
         } else {
             doorsNode.attachChild(prototypeGeometry.getGeometry());
             bulletAppState.getPhysicsSpace().remove(prototypeGeometry.getPhysics());
+            if (getPrototypeGeometry().getGeometry().getControl(DoorControl.class) != null) {
+                getPrototypeGeometry().getGeometry().getControl(DoorControl.class).setEnabled(false);
+            }
         }
     }
 
