@@ -100,13 +100,13 @@ public class CollisionControl extends AbstractControl implements IObservable, Ph
                 if (!isColliding) {
                     isColliding = true;
                     notifyAllObservers(ObserverPattern.COLLISION_PLAYER);
-                    System.out.println("DEBUG: Collision with player");
+                    System.out.println("DEBUG:" + spatial.getName() + " Collision with player");
                 }
             } else {
                 if(isColliding){
                     isColliding = false;
                     notifyAllObservers(ObserverPattern.NOT_COLLISION_PLAYER);
-                    System.out.println("DEBUG: Not in collision with player");
+                    System.out.println("DEBUG:" + spatial.getName() + " Not in collision with player");
                 }
             }
         }

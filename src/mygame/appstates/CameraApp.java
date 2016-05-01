@@ -21,7 +21,7 @@ import mygame.javaclasses.TargetSight;
  */
 public class CameraApp extends AbstractAppState {
 
-    public static final boolean FLY_CAM_ENABLED = true;
+    public static final boolean FLY_CAM_ENABLED = false;
     private Camera cam;
     private FlyByCamera flyCam;
     private TargetSight targetSight;
