@@ -143,6 +143,7 @@ public class InputApp extends AbstractAppState implements IObserver, IObservable
 
             }
 
+            
             playerControl.setWalkDirection(playerMove);
 
             if (!playerControl.getWalkDirection().equals(Vector3f.ZERO)) {
@@ -160,7 +161,6 @@ public class InputApp extends AbstractAppState implements IObserver, IObservable
     public void checkForPlayerActions() {
 
         if (nextToDoor) {
-            // notify guiAppState and changeRoomAppState
             notifyAllObservers(ObserverPattern.ENTERED_DOOR);
             nextToDoor = false;
         }
