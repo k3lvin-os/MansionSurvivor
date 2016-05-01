@@ -63,7 +63,7 @@ public class CharactersApp extends AbstractAppState {
         //       targetSight.getLocalTranslation().getZ()));
         // cam.lookAt(target.getLocalTranslation(), new Vector3f(0f, 0f, -1f));
 
-        playerControl.setPosition(new Vector3f(0F, 0F, 5F));
+        playerControl.setPosition(new Vector3f(0F, 0F, 5f));
 
 
 

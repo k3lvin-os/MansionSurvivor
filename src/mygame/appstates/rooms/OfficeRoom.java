@@ -77,7 +77,7 @@ public class OfficeRoom extends RoomScenario {
         CollisionControl deskCollisionControl = new CollisionControl(deskWithKey, 4f, bulletAppState);
         deskWithKey.addControl(deskCollisionControl);
 
-        setEnabled(true);
+        setEnabled(false);
 
     }
 
