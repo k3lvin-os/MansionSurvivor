@@ -8,22 +8,14 @@ import mygame.appstates.util.RoomScenario;
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
-import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
-import com.jme3.scene.SceneGraphVisitor;
 import com.jme3.scene.Spatial;
 import com.jme3.math.Vector3f;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mygame.controls.DoorControl;
 import mygame.controls.PlayerControl;
-import mygame.enumerations.Direction;
-import mygame.enumerations.RayCastFace;
 import mygame.interfaces.IObserver;
-import mygame.javaclasses.Constants;
 import mygame.javaclasses.Constants.ObserverPattern;
 import mygame.javaclasses.Constants.UserData;
-import mygame.javaclasses.DoorOrientation;
 
 /**
  *
@@ -31,23 +23,23 @@ import mygame.javaclasses.DoorOrientation;
  */
 public class ChangeRoomApp extends AbstractAppState implements IObserver {
 
-    private Node playerNode;
-    private Node rootNode;
-    private Node doorsNode;
+    private static Node playerNode;
+    private static Node rootNode;
+    private static Node doorsNode;
 
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
         NodesApp nodesAppState = stateManager.getState(NodesApp.class);
-        this.rootNode = nodesAppState.getRootNode();
-        this.playerNode = nodesAppState.getPlayerNode();
-        this.doorsNode = nodesAppState.getDoorsNode();
+        rootNode = nodesAppState.getRootNode();
+        playerNode = nodesAppState.getPlayerNode();
+        doorsNode = nodesAppState.getDoorsNode();
     }
 
     /**
      * Change the room based in the door that player is using
      */
-    public void changeRoom() {
+    private void changeRoom() {
             DoorControl playerUsingDoor = getDoorPlayerIsUsing();
             playerUsingDoor.setPlayerUsingDoor(false);
             RoomScenario currentRoom = playerUsingDoor.getDoorRoomAppState();
@@ -63,16 +55,16 @@ public class ChangeRoomApp extends AbstractAppState implements IObserver {
             rootNode.attachChild(playerNode);
     }
 
-    public DoorControl getDoorControlWithName(String name) {
+    private DoorControl getDoorControlWithName(String name) {
         
-        for(Spatial child: this.doorsNode.getChildren()){
+        for(Spatial child: doorsNode.getChildren()){
             if(child.getName().equals(name)){
                 return child.getControl(DoorControl.class);
             }
         }
         
         
-        for (Spatial child : this.rootNode.getChildren()) {
+        for (Spatial child : rootNode.getChildren()) {
             if (child.getName().equals(name)) {
                 return child.getControl(DoorControl.class);
             }
@@ -82,8 +74,8 @@ public class ChangeRoomApp extends AbstractAppState implements IObserver {
       
     }
 
-    private DoorControl getDoorPlayerIsUsing() {
-        for (Spatial child : this.rootNode.getChildren()) {
+    public static DoorControl getDoorPlayerIsUsing() {
+        for (Spatial child : rootNode.getChildren()) {
             if (child.getControl(DoorControl.class) != null) {
                 if (child.getControl(DoorControl.class).isPlayerUsingDoor()) {
                     return child.getControl(DoorControl.class);

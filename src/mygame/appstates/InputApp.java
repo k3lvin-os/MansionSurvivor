@@ -143,11 +143,11 @@ public class InputApp extends AbstractAppState implements IObserver, IObservable
 
             }
 
-            
+
             playerControl.setWalkDirection(playerMove);
 
             if (!playerControl.getWalkDirection().equals(Vector3f.ZERO)) {
-                playerPhysics.setViewDirection(playerControl.getWalkDirection());
+                playerPhysics.setViewDirection(playerControl.getWalkDirection().divide(playerControl.getSpeed()));
             }
 
             playerPhysics.setWalkDirection(playerControl.getWalkDirection());
@@ -161,8 +161,21 @@ public class InputApp extends AbstractAppState implements IObserver, IObservable
     public void checkForPlayerActions() {
 
         if (nextToDoor) {
-            notifyAllObservers(ObserverPattern.ENTERED_DOOR);
-            nextToDoor = false;
+            Vector3f rayCastDir = ChangeRoomApp.getDoorPlayerIsUsing().getRayDirection().mult(-1f);
+            if (rayCastDir.getX() == -0.0f) {
+                rayCastDir.setX(0.0f);
+            }
+            if (rayCastDir.getZ() == -0.0f) {
+                rayCastDir.setZ(0.0f);
+            }
+            if (rayCastDir.getY() == -0.0f) {
+                rayCastDir.setY(0.0f);
+            }
+
+            if (rayCastDir.equals(playerPhysics.getViewDirection())) {
+                notifyAllObservers(ObserverPattern.ENTERED_DOOR);
+                nextToDoor = false;
+            }
         }
     }
 
