@@ -32,6 +32,7 @@ public class EntranceRoom extends RoomScenario {
     protected Door outdoorDoor;
     protected Door corridorDoor;
     protected DoorControl outdoorDoorControl;
+    private boolean isWithWolfBone;
 
     public EntranceRoom() {
         super(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_SIZE, DEFAULT_POSITION);
@@ -40,6 +41,7 @@ public class EntranceRoom extends RoomScenario {
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
+        isWithWolfBone = false;
         boolean doubleDoor = true;
 
         // Corridor Door
@@ -77,6 +79,10 @@ public class EntranceRoom extends RoomScenario {
         super.OnEnabled();
         outdoorDoor.setEnabled(true);
         this.corridorDoor.setEnabled(true);
-        this.outdoorDoorControl.setEnabled(false); // Stop the access to the outdoor. In order to provide interaction, use CollisionControl
+        if (!isWithWolfBone) {
+            this.outdoorDoorControl.setEnabled(false);
+        } else {
+            this.outdoorDoorControl.setEnabled(true);
+        }
     }
 }
