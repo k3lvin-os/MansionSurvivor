@@ -17,6 +17,8 @@ import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
+import mygame.appstates.CameraApp;
+import mygame.controls.CameraControl;
 import mygame.appstates.ObserverManagerApp;
 import mygame.controls.CollisionControl;
 import mygame.controls.DoorControl;
@@ -43,6 +45,9 @@ public class OfficeRoom extends RoomScenario {
     protected Door corridorDoor;
     protected Node deskWithKey;
     protected Geometry cagesKey;
+    protected CollisionControl deskCollisionControl;
+    protected CameraControl keyCamControl;
+    private boolean playerTookKey;
 
     public OfficeRoom() {
         super(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_SIZE, DEFAULT_POSITION);
@@ -51,6 +56,8 @@ public class OfficeRoom extends RoomScenario {
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
+        CameraApp cameraApp = stateManager.getState(CameraApp.class);
+        playerTookKey = false;
 
         // Corridor Door
         DoorOrientation corridorDoorOrientation = new DoorOrientation(RayCastFace.NegativeAxis, Direction.Vertical);
@@ -67,6 +74,9 @@ public class OfficeRoom extends RoomScenario {
         this.cagesKey.setLocalTranslation(-10f, 0f, -24f);
         this.cagesKey.scale(0.125f);
         this.cagesKey.rotate(FastMath.DEG_TO_RAD * 90F, 0F, 0F);
+        keyCamControl =  observerApp.createCameraControl(cagesKey, cameraApp);
+        this.cagesKey.addControl(keyCamControl);
+
 
         // DeskWithKey
         this.deskWithKey = (Node) assetManager.loadModel("Models/StylishDesk/StylishDesk.j3o");
@@ -74,8 +84,10 @@ public class OfficeRoom extends RoomScenario {
         CollisionShape deskCollisionShape = CollisionShapeFactory.createBoxShape(deskWithKey);
         RigidBodyControl deskRigidBodyControl = new RigidBodyControl(deskCollisionShape, 0.0f);
         deskWithKey.addControl(deskRigidBodyControl);
-        CollisionControl deskCollisionControl = new CollisionControl(deskWithKey, 4f, bulletAppState);
+        deskCollisionControl = new CollisionControl(deskWithKey, 4f, bulletAppState);
         deskWithKey.addControl(deskCollisionControl);
+        deskCollisionControl.addObserver(keyCamControl);
+
 
         setEnabled(false);
 
@@ -88,6 +100,11 @@ public class OfficeRoom extends RoomScenario {
         nodes.getRootNode().attachChild(cagesKey);
         nodes.getRootNode().attachChild(deskWithKey);
         bulletAppState.getPhysicsSpace().add(deskWithKey.getControl(RigidBodyControl.class));
+        if (!playerTookKey) {
+            nodes.getRootNode().attachChild(deskWithKey);
+            deskCollisionControl.setEnabled(true);
+            keyCamControl.setEnabled(true);
+        }
     }
 
     @Override
@@ -97,7 +114,10 @@ public class OfficeRoom extends RoomScenario {
         nodes.getRootNode().detachChild(cagesKey);
         nodes.getRootNode().detachChild(deskWithKey);
         bulletAppState.getPhysicsSpace().remove(deskWithKey.getControl(RigidBodyControl.class));
-
-
+        if (!playerTookKey) {
+            nodes.getRootNode().detachChild(deskWithKey);
+            deskCollisionControl.setEnabled(false);
+            keyCamControl.setEnabled(false);
+        }
     }
 }

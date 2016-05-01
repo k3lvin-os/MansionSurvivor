@@ -26,9 +26,10 @@ import mygame.javaclasses.Constants.ObserverPattern;
  * @author GAMEOVER
  */
 public class GUIApp extends AbstractAppState implements IObserver {
-    
-    private static final ColorRGBA GREEN_COLOR =  new ColorRGBA(22f / 255f, 110f / 255f, 12f / 255f, 1f);                            // font colo
+
+    private static final ColorRGBA GREEN_COLOR = new ColorRGBA(22f / 255f, 110f / 255f, 12f / 255f, 1f);                            // font colo
     private static final String ENTER_DOOR = "Press ENTER to enter in the door";
+    private static final String CLOSE_CAM_OBJECT = "Press I to interact";
     private static BitmapFont gameplayGUIFont;
     private Node guiNode;
     private SimpleApplication simpleApp;
@@ -67,28 +68,44 @@ public class GUIApp extends AbstractAppState implements IObserver {
         hudText.setText(message);             // the text
         hudText.setLocalTranslation(300, hudText.getLineHeight(), 0); // position
         int nodeId = guiNode.attachChild(hudText);
-        messagesOnScreen.put(message, nodeId - 1);
+        System.out.println("At " + nodeId + " position");
+        messagesOnScreen.put(message, nodeId);
     }
 
     public void removeMessageOnScreen(String message) {
-       int nodeId = messagesOnScreen.get(message);
-       guiNode.detachChildAt(nodeId);
-       messagesOnScreen.remove(message);
+        int nodeId = messagesOnScreen.get(message);
+        System.out.println("Removing " + nodeId + " position");
+        guiNode.detachChildAt(nodeId - 1);
+        messagesOnScreen.remove(message);
     }
 
     public void subjectUpdate(String update) {
-        
-        if(update.equals(ObserverPattern.NEXT_DOOR)){
+
+        System.out.println("GUIApp: msg = " + update);
+
+        if (update.equals(ObserverPattern.NEXT_DOOR)) {
             try {
                 putMessageOnScreen(ENTER_DOOR, TypeOfMessage.Gameplay);
             } catch (Exception ex) {
                 Logger.getLogger(GUIApp.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-       
-        else if(update.equals(ObserverPattern.NOT_NEXT_DOOR) ||
-                update.equals(ObserverPattern.ENTERED_DOOR)){
+        } else if (update.equals(ObserverPattern.NOT_NEXT_DOOR)
+                || update.equals(ObserverPattern.ENTERED_DOOR)) {
             removeMessageOnScreen(ENTER_DOOR);
+            
+        } else if (update.equals(ObserverPattern.CLOSE_CAMERA_OBJECT)) {
+            try {
+                putMessageOnScreen(CLOSE_CAM_OBJECT, TypeOfMessage.Gameplay);
+            } catch (Exception ex) {
+                Logger.getLogger(GUIApp.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        } else if (update.equals(ObserverPattern.NOT_CLOSE_CAMERA_OBJECT)) {
+            removeMessageOnScreen(CLOSE_CAM_OBJECT);
+        } else if (update.equals(ObserverPattern.SEE_CAMERA_OBJECT)) {
+            removeMessageOnScreen(CLOSE_CAM_OBJECT);
+            // do some more work here
         }
+
     }
 }

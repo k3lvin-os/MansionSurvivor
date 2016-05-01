@@ -67,6 +67,7 @@ public class InputApp extends AbstractAppState implements IObserver, IObservable
      * This class use methods of GUIApp
      */
     private boolean nextToDoor;
+    private boolean interact;
     private ArrayListSavable<IObserver> observers;
 
     @Override
@@ -75,6 +76,7 @@ public class InputApp extends AbstractAppState implements IObserver, IObservable
         // Receive and set valeus
         super.initialize(stateManager, app);
         this.nextToDoor = false;
+        this.interact = false;
         this.simpleApp = (SimpleApplication) app;
         playerNode = (Node) this.simpleApp.getRootNode().getChild(UserData.PLAYER_NODE);
         player = playerNode.getChild(UserData.PLAYER);
@@ -93,11 +95,15 @@ public class InputApp extends AbstractAppState implements IObserver, IObservable
                 new KeyTrigger(KeyInput.KEY_A));
         inputManager.addMapping(Mapping.RIGHT, new KeyTrigger(KeyInput.KEY_RIGHT),
                 new KeyTrigger(KeyInput.KEY_D));
-        inputManager.addMapping(Mapping.RETURN, new KeyTrigger(KeyInput.KEY_RETURN));
+        inputManager.addMapping(Mapping.RETURN,
+                new KeyTrigger(KeyInput.KEY_RETURN));
+        inputManager.addMapping(Mapping.KEY_I,
+                new KeyTrigger(KeyInput.KEY_I));
+
 
         // Add listeners here
         inputManager.addListener(movement, Mapping.UP, Mapping.DOWN, Mapping.LEFT, Mapping.RIGHT,
-                Mapping.RETURN);
+                Mapping.RETURN, Mapping.KEY_I);
 
 
     }
@@ -137,9 +143,11 @@ public class InputApp extends AbstractAppState implements IObserver, IObservable
                         playerMove.setZ(0f);
                     }
                 } else if (name.equals(Mapping.RETURN)) {
-
-                    checkForPlayerActions();
+                    checkEnterDoor();
+                } else if (name.equals(Mapping.KEY_I)) {
+                    checkInteract();
                 }
+
 
             }
 
@@ -158,7 +166,14 @@ public class InputApp extends AbstractAppState implements IObserver, IObservable
     public void update(float tpf) {
     }
 
-    public void checkForPlayerActions() {
+    public void checkInteract() {
+        if (interact) {
+            setEnabled(false);
+            notifyAllObservers(ObserverPattern.SEE_CAMERA_OBJECT);
+        }
+    }
+
+    public void checkEnterDoor() {
 
         if (nextToDoor) {
             Vector3f rayCastDir = ChangeRoomApp.getDoorPlayerIsUsing().getRayDirection().mult(-1f);
@@ -182,11 +197,14 @@ public class InputApp extends AbstractAppState implements IObserver, IObservable
     public void subjectUpdate(String update) {
         if (update.equals(ObserverPattern.NEXT_DOOR)) {
             this.nextToDoor = true;
+        } else if (update.equals(ObserverPattern.NOT_NEXT_DOOR)) {
+            this.nextToDoor = false;
+        } else if (update.equals(ObserverPattern.CLOSE_CAMERA_OBJECT)) {
+            this.interact = true;
+        } else if (update.equals(ObserverPattern.NOT_CLOSE_CAMERA_OBJECT)) {
+            this.interact = false;
         }
 
-        if (update.equals(ObserverPattern.NOT_NEXT_DOOR)) {
-            this.nextToDoor = false;
-        }
     }
 
     public void addObserver(IObserver o) {

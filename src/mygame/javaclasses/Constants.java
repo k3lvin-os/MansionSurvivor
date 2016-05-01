@@ -50,6 +50,7 @@ public final class Constants {
         public static final String LEFT = "left";
         public static final String RIGHT = "right";
         public static final String RETURN = "return";
+        public static final String KEY_I = "i";
     }
 
     public static final class Doors {
@@ -75,6 +76,9 @@ public final class Constants {
         public static final String ENTERED_DOOR = "enteredDoor";
         public static final String COLLISION_PLAYER = "collisionPlayer";
         public static final String NOT_COLLISION_PLAYER = "!collisionPlayer";
+        public static final String CLOSE_CAMERA_OBJECT = "closeCameraObject";
+        public static final String NOT_CLOSE_CAMERA_OBJECT = "!closeCameraObject";
+        public static final String SEE_CAMERA_OBJECT = "seeCamObject";
     }
    
 }
