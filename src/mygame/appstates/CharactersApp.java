@@ -59,10 +59,7 @@ public class CharactersApp extends AbstractAppState {
         TargetSight playerSight = new TargetSight(new Vector3f(0f, 20f, 0f), new Vector3f(1f, 0f, 1f), new Vector3f(0f, 0f, -1f));
         player.setUserData(UserData.TARGET_SIGHT, playerSight);
         cameraAppState.setTarget(player);
-        //cam.setLocation(new Vector3f(targetSight.getLocalTranslation().getX(), 20f,
-        //       targetSight.getLocalTranslation().getZ()));
-        // cam.lookAt(target.getLocalTranslation(), new Vector3f(0f, 0f, -1f));
-
+        
         playerControl.setPosition(new Vector3f(0F, 0F, 5f));
 
 

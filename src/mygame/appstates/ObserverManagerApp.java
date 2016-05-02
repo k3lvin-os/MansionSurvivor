@@ -17,6 +17,7 @@ import mygame.interfaces.IObservable;
 import mygame.interfaces.IObserver;
 import mygame.javaclasses.ArrayListSavable;
 import mygame.javaclasses.DoorOrientation;
+import mygame.javaclasses.TargetSight;
 
 /**
  *
@@ -54,8 +55,8 @@ public class ObserverManagerApp extends AbstractAppState {
         return doorControl;
     }
     
-    public CameraControl createCameraControl(Spatial object, CameraApp cameraApp){
-        CameraControl cameraControl = new CameraControl(object, cameraApp);
+    public CameraControl createCameraControl(Spatial object, CameraApp cameraApp, TargetSight targetSight){
+        CameraControl cameraControl = new CameraControl(object, cameraApp,targetSight );
         cameraControl.addObserver(guiApp);
         cameraControl.addObserver(inputApp);
         inputApp.addObserver(cameraControl);

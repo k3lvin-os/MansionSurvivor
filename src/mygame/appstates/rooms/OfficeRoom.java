@@ -28,6 +28,7 @@ import mygame.javaclasses.Constants;
 import mygame.javaclasses.Constants.Doors;
 import mygame.javaclasses.Door;
 import mygame.javaclasses.DoorOrientation;
+import mygame.javaclasses.TargetSight;
 
 /**
  *
@@ -74,7 +75,8 @@ public class OfficeRoom extends RoomScenario {
         this.cagesKey.setLocalTranslation(-10f, 0f, -24f);
         this.cagesKey.scale(0.125f);
         this.cagesKey.rotate(FastMath.DEG_TO_RAD * 90F, 0F, 0F);
-        keyCamControl =  observerApp.createCameraControl(cagesKey, cameraApp);
+        TargetSight keySight = new TargetSight(new Vector3f(0f, 5f, 0f), new Vector3f(1f, 0f, 1f), new Vector3f(0f, 0f, -1f));
+        keyCamControl =  observerApp.createCameraControl(cagesKey, cameraApp,keySight);
         this.cagesKey.addControl(keyCamControl);
 
 

@@ -14,7 +14,10 @@ import mygame.appstates.CameraApp;
 import mygame.interfaces.IObservable;
 import mygame.interfaces.IObserver;
 import mygame.javaclasses.ArrayListSavable;
+import mygame.javaclasses.Constants;
 import mygame.javaclasses.Constants.ObserverPattern;
+import mygame.javaclasses.Constants.UserData;
+import mygame.javaclasses.TargetSight;
 
 /**
  *
@@ -25,10 +28,11 @@ public class CameraControl extends AbstractControl implements IObserver, IObserv
     private CameraApp cameraApp;
     private ArrayList<IObserver> observers;
     
-    public CameraControl(Spatial s, CameraApp cameraApp){
+    public CameraControl(Spatial s, CameraApp cameraApp, TargetSight targetSight){
        this.setSpatial(s);
        this.cameraApp = cameraApp;
        this.observers = new ArrayList<IObserver>();
+       this.spatial.setUserData(UserData.TARGET_SIGHT, targetSight);
     }
     
     @Override
@@ -50,6 +54,7 @@ public class CameraControl extends AbstractControl implements IObserver, IObserv
         }
         
         if(update.equals(ObserverPattern.SEE_CAMERA_OBJECT)){
+           
            cameraApp.setTarget(spatial);
         }
     }
