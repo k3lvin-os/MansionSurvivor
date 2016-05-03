@@ -79,6 +79,8 @@ public final class Constants {
         public static final String CLOSE_CAMERA_OBJECT = "closeCameraObject";
         public static final String NOT_CLOSE_CAMERA_OBJECT = "!closeCameraObject";
         public static final String SEE_CAMERA_OBJECT = "seeCamObject";
+        public static final String WAIT_PLAYER_CONFIRM = "waitPlayerConfirm";
+        public static final String PLAYER_CONFIRMED = "playerConfirmed";
     }
    
 }

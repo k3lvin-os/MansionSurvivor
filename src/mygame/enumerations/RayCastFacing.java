@@ -8,7 +8,7 @@ package mygame.enumerations;
  *
  * @author GAMEOVER
  */
-public enum RayCastFace {
+public enum RayCastFacing {
     PositiveAxis,
     NegativeAxis
 }

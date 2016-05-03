@@ -21,7 +21,7 @@ import mygame.javaclasses.Constants;
 import mygame.enumerations.Direction;
 import mygame.javaclasses.Door;
 import mygame.javaclasses.DoorOrientation;
-import mygame.enumerations.RayCastFace;
+import mygame.enumerations.RayCastFacing;
 import mygame.javaclasses.Constants.Doors;
 import mygame.javaclasses.Constants.UserData;
 import mygame.javaclasses.Floor;
@@ -70,7 +70,7 @@ public class OutdoorRoom extends RoomScenario {
 
 
 
-        DoorOrientation doorOrientation = new DoorOrientation(RayCastFace.NegativeAxis, Direction.Horizontal);
+        DoorOrientation doorOrientation = new DoorOrientation(RayCastFacing.NegativeAxis, Direction.Horizontal);
         boolean doubleDoor = true;
 
         // Left door

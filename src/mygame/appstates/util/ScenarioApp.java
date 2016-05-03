@@ -29,7 +29,7 @@ import mygame.controls.DoorControl;
 import mygame.enumerations.Direction;
 import mygame.javaclasses.Constants;
 import mygame.javaclasses.ConstructionAssets;
-import mygame.enumerations.RayCastFace;
+import mygame.enumerations.RayCastFacing;
 import mygame.javaclasses.Constants.UserData;
 
 /**

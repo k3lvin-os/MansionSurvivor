@@ -19,7 +19,7 @@ import mygame.appstates.NodesApp;
 import mygame.appstates.util.RoomScenario;
 import mygame.javaclasses.Constants.UserData;
 import mygame.enumerations.Direction;
-import mygame.enumerations.RayCastFace;
+import mygame.enumerations.RayCastFacing;
 import mygame.interfaces.IObservable;
 import mygame.interfaces.IObserver;
 import mygame.javaclasses.DoorOrientation;
@@ -139,13 +139,13 @@ public class DoorControl extends AbstractControl implements IObservable {
     private void defineRayCast() {
         if (this.getDoorOrienation().getDoorDirection() == Direction.Horizontal) {
 
-            if (this.getDoorOrienation().getDoorType() == RayCastFace.PositiveAxis) {
+            if (this.getDoorOrienation().getDoorType() == RayCastFacing.PositiveAxis) {
                 rayDirection.setZ(-1f);
             } else {
                 rayDirection.setZ(1f);
             }
         } else {
-            if (this.getDoorOrienation().getDoorType() == RayCastFace.PositiveAxis) {
+            if (this.getDoorOrienation().getDoorType() == RayCastFacing.PositiveAxis) {
                 rayDirection.setX(1f);
             } else {
                 rayDirection.setX(-1f);

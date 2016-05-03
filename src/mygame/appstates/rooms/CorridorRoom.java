@@ -14,7 +14,7 @@ import com.jme3.scene.Node;
 import mygame.appstates.ObserverManagerApp;
 import mygame.controls.DoorControl;
 import mygame.enumerations.Direction;
-import mygame.enumerations.RayCastFace;
+import mygame.enumerations.RayCastFacing;
 import mygame.javaclasses.Constants;
 import mygame.javaclasses.Constants.Doors;
 import mygame.javaclasses.Door;
@@ -58,7 +58,7 @@ public class CorridorRoom extends RoomScenario {
         boolean doubleDoor = true;
         
         // Entrance door
-        DoorOrientation entranceDoorOrientation = new DoorOrientation(RayCastFace.PositiveAxis, Direction.Horizontal);
+        DoorOrientation entranceDoorOrientation = new DoorOrientation(RayCastFacing.PositiveAxis, Direction.Horizontal);
         this.entranceDoor = new Door(constructionAssets, ENTRANCE_DOOR_POS, 
                 entranceDoorOrientation.getDoorDirection(),nodes.getDoorsNode(), doubleDoor);
         Geometry entranceDoorGeometry = this.entranceDoor.getPrototypeGeometry().getGeometry();
@@ -67,7 +67,7 @@ public class CorridorRoom extends RoomScenario {
         entranceDoorGeometry.addControl(entranceDoorControl);
         
         // Office Door
-        DoorOrientation officeDoorOrientation = new DoorOrientation(RayCastFace.PositiveAxis, Direction.Vertical);
+        DoorOrientation officeDoorOrientation = new DoorOrientation(RayCastFacing.PositiveAxis, Direction.Vertical);
         this.officeDoor = new Door(constructionAssets, OFFICE_DOOR_POS, 
                 officeDoorOrientation.getDoorDirection(),nodes.getDoorsNode());
         Geometry officeDoorGeometry = officeDoor.getPrototypeGeometry().getGeometry();
@@ -76,7 +76,7 @@ public class CorridorRoom extends RoomScenario {
         officeDoorGeometry.addControl(officeDoorControl);
         
         // Maintenance Door
-        DoorOrientation maintenanceDoorOrientation = new DoorOrientation(RayCastFace.NegativeAxis, Direction.Vertical);
+        DoorOrientation maintenanceDoorOrientation = new DoorOrientation(RayCastFacing.NegativeAxis, Direction.Vertical);
         this.maintenanceDoor = new Door(constructionAssets,MAINTENANCE_DOOR_POS,
                 maintenanceDoorOrientation.getDoorDirection(),nodes.getDoorsNode());
         Geometry maintenanceDoorGeometry = this.maintenanceDoor.getPrototypeGeometry().getGeometry();
@@ -85,7 +85,7 @@ public class CorridorRoom extends RoomScenario {
         maintenanceDoorGeometry.addControl(maintenanceDoorControl);
         
         // Animal Cages Door
-        DoorOrientation cagesDoorOrientation = new DoorOrientation(RayCastFace.PositiveAxis, 
+        DoorOrientation cagesDoorOrientation = new DoorOrientation(RayCastFacing.PositiveAxis, 
                 Direction.Vertical);
         this.cagesDoor = new Door(constructionAssets, CAGES_DOOR_POS
                 ,cagesDoorOrientation.getDoorDirection(),nodes.getDoorsNode());
@@ -95,7 +95,7 @@ public class CorridorRoom extends RoomScenario {
         cagesDoorGeometry.addControl(cagesDoorControl);
         
         // Power Door
-        DoorOrientation powerDoorOrientation = new DoorOrientation(RayCastFace.NegativeAxis,
+        DoorOrientation powerDoorOrientation = new DoorOrientation(RayCastFacing.NegativeAxis,
                 Direction.Vertical);
         this.powerDoor = new Door(constructionAssets,POWER_DOOR_POS,
                 powerDoorOrientation.getDoorDirection(), nodes.getDoorsNode());

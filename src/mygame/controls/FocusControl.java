@@ -23,12 +23,12 @@ import mygame.javaclasses.TargetSight;
  *
  * @author Kelvin Oliveira
  */
-public class CameraControl extends AbstractControl implements IObserver, IObservable{
+public class FocusControl extends AbstractControl implements IObserver, IObservable{
 
     private CameraApp cameraApp;
     private ArrayList<IObserver> observers;
     
-    public CameraControl(Spatial s, CameraApp cameraApp, TargetSight targetSight){
+    public FocusControl(Spatial s, CameraApp cameraApp, TargetSight targetSight){
        this.setSpatial(s);
        this.cameraApp = cameraApp;
        this.observers = new ArrayList<IObserver>();

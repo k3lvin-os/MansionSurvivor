@@ -12,7 +12,7 @@ import com.jme3.scene.Geometry;
 import mygame.appstates.ObserverManagerApp;
 import mygame.controls.DoorControl;
 import mygame.enumerations.Direction;
-import mygame.enumerations.RayCastFace;
+import mygame.enumerations.RayCastFacing;
 import mygame.javaclasses.Constants.Doors;
 import mygame.javaclasses.Door;
 import mygame.javaclasses.DoorOrientation;
@@ -41,7 +41,7 @@ public class CagesRoom extends RoomScenario {
         super.initialize(stateManager, app);
 
         // Corridor door
-        DoorOrientation corridorDoorOrientation = new DoorOrientation(RayCastFace.NegativeAxis, Direction.Vertical);
+        DoorOrientation corridorDoorOrientation = new DoorOrientation(RayCastFacing.NegativeAxis, Direction.Vertical);
         this.corridorDoor = new Door(constructionAssets, CORRIDOR_DOOR_POS,
                 corridorDoorOrientation.getDoorDirection(), nodes.getDoorsNode());
         Geometry corridorDoorGeometry = this.corridorDoor.getPrototypeGeometry().getGeometry();

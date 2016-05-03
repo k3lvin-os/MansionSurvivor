@@ -18,12 +18,12 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import mygame.appstates.CameraApp;
-import mygame.controls.CameraControl;
+import mygame.controls.FocusControl;
 import mygame.appstates.ObserverManagerApp;
 import mygame.controls.CollisionControl;
 import mygame.controls.DoorControl;
 import mygame.enumerations.Direction;
-import mygame.enumerations.RayCastFace;
+import mygame.enumerations.RayCastFacing;
 import mygame.javaclasses.Constants;
 import mygame.javaclasses.Constants.Doors;
 import mygame.javaclasses.Door;
@@ -47,7 +47,7 @@ public class OfficeRoom extends RoomScenario {
     protected Node deskWithKey;
     protected Geometry cagesKey;
     protected CollisionControl deskCollisionControl;
-    protected CameraControl keyCamControl;
+    protected FocusControl keyCamControl;
     private boolean playerTookKey;
 
     public OfficeRoom() {
@@ -61,7 +61,7 @@ public class OfficeRoom extends RoomScenario {
         playerTookKey = false;
 
         // Corridor Door
-        DoorOrientation corridorDoorOrientation = new DoorOrientation(RayCastFace.NegativeAxis, Direction.Vertical);
+        DoorOrientation corridorDoorOrientation = new DoorOrientation(RayCastFacing.NegativeAxis, Direction.Vertical);
         this.corridorDoor = new Door(constructionAssets, CORRIDOR_DOOR_POS,
                 corridorDoorOrientation.getDoorDirection(), nodes.getDoorsNode());
         Geometry corridorDoorGeometry = this.corridorDoor.getPrototypeGeometry().getGeometry();

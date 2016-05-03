@@ -8,7 +8,7 @@ import com.jme3.export.JmeExporter;
 import com.jme3.export.JmeImporter;
 import com.jme3.export.Savable;
 import java.io.IOException;
-import mygame.enumerations.RayCastFace;
+import mygame.enumerations.RayCastFacing;
 import mygame.enumerations.Direction;
 
 /**
@@ -17,10 +17,10 @@ import mygame.enumerations.Direction;
  */
 public class DoorOrientation implements Savable{
    
-    private RayCastFace doorType;
+    private RayCastFacing doorType;
     private Direction doorDirection;
     
-    public DoorOrientation(RayCastFace doorType, Direction doorDirection){
+    public DoorOrientation(RayCastFacing doorType, Direction doorDirection){
        this.doorType = doorType;
        this.doorDirection = doorDirection;
     }
@@ -30,7 +30,7 @@ public class DoorOrientation implements Savable{
         this.doorDirection = doorOrientation.getDoorDirection();
     }
     
-    public RayCastFace getDoorType(){
+    public RayCastFacing getDoorType(){
         return doorType;
     }
     

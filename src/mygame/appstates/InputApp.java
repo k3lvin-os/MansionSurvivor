@@ -58,16 +58,11 @@ public class InputApp extends AbstractAppState implements IObserver, IObservable
      * This is vector is necessary in the algorithm of the player move. With it
      * we can keep state of two buttons that make a diagonal movement
      */
-    private Vector3f playerMove = new Vector3f();
-    /**
-     * List of player options that affect input check's
-     */
-    private ArrayListSavable<String> playerOptions;
-    /**
-     * This class use methods of GUIApp
-     */
+    private Vector3f playerMove;
+    
     private boolean nextToDoor;
     private boolean interact;
+    private boolean confirm;
     private ArrayListSavable<IObserver> observers;
 
     @Override
@@ -77,12 +72,14 @@ public class InputApp extends AbstractAppState implements IObserver, IObservable
         super.initialize(stateManager, app);
         this.nextToDoor = false;
         this.interact = false;
+        this.confirm = false;
         this.simpleApp = (SimpleApplication) app;
         playerNode = (Node) this.simpleApp.getRootNode().getChild(UserData.PLAYER_NODE);
         player = playerNode.getChild(UserData.PLAYER);
         playerPhysics = player.getControl(BetterCharacterControl.class);
         playerControl = player.getControl(PlayerControl.class);
         observers = new ArrayListSavable<IObserver>();
+        playerMove = Vector3f.ZERO;
 
 
         //Set mapping
@@ -166,14 +163,16 @@ public class InputApp extends AbstractAppState implements IObserver, IObservable
     public void update(float tpf) {
     }
 
-    public void checkInteract() {
+    public boolean checkInteract() {
         if (interact) {
             setEnabled(false);
             notifyAllObservers(ObserverPattern.SEE_CAMERA_OBJECT);
+            return true;
         }
+        return false;
     }
 
-    public void checkEnterDoor() {
+    public boolean checkEnterDoor() {
 
         if (nextToDoor) {
             Vector3f rayCastDir = ChangeRoomApp.getDoorPlayerIsUsing().getRayDirection().mult(-1f);
@@ -190,8 +189,10 @@ public class InputApp extends AbstractAppState implements IObserver, IObservable
             if (rayCastDir.equals(playerPhysics.getViewDirection())) {
                 notifyAllObservers(ObserverPattern.ENTERED_DOOR);
                 nextToDoor = false;
+                return true;
             }
         }
+        return false;
     }
 
     public void subjectUpdate(String update) {
@@ -203,6 +204,9 @@ public class InputApp extends AbstractAppState implements IObserver, IObservable
             this.interact = true;
         } else if (update.equals(ObserverPattern.NOT_CLOSE_CAMERA_OBJECT)) {
             this.interact = false;
+        }
+        else if(update.equals(ObserverPattern.WAIT_PLAYER_CONFIRM)){
+            
         }
 
     }

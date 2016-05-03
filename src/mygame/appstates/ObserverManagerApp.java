@@ -10,7 +10,7 @@ import com.jme3.app.state.AppStateManager;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.scene.Spatial;
 import mygame.appstates.util.RoomScenario;
-import mygame.controls.CameraControl;
+import mygame.controls.FocusControl;
 import mygame.controls.CollisionControl;
 import mygame.controls.DoorControl;
 import mygame.interfaces.IObservable;
@@ -55,8 +55,8 @@ public class ObserverManagerApp extends AbstractAppState {
         return doorControl;
     }
     
-    public CameraControl createCameraControl(Spatial object, CameraApp cameraApp, TargetSight targetSight){
-        CameraControl cameraControl = new CameraControl(object, cameraApp,targetSight );
+    public FocusControl createCameraControl(Spatial object, CameraApp cameraApp, TargetSight targetSight){
+        FocusControl cameraControl = new FocusControl(object, cameraApp,targetSight );
         cameraControl.addObserver(guiApp);
         cameraControl.addObserver(inputApp);
         inputApp.addObserver(cameraControl);
@@ -68,5 +68,6 @@ public class ObserverManagerApp extends AbstractAppState {
     private void configureAppStates() {
         inputApp.addObserver(guiApp);
         inputApp.addObserver(changeRoomApp);
+        guiApp.addObserver(inputApp);
     }
 }

@@ -12,7 +12,7 @@ import com.jme3.scene.Geometry;
 import mygame.appstates.ObserverManagerApp;
 import mygame.controls.DoorControl;
 import mygame.enumerations.Direction;
-import mygame.enumerations.RayCastFace;
+import mygame.enumerations.RayCastFacing;
 import mygame.javaclasses.Constants.Doors;
 import mygame.javaclasses.Door;
 import mygame.javaclasses.DoorOrientation;
@@ -45,7 +45,7 @@ public class EntranceRoom extends RoomScenario {
         boolean doubleDoor = true;
 
         // Corridor Door
-        DoorOrientation corridorDoorOrientation = new DoorOrientation(RayCastFace.NegativeAxis, Direction.Horizontal);
+        DoorOrientation corridorDoorOrientation = new DoorOrientation(RayCastFacing.NegativeAxis, Direction.Horizontal);
         this.corridorDoor = new Door(constructionAssets, CORRIDOR_DOOR_POS, corridorDoorOrientation.getDoorDirection(),
                 nodes.getDoorsNode(), doubleDoor);
         Geometry corridorDoorGeometry = this.corridorDoor.getPrototypeGeometry().getGeometry();
@@ -55,7 +55,7 @@ public class EntranceRoom extends RoomScenario {
         corridorDoorGeometry.addControl(corridorDoorControl);
 
         // Outdoor Door
-        DoorOrientation outdoorDoorOrientation = new DoorOrientation(RayCastFace.PositiveAxis, Direction.Horizontal);
+        DoorOrientation outdoorDoorOrientation = new DoorOrientation(RayCastFacing.PositiveAxis, Direction.Horizontal);
         outdoorDoor = new Door(constructionAssets, OUTDOOR_DOOR_POS,
                 outdoorDoorOrientation.getDoorDirection(), nodes.getDoorsNode(), doubleDoor);
         Geometry outdoorDoorGeometry = outdoorDoor.getPrototypeGeometry().getGeometry();

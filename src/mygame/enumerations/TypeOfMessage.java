@@ -10,5 +10,4 @@ package mygame.enumerations;
  */
 public enum TypeOfMessage {
     Gameplay,
-    Information
 }
